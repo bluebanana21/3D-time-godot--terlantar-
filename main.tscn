@@ -18,11 +18,11 @@ shape = SubResource("BoxShape3D_248vk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0819424, 0.122913)
 mesh = SubResource("BoxMesh_yxeon")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_mrt1y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38957, -0.353581)
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.995935, 0, 0.0900763, 0.02128, 0.971694, 0.235284, -0.0875266, 0.236245, -0.967744, 0, 0.41596, -1.30079)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0109604, 0.99994, 0, -0.99994, -0.0109604, 0, 4.08146, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_mrt1y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0904822, 0.77937, 0.0027647)
