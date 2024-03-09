@@ -10,8 +10,19 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #camera variables
 @onready var head := $Head
-@onready var camera := $Head/Camera3D
+@onready var eyes := $Head/Eyes
+@onready var camera := $Head/Eyes/Camera3D
 
+#Head bobbing vars
+const Head_bobbing_sprinting_speed = 22.0
+const Head_bobbing_walking_speed = 14.0
+
+const head_bobing_sprinting_intensity = 0.2
+const head_bobing_walking_intensity = 0.1
+
+var head_bobbing_vector = Vector2.ZERO
+var head_bobbing_index = 0.0
+var head_bobbing_current_intensity = 0.0
 
 #removes mouse cursor
 func _ready():
@@ -33,6 +44,7 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("Reload"):
 		print("you realoaded")
 
+
 func _physics_process(delta):
 	# Add the gravity.
 	#if not is_on_floor():
@@ -53,6 +65,15 @@ func _physics_process(delta):
 		velocity.x = 0.0
 		velocity.z = 0.0
 	
+	#Head bobbing logic
+	if input_dir != Vector2.ZERO:
+		head_bobbing_current_intensity = head_bobing_walking_intensity
+		head_bobbing_index += Head_bobbing_walking_speed * delta
 	
+	if is_on_floor() && input_dir != Vector2.ZERO:
+		head_bobbing_vector.y = sin(head_bobbing_index)
+		head_bobbing_vector.x = sin(head_bobbing_index / 2) + 0.5
+		
+		#eyes.position.y = lerp(eyes.position.y, head_bobbing_vector.y * (head_bobbing_current_intensity / 2.0), delta*lerp)
 	
 	move_and_slide()

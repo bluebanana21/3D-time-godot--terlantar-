@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var pause_menu = $PauseMenu
+@onready var pause_menu = $CanvasLayer/PauseMenu
 var paused = false
 
 

@@ -1,32 +1,38 @@
-[gd_scene load_steps=9 format=3 uid="uid://bl3b3guldify5"]
+[gd_scene load_steps=12 format=3 uid="uid://bl3b3guldify5"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_1d7pl"]
-[ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://player.tscn" id="1_jmicj"]
-[ext_resource type="PackedScene" uid="uid://i0u5cgh2v7vd" path="res://pause_menu.tscn" id="2_whwbf"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
+[ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
+[ext_resource type="Texture2D" uid="uid://ci48m8w15s7je" path="res://Assets/FPS-controller-assets-main/FPS-controller-assets-main/assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="2_0lcu1"]
+[ext_resource type="PackedScene" uid="uid://i0u5cgh2v7vd" path="res://Scenes/pause_menu.tscn" id="2_whwbf"]
+[ext_resource type="Texture2D" uid="uid://dxgn2ilmngddj" path="res://Assets/FPS-controller-assets-main/FPS-controller-assets-main/assets/textures/dev/grids/Dark/texture_07.png" id="3_3fvog"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rua2p"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_d5iix"]
+panorama = ExtResource("2_0lcu1")
 
-[sub_resource type="Sky" id="Sky_34n8l"]
-sky_material = SubResource("ProceduralSkyMaterial_rua2p")
+[sub_resource type="Sky" id="Sky_0enqx"]
+sky_material = SubResource("PanoramaSkyMaterial_d5iix")
 
 [sub_resource type="Environment" id="Environment_lb72m"]
 background_mode = 2
-sky = SubResource("Sky_34n8l")
+sky = SubResource("Sky_0enqx")
 tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gm8ox"]
 size = Vector3(33, 1, 33)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecki0"]
+albedo_texture = ExtResource("3_3fvog")
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_r2rsm"]
 
 [node name="World" type="Node3D"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109615, 0, -0.0332985)
 script = ExtResource("1_1d7pl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.0191972, 0.546001, -0.837564, 0, 0.837719, 0.546102, 0.999816, -0.0104837, 0.0160819, 0, 0, 0)
+transform = Transform3D(0.0191972, 0.546001, -0.837565, 0, 0.837719, 0.546102, 0.999816, -0.0104836, 0.0160819, 0, 0, 0)
 light_color = Color(0.843137, 0.843137, 0.843137, 1)
 light_energy = 2.5
 shadow_enabled = true
@@ -43,10 +49,13 @@ shape = SubResource("BoxShape3D_gm8ox")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(16.5, 0, 0, 0, 16.5, 0, 0, 0, 16.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ecki0")
 mesh = SubResource("PlaneMesh_r2rsm")
-
-[node name="PauseMenu" parent="." instance=ExtResource("2_whwbf")]
-visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_jmicj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_whwbf")]
+visible = false

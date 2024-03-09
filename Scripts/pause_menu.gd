@@ -1,6 +1,6 @@
 extends Control
 
-@onready var main = $"../"
+@onready var main = $"../../"
 
 
 #Resumes the game
