@@ -1,8 +1,23 @@
-[gd_scene format=3 uid="uid://bgy0r358v1j6r"]
+[gd_scene load_steps=3 format=3 uid="uid://bgy0r358v1j6r"]
+
+[ext_resource type="Texture2D" uid="uid://c8fbl3nl3666y" path="res://Assets/Gun Sprite 3D time.png" id="1_jx0x7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_anrdd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jx0x7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="UI" type="CanvasLayer"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(576, 288)
+sprite_frames = SubResource("SpriteFrames_anrdd")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 7

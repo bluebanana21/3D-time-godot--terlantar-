@@ -52,5 +52,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0.0
 		velocity.z = 0.0
-
+	
+	
+	
 	move_and_slide()

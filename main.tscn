@@ -35,9 +35,6 @@ directional_shadow_max_distance = 102.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lb72m")
 
-[node name="Player" parent="." instance=ExtResource("1_jmicj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
@@ -50,3 +47,6 @@ mesh = SubResource("PlaneMesh_r2rsm")
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_whwbf")]
 visible = false
+
+[node name="Player" parent="." instance=ExtResource("1_jmicj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
