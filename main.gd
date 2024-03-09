@@ -10,7 +10,7 @@ func _process(delta):
 		pauseMenu()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-
+#Pause menu config
 func pauseMenu():
 	if paused:
 		pause_menu.hide()
@@ -19,4 +19,4 @@ func pauseMenu():
 		pause_menu.show()
 		Engine.time_scale = 0
 	
-	paused = !paused
+	paused = not paused

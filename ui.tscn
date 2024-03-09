@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bgy0r358v1j6r"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -72.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.270588, 0.545098, 1, 1)

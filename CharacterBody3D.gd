@@ -27,15 +27,20 @@ func _unhandled_input(event):
 		#Limits camera movement vertically
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(0), deg_to_rad(0))
 	
+	#Checking shooting input responsiveness
+	if Input.is_action_just_pressed("Shoot"):
+		print("You shot someone")
+	if Input.is_action_just_pressed("Reload"):
+		print("you realoaded")
 
 func _physics_process(delta):
 	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+	#if not is_on_floor():
+		#velocity.y -= gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		#velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
