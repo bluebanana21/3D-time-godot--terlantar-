@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bl3b3guldify5"]
+[gd_scene load_steps=9 format=3 uid="uid://bl3b3guldify5"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://player.tscn" id="1_jmicj"]
+[ext_resource type="PackedScene" uid="uid://i0u5cgh2v7vd" path="res://pause_menu.tscn" id="2_whwbf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rua2p"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -21,6 +23,7 @@ size = Vector3(33, 1, 33)
 [sub_resource type="PlaneMesh" id="PlaneMesh_r2rsm"]
 
 [node name="World" type="Node3D"]
+script = ExtResource("1_1d7pl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.0191972, 0.546001, -0.837564, 0, 0.837719, 0.546102, 0.999816, -0.0104837, 0.0160819, 0, 0, 0)
@@ -44,3 +47,6 @@ shape = SubResource("BoxShape3D_gm8ox")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(16.5, 0, 0, 0, 16.5, 0, 0, 0, 16.5, 0, 0, 0)
 mesh = SubResource("PlaneMesh_r2rsm")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_whwbf")]
+visible = false

@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://i0u5cgh2v7vd"]
+
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_8h8sq"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchor_left = 0.48
+anchor_top = 0.671
+anchor_right = 0.48
+anchor_bottom = 0.671
+offset_left = -252.96
+offset_top = -434.808
+offset_right = -110.96
+offset_bottom = -368.808
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.365, 3.365)
+script = ExtResource("1_8h8sq")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = -89.0
+offset_right = 253.0
+offset_bottom = 193.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Quit" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
