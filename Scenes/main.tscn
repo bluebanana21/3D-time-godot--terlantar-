@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bl3b3guldify5"]
+[gd_scene load_steps=13 format=3 uid="uid://bl3b3guldify5"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
 [ext_resource type="Texture2D" uid="uid://ci48m8w15s7je" path="res://Assets/FPS-controller-assets-main/FPS-controller-assets-main/assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="2_0lcu1"]
 [ext_resource type="PackedScene" uid="uid://i0u5cgh2v7vd" path="res://Scenes/pause_menu.tscn" id="2_whwbf"]
 [ext_resource type="Texture2D" uid="uid://dxgn2ilmngddj" path="res://Assets/FPS-controller-assets-main/FPS-controller-assets-main/assets/textures/dev/grids/Dark/texture_07.png" id="3_3fvog"]
+[ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_d5iix"]
 panorama = ExtResource("2_0lcu1")
@@ -52,10 +53,14 @@ transform = Transform3D(16.5, 0, 0, 0, 16.5, 0, 0, 0, 16.5, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_ecki0")
 mesh = SubResource("PlaneMesh_r2rsm")
 
-[node name="Player" parent="." instance=ExtResource("1_jmicj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_whwbf")]
 visible = false
+
+[node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.89038, 2, 4.0333)
+visible = false
+
+[node name="Player" parent="." instance=ExtResource("1_jmicj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.882585, 0.000500488, -2.3914)

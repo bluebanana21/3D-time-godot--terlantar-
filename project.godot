@@ -62,6 +62,11 @@ Reload={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="environment"
+3d_physics/layer_2="characters"
+
 [rendering]
 
 renderer/rendering_method="mobile"
