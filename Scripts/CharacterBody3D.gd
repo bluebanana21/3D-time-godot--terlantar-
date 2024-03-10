@@ -9,7 +9,7 @@ const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 #Bullets
-var bullet = load("res://bullet.tscn")
+var bullet = load("res://Scenes/bullet.tscn")
 var instance
 
 #camera variables
