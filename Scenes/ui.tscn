@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgy0r358v1j6r"]
 
-[ext_resource type="Texture2D" uid="uid://c8fbl3nl3666y" path="res://Assets/Gun Sprite 3D time.png" id="1_jx0x7"]
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_r6jp7"]
+[ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Gun Sprite 3D time 2.png" id="2_g8a33"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_anrdd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_jx0x7")
+"texture": ExtResource("2_g8a33")
 }],
 "loop": true,
-"name": &"gun_idle",
+"name": &"gun idle",
 "speed": 5.0
 }]
 
@@ -20,9 +20,9 @@ script = ExtResource("1_r6jp7")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(576, 288)
 sprite_frames = SubResource("SpriteFrames_anrdd")
-animation = &"gun_idle"
+animation = &"gun idle"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Profile" type="ColorRect" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -34,3 +34,16 @@ offset_right = 576.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.270588, 0.545098, 1, 1)
+
+[node name="Crosshair" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2

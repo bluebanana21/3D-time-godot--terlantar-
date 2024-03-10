@@ -24,15 +24,11 @@ func _ready():
 
 
 #Camera controls
-func _unhandled_input(event):
+func _input(event):
 	if event is InputEventMouseMotion:
-		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		
-		#Limits camera movement vertically
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(0), deg_to_rad(0))
+		rotation_degrees.y -= event.relative.x * SENSITIVITY
 	
-	#Checking shooting input responsiveness
+	
 
 
 func _physics_process(delta):
