@@ -20,15 +20,12 @@ shape = SubResource("CapsuleShape3D_6mt14")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478711, 0)
 
-[node name="Eyes" type="Node3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="Head"]
 
-[node name="Camera3D" type="Camera3D" parent="Head/Eyes"]
-
-[node name="Rifle" type="Node3D" parent="Head/Eyes/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.378355, -0.163565, -0.573712)
+[node name="Rifle" type="Node3D" parent="Head/Camera3D"]
 
 [node name="UI" parent="." instance=ExtResource("2_8hqej")]
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.462868, 0)
-target_position = Vector3(0, 0, -1)
+target_position = Vector3(0, 0, -2.955)
