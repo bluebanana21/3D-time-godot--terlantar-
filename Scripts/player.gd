@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @onready var animated_sprite_2d = $CanvasLayer/GunBase/AnimatedSprite2D
 @onready var ray_cast_3d = $RayCast3D
+@onready var death_screen = $CanvasLayer/DeathScreen
 
 
 const SPEED = 5.0
@@ -13,7 +14,7 @@ var dead = false
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	animated_sprite_2d.animation_finished.connect(shoot_anim_done)
-
+	$CanvasLayer/DeathScreen/Panel/Button.button_up.connect(restart)
 
 func _input(event):
 	if dead:
@@ -26,18 +27,15 @@ func _input(event):
 	if Input.is_action_just_pressed("Shoot"):
 		shoot()
 
-
 func _process(delta):
-	if Input.is_action_just_pressed("exit"):
-		get_tree().quit()
 	if Input.is_action_just_pressed("restart"):
 		restart()
-
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 
 func _physics_process(delta):
 	if dead:
 		return
-	
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
@@ -51,23 +49,20 @@ func _physics_process(delta):
 
 
 func restart():
-	pass
-
+	get_tree().reload_current_scene()
 
 func shoot():
 	if !can_shoot:
 		return
 	can_shoot = false
 	animated_sprite_2d.play("shoot")
-	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().get_method("kill"):
+	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("kill"):
 		ray_cast_3d.get_collider().kill()
-
 
 func shoot_anim_done():
 	can_shoot = true
 
-
 func kill():
 	dead = true
-	$CanvasLayer/DeathScreen.show()
+	death_screen.show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
