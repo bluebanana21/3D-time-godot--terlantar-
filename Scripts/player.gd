@@ -57,6 +57,7 @@ func shoot():
 	can_shoot = false
 	animated_sprite_2d.play("shoot")
 	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("kill"):
+		print("kill")
 		ray_cast_3d.get_collider().kill()
 
 func shoot_anim_done():
