@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkwdxqv1ncgkj"]
+[gd_scene load_steps=9 format=3 uid="uid://bkwdxqv1ncgkj"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_87n2l"]
 [ext_resource type="Texture2D" uid="uid://bpavai5s8ew6e" path="res://Assets/tong.jpg" id="2_0jbmf"]
 [ext_resource type="Texture2D" uid="uid://wnbcxbo83u2p" path="res://Assets/tong 2.jpg" id="3_hd1f7"]
 [ext_resource type="Texture2D" uid="uid://dil5uxwqr7spt" path="res://Assets/jeff-kingma--lLWCvEoFJM-unsplash.jpg" id="3_xu5yu"]
+[ext_resource type="AudioStream" uid="uid://4a6dwxijejgr" path="res://Assets/Audio assets/Nuclear Bomb Explosion Sound Effect..mp3" id="5_crvvs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70m27"]
 
@@ -52,3 +53,6 @@ animation = &"death"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("CapsuleMesh_wnwje")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_crvvs")

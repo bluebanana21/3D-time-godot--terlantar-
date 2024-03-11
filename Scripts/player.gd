@@ -25,6 +25,7 @@ func _input(event):
 	if dead:
 		return
 	if Input.is_action_just_pressed("Shoot"):
+		$AudioStreamPlayer3D.play()
 		shoot()
 
 func _process(delta):
@@ -57,7 +58,6 @@ func shoot():
 	can_shoot = false
 	animated_sprite_2d.play("shoot")
 	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("kill"):
-		print("kill")
 		ray_cast_3d.get_collider().kill()
 
 func shoot_anim_done():

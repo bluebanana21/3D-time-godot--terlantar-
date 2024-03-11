@@ -40,5 +40,6 @@ func attempt_to_kill_player():
 
 func kill():
 	dead = true
+	$AudioStreamPlayer3D.play()
 	animated_sprite_3d.play("death")
 	$CollisionShape3D.disabled = true
