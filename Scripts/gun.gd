@@ -13,3 +13,7 @@ func get_prompt():
 			key_name = OS.get_keycode_string(action.keycode)
 	return prompt_message + "\n[" + prompt_action + "]"
 	#return 
+
+
+func interacted_by_player():
+	print("obj has interacted with player")

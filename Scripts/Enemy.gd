@@ -14,7 +14,7 @@ func _physics_process(delta):
 	if dead:
 		return
 	if player == null:
-		print("player is null")
+		#print("player is null")
 		return
 	
 	var dir = player.global_position - global_position
