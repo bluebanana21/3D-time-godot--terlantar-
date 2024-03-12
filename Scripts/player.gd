@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var interact_ray = $InteractRay
 
 
+
 const SPEED = 5.0
 const MOUSE_SENS = 0.5
 
@@ -69,11 +70,20 @@ func shoot_anim_done():
 	can_shoot = true
 
 func kill():
-	#dead = true
-	#death_screen.show()
-	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
-	health -= 1
+	#health -= 1
+	if health <= 0:
+		dead = true
+		death_screen.show()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
 
 func show_health():
 	print(health)
+
+
+func _on_enemy_damage(damage_power):
+	health -= damage_power
+
+
+func _on_gun_box_heal(heal_amount):
+	health += heal_amount

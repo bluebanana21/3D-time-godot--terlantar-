@@ -5,9 +5,12 @@ extends CharacterBody3D
 
 @export var move_speed = 2.0
 @export var attack_range = 2.0
+@export var damage_power = 10
 
 @onready var player = $"../Player"
 #@onready var player : CharacterBody3D = get_tree().get_first_node_in_group("Player")
+signal damage(damage_power)
+
 var dead = false
 
 func _physics_process(delta):
@@ -36,6 +39,7 @@ func attempt_to_kill_player():
 	var query = PhysicsRayQueryParameters3D.create(global_position+eye_line, player.global_position+eye_line, 1)
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
 	if result.is_empty():
+		emit_signal("damage",damage_power)
 		player.kill()
 
 

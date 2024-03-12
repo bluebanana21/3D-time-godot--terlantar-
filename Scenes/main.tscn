@@ -67,5 +67,8 @@ move_speed = 0.0
 
 [node name="Player" parent="." instance=ExtResource("1_jmicj")]
 
-[node name="StaticBody3D2" parent="." instance=ExtResource("7_twdv4")]
+[node name="GunBox" parent="." instance=ExtResource("7_twdv4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9)
+
+[connection signal="damage" from="Enemy" to="Player" method="_on_enemy_damage"]
+[connection signal="heal" from="GunBox" to="Player" method="_on_gun_box_heal"]
