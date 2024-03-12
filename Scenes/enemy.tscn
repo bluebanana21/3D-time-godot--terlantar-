@@ -48,7 +48,7 @@ shape = SubResource("CapsuleShape3D_70m27")
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_n8pba")
-animation = &"death"
+animation = &"idle"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false

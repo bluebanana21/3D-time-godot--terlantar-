@@ -1,8 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://i0u5cgh2v7vd"]
+[gd_scene load_steps=2 format=3 uid="uid://b17sjhbdj50lw"]
 
-[ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="1_8h8sq"]
+[sub_resource type="GDScript" id="GDScript_lpvhd"]
+script/source = "extends Control
+
+@onready var main = $\"../../\"
+
+
+#Resumes the game
+func _on_resume_pressed():
+	main.pauseMenu()
+	#Recaptures the cursor after resuming
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+#Quits the game
+func _on_quit_pressed():
+	get_tree().quit()
+"
 
 [node name="PauseMenu" type="Control"]
+z_index = 10
 layout_mode = 3
 anchor_left = 0.48
 anchor_top = 0.671
@@ -15,7 +32,7 @@ offset_bottom = -368.808
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3.365, 3.365)
-script = ExtResource("1_8h8sq")
+script = SubResource("GDScript_lpvhd")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0

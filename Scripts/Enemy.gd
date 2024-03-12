@@ -20,6 +20,7 @@ func _physics_process(delta):
 	var dir = player.global_position - global_position
 	dir.y = 0.0
 	dir = dir.normalized()
+	animated_sprite_3d.play("idle")
 	
 	velocity = dir * move_speed
 	move_and_slide()
