@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var animated_sprite_2d = $CanvasLayer/GunBase/AnimatedSprite2D
-@onready var ray_cast_3d = $RayCast3D
+@onready var ray_cast_3d = $GunRayCast
 @onready var death_screen = $CanvasLayer/DeathScreen
 
 
