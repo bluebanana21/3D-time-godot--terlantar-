@@ -11,6 +11,7 @@ extends CharacterBody3D
 #@onready var player : CharacterBody3D = get_tree().get_first_node_in_group("Player")
 signal damage(damage_power)
 
+var enemy_health = 100
 var dead = false
 
 func _physics_process(delta):
@@ -38,13 +39,23 @@ func attempt_to_kill_player():
 	var eye_line = Vector3.UP * 1.5
 	var query = PhysicsRayQueryParameters3D.create(global_position+eye_line, player.global_position+eye_line, 1)
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	#If enemy is colliding with player
 	if result.is_empty():
 		emit_signal("damage",damage_power)
 		player.kill()
 
 
 func kill():
-	dead = true
-	$AudioStreamPlayer3D.play()
-	animated_sprite_3d.play("death")
-	$CollisionShape3D.disabled = true
+	#dead = true
+	#$AudioStreamPlayer3D.play()
+	#animated_sprite_3d.play("death")
+	#$CollisionShape3D.disabled = true
+	if enemy_health <= 0:
+		dead = true
+		$AudioStreamPlayer3D.play()
+		animated_sprite_3d.play("death")
+		$CollisionShape3D.disabled = true
+
+
+func _on_player_damage(damage_power):
+	enemy_health -= damage_power
