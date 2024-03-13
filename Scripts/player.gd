@@ -5,6 +5,8 @@ extends CharacterBody3D
 @onready var death_screen = $CanvasLayer/DeathScreen
 @onready var interact_ray = $InteractRay
 
+@export var damage_power = 50
+
 const SPEED = 5.0
 const MOUSE_SENS = 0.5
 
@@ -12,7 +14,6 @@ var can_shoot = true
 var dead = false
 
 var health = 100
-var damage_power = 50
 
 signal damage(damage_power)
 

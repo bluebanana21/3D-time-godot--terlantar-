@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://diehd27twcx1h"]
+
+[ext_resource type="Script" path="res://Scripts/MedKitBox.gd" id="1_vhfec"]
+
+[node name="MedKitBox" type="CSGBox3D"]
+script = ExtResource("1_vhfec")
+prompt_message = "Medkit"
+prompt_action = "E"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bl3b3guldify5"]
+[gd_scene load_steps=15 format=3 uid="uid://bl3b3guldify5"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dxgn2ilmngddj" path="res://Assets/FPS-controller-assets-main/FPS-controller-assets-main/assets/textures/dev/grids/Dark/texture_07.png" id="3_3fvog"]
 [ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
 [ext_resource type="PackedScene" uid="uid://drqgbv1nno15w" path="res://Scenes/gun.tscn" id="7_twdv4"]
+[ext_resource type="PackedScene" uid="uid://diehd27twcx1h" path="res://Scenes/med_kit_box.tscn" id="8_av4lw"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_d5iix"]
 panorama = ExtResource("2_0lcu1")
@@ -63,13 +64,19 @@ light_mask = 3
 
 [node name="Player" parent="." instance=ExtResource("1_jmicj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.45058e-09)
+damage_power = 25
 
 [node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8.44627)
-move_speed = 2.0
+move_speed = 0.0
 
 [node name="GunBox" parent="." instance=ExtResource("7_twdv4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9)
+
+[node name="MedKitBox" parent="." instance=ExtResource("8_av4lw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 7.45058e-09)
+use_collision = true
+collision_layer = 3
 
 [connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
 [connection signal="damage" from="Enemy" to="Player" method="_on_enemy_damage"]
