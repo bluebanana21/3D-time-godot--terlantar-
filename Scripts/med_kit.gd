@@ -1,5 +1,5 @@
-class_name  interactable_health
-extends CSGBox3D
+class_name  interactabl
+extends StaticBody3D
 
 @export var prompt_message = "interact"
 @export var prompt_action = "interact"
@@ -19,4 +19,4 @@ func get_prompt():
 func interacted_by_player():
 	emit_signal("heal", heal_amount)
 	#health += 1
-	print("medkit has interacted with player")
+	print("obj has interacted with player")

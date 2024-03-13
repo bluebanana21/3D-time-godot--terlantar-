@@ -16,6 +16,8 @@ func _process(delta):
 			#print("youve interacted")
 		if detected is interactable:
 			prompt.text = detected.get_prompt()
+		if detected is interactabl:
+			prompt.text = detected.get_prompt()
 
 #Interacting with "interact" button
 func _input(event):
