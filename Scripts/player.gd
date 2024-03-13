@@ -37,6 +37,9 @@ func _input(event):
 		shoot()
 	if Input.is_action_just_pressed("show_health"):
 		show_health()
+	if Input.is_action_just_pressed("switch_primary"):
+		print("switched to primary")
+		damage_power = 25
 
 
 func _process(delta):
@@ -105,3 +108,13 @@ func _on_enemy_damage(damage_power):
 #Heals when interacting with the gun Box
 func _on_gun_box_heal(heal_amount):
 	health += heal_amount
+
+
+#Heals when interacting with medkit
+func _on_med_kit_heal(heal_amount):
+	health += heal_amount
+
+
+#Changes gun damage when interacting with shotgun pic
+func _on_gun_box_damage(damage_num):
+	damage_power = damage_num

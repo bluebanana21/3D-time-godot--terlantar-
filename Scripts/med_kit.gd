@@ -1,4 +1,4 @@
-class_name  interactabl
+class_name  HealthInteractable
 extends StaticBody3D
 
 @export var prompt_message = "interact"
@@ -19,4 +19,4 @@ func get_prompt():
 func interacted_by_player():
 	emit_signal("heal", heal_amount)
 	#health += 1
-	print("obj has interacted with player")
+	print("Medkit has healed player")

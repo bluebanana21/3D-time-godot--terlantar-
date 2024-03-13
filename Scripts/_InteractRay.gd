@@ -14,9 +14,9 @@ func _process(delta):
 		var detected = get_collider()
 		#if Input.is_action_just_pressed("interact"):
 			#print("youve interacted")
-		if detected is interactable:
+		if detected is HealthInteractable:
 			prompt.text = detected.get_prompt()
-		if detected is interactabl:
+		if detected is GunInteractable:
 			prompt.text = detected.get_prompt()
 
 #Interacting with "interact" button
