@@ -56,3 +56,5 @@ mesh = SubResource("CapsuleMesh_wnwje")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_crvvs")
+
+[node name="Timer" type="Timer" parent="."]

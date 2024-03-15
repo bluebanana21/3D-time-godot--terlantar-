@@ -1,18 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://drqgbv1nno15w"]
+[gd_scene load_steps=6 format=3 uid="uid://drqgbv1nno15w"]
 
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="1_x4v3u"]
+[ext_resource type="Texture2D" uid="uid://47kq8moupy40" path="res://Assets/SHotgun.jpg" id="2_n61bu"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7vv2e"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_laqdn"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebg7d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n61bu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_x4v3u")
-prompt_message = "white box"
+prompt_message = "Shotgun"
 prompt_action = "E"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_7vv2e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("BoxMesh_laqdn")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_ebg7d")
