@@ -19,7 +19,7 @@ func get_prompt():
 
 
 func interacted_by_player():
-	emit_signal("heal", heal_amount)
+	#emit_signal("heal", heal_amount)
 	emit_signal("damage", damage_num)
 	#health += 1
 	print("Shotgun has changed player weapon")
