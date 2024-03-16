@@ -5,9 +5,11 @@ extends StaticBody3D
 @export var prompt_action = "interact"
 @export var heal_amount = 10
 @export var damage_num = 50
+var weapon_name = "shotgun"
 
 signal heal(heal_amount)
 signal damage(damage_num)
+signal weapons_name(weapon_name)
 
 func get_prompt():
 	var key_name = ""
@@ -21,5 +23,6 @@ func get_prompt():
 func interacted_by_player():
 	#emit_signal("heal", heal_amount)
 	emit_signal("damage", damage_num)
+	emit_signal("weapons_name", weapon_name)
 	#health += 1
 	print("Shotgun has changed player weapon")
