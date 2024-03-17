@@ -3,13 +3,13 @@ extends CharacterBody3D
 @onready var revolver_sprite = $UI/Revolver/AnimatedSprite2D
 @onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
 @onready var ray_cast_3d = $GunRayCast
-@onready var death_screen = $CanvasLayer/DeathScreen
+@onready var death_screen = $UI/DeathScreen
 @onready var interact_ray = $InteractRay
 
 @export var damage_power = 50
 
 const SPEED = 5.0
-const MOUSE_SENS = 0.5
+const MOUSE_SENS = 0.2
 
 var can_shoot = true
 var dead = false
@@ -118,9 +118,6 @@ func show_health():
 func _on_enemy_damage(damage_power):
 	health -= damage_power
 
-#Heals when interacting with the gun Box
-func _on_gun_box_heal(heal_amount):
-	health += heal_amount
 
 #Heals when interacting with medkit
 func _on_med_kit_heal(heal_amount):
@@ -132,4 +129,12 @@ func _on_gun_box_damage(damage_num):
 
 
 func _on_shotgun_object_weapons_name(weapon_name):
+	current_weapon = weapon_name
+
+
+func _on_sniper_object_damage(damage_num):
+	damage_power = damage_num
+
+
+func _on_sniper_object_weapons_name(weapon_name):
 	current_weapon = weapon_name

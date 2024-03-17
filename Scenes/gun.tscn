@@ -1,22 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://drqgbv1nno15w"]
+[gd_scene load_steps=5 format=3 uid="uid://drqgbv1nno15w"]
 
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="1_x4v3u"]
-[ext_resource type="Texture2D" uid="uid://47kq8moupy40" path="res://Assets/SHotgun.jpg" id="2_n61bu"]
+[ext_resource type="Texture2D" uid="uid://dsua3c57qkyaf" path="res://Assets/SHotgun object.jpg" id="2_12a03"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7vv2e"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_laqdn"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ebg7d"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_n61bu")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="ShotgunObject" type="StaticBody3D"]
 script = ExtResource("1_x4v3u")
@@ -30,6 +19,6 @@ shape = SubResource("BoxShape3D_7vv2e")
 visible = false
 mesh = SubResource("BoxMesh_laqdn")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 2
-sprite_frames = SubResource("SpriteFrames_ebg7d")
+texture = ExtResource("2_12a03")

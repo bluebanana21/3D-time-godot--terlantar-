@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsua3c57qkyaf"
-path.s3tc="res://.godot/imported/SHotgun object.jpg-4ed7957adbf2c93b42f8f20ab7444864.s3tc.ctex"
+uid="uid://dmqjd83qxrnlq"
+path.s3tc="res://.godot/imported/cat attack.jpeg-66e0da5b7c474bad336199ade2021add.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/SHotgun object.jpg"
-dest_files=["res://.godot/imported/SHotgun object.jpg-4ed7957adbf2c93b42f8f20ab7444864.s3tc.ctex"]
+source_file="res://Assets/cat attack.jpeg"
+dest_files=["res://.godot/imported/cat attack.jpeg-66e0da5b7c474bad336199ade2021add.s3tc.ctex"]
 
 [params]
 

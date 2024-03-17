@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cep4eoxup3mcl"]
+
+[ext_resource type="Script" path="res://Scripts/sniper_object.gd" id="1_4tu7d"]
+[ext_resource type="Texture2D" uid="uid://dcqt5eoxetklg" path="res://Assets/sniper.jpg" id="2_qobi7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fqivt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ftoce"]
+
+[node name="SniperObject" type="StaticBody3D"]
+script = ExtResource("1_4tu7d")
+prompt_message = "Sniper"
+prompt_action = "E"
+damage_num = 100
+weapon_name = "sniper"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fqivt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_ftoce")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.28532, 0, 0, 0, 0.28532, 0, 0, 0, 0.28532, 0, 0, 0)
+billboard = 2
+texture = ExtResource("2_qobi7")
