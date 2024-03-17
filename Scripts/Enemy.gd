@@ -12,7 +12,12 @@ extends CharacterBody3D
 signal damage(damage_power)
 
 var enemy_health = 100
+var can_attack = true
 var dead = false
+
+func _ready():
+	animated_sprite_3d.animation_finished.connect(attack_anim_done)
+
 
 func _physics_process(delta):
 	if dead:
@@ -40,8 +45,12 @@ func attempt_to_kill_player():
 	var query = PhysicsRayQueryParameters3D.create(global_position+eye_line, player.global_position+eye_line, 1)
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
 	#If enemy is colliding with player
+	if !can_attack:
+		return
+	can_attack = false
 	if result.is_empty():
 		emit_signal("damage",damage_power)
+		animated_sprite_3d.play("attack")
 		player.kill()
 
 
@@ -55,6 +64,10 @@ func kill():
 		$AudioStreamPlayer3D.play()
 		animated_sprite_3d.play("death")
 		$CollisionShape3D.disabled = true
+
+
+func attack_anim_done():
+	can_attack = true
 
 
 func _on_player_damage(damage_power):
