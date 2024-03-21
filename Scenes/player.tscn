@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
-[ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Gun Sprite 3D time 2.png" id="2_f3des"]
-[ext_resource type="Texture2D" uid="uid://cpd884r6ljbo0" path="res://Assets/Gun Sprite blast.png" id="3_guu41"]
+[ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/temp assets/Gun Sprite 3D time 2.png" id="2_f3des"]
+[ext_resource type="Texture2D" uid="uid://cpd884r6ljbo0" path="res://Assets/temp assets/Gun Sprite blast.png" id="3_guu41"]
 [ext_resource type="Script" path="res://Scripts/Button.gd" id="4_4rxwo"]
-[ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/Shotgun.png" id="5_21cfq"]
+[ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/temp assets/Shotgun.png" id="5_21cfq"]
 [ext_resource type="AudioStream" uid="uid://dwfwa7j4at0nc" path="res://Assets/Audio assets/Fart sound effect(1).mp3" id="5_vohir"]
-[ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/Shotgun blast.png" id="6_50dtj"]
+[ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/temp assets/Shotgun blast.png" id="6_50dtj"]
 [ext_resource type="Script" path="res://Scripts/_InteractRay.gd" id="6_54qee"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vc7f6"]

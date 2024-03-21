@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cw3egvxu1j0j1"]
 
 [ext_resource type="Script" path="res://Scripts/med_kit.gd" id="1_3kqan"]
-[ext_resource type="Texture2D" uid="uid://dlbdik4rk8wel" path="res://Assets/medkit.png" id="2_et4lv"]
+[ext_resource type="Texture2D" uid="uid://dlbdik4rk8wel" path="res://Assets/temp assets/medkit.png" id="2_et4lv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_55dpl"]
 

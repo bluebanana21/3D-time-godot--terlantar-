@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkwdxqv1ncgkj"]
+[gd_scene load_steps=9 format=3 uid="uid://bkwdxqv1ncgkj"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_87n2l"]
-[ext_resource type="Texture2D" uid="uid://bpavai5s8ew6e" path="res://Assets/tong.jpg" id="2_0jbmf"]
-[ext_resource type="Texture2D" uid="uid://dmqjd83qxrnlq" path="res://Assets/cat attack.jpeg" id="2_dtnwk"]
-[ext_resource type="Texture2D" uid="uid://wnbcxbo83u2p" path="res://Assets/tong 2.jpg" id="3_hd1f7"]
-[ext_resource type="Texture2D" uid="uid://dil5uxwqr7spt" path="res://Assets/jeff-kingma--lLWCvEoFJM-unsplash.jpg" id="3_xu5yu"]
+[ext_resource type="Texture2D" uid="uid://dmqjd83qxrnlq" path="res://Assets/temp assets/cat attack.jpeg" id="2_dtnwk"]
+[ext_resource type="Texture2D" uid="uid://dil5uxwqr7spt" path="res://Assets/temp assets/jeff-kingma--lLWCvEoFJM-unsplash.jpg" id="3_xu5yu"]
 [ext_resource type="AudioStream" uid="uid://4a6dwxijejgr" path="res://Assets/Audio assets/Nuclear Bomb Explosion Sound Effect..mp3" id="5_crvvs"]
+[ext_resource type="Texture2D" uid="uid://d13l7yr1lgu1p" path="res://Assets/enemies/gunmen.png" id="5_wregn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70m27"]
 
@@ -21,9 +20,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_0jbmf")
-}, {
-"duration": 1.0,
 "texture": ExtResource("3_xu5yu")
 }],
 "loop": false,
@@ -32,10 +28,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_0jbmf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_hd1f7")
+"texture": ExtResource("5_wregn")
 }],
 "loop": true,
 "name": &"idle",
@@ -54,10 +47,10 @@ script = ExtResource("1_87n2l")
 shape = SubResource("CapsuleShape3D_70m27")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
+transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 0, 0, 0)
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_n8pba")
-animation = &"attack"
+animation = &"idle"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://drqgbv1nno15w"]
 
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="1_x4v3u"]
-[ext_resource type="Texture2D" uid="uid://dsua3c57qkyaf" path="res://Assets/SHotgun object.jpg" id="2_12a03"]
+[ext_resource type="Texture2D" uid="uid://dsua3c57qkyaf" path="res://Assets/temp assets/SHotgun object.jpg" id="2_12a03"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7vv2e"]
 
