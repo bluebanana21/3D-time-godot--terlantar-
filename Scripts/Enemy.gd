@@ -44,6 +44,7 @@ func attempt_to_kill_player():
 	var eye_line = Vector3.UP * 1.5
 	var query = PhysicsRayQueryParameters3D.create(global_position+eye_line, player.global_position+eye_line, 1)
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	
 	#If enemy is colliding with player
 	if !can_attack:
 		return
@@ -55,10 +56,6 @@ func attempt_to_kill_player():
 
 
 func kill():
-	#dead = true
-	#$AudioStreamPlayer3D.play()
-	#animated_sprite_3d.play("death")
-	#$CollisionShape3D.disabled = true
 	if enemy_health <= 0:
 		dead = true
 		$AudioStreamPlayer3D.play()

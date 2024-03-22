@@ -1,19 +1,19 @@
 extends CharacterBody3D
 
 @onready var revolver_sprite = $UI/Revolver/AnimatedSprite2D
+@onready var revolver_audio = $UI/Revolver/AudioStreamPlayer3D
 @onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
-@onready var ray_cast_3d = $GunRayCast
 @onready var death_screen = $UI/DeathScreen
+@onready var ray_cast_3d = $GunRayCast
 @onready var interact_ray = $InteractRay
 
-@export var damage_power = 50
+@export var damage_power = 25
 
 const SPEED = 5.0
 const MOUSE_SENS = 0.2
 
 var can_shoot = true
 var dead = false
-
 var health = 100
 var current_weapon = "revolver"
 #var current_weapon = "shotgun"
@@ -23,7 +23,11 @@ signal damage(damage_power)
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	revolver_sprite.animation_finished.connect(shoot_anim_done)
+	#revolver_sprite.animation_finished.connect(shoot_anim_done)
+	if current_weapon == "revolver":
+		revolver_sprite.animation_finished.connect(shoot_anim_done_revolver)
+	if current_weapon == "shotgun":
+		shotgun_sprite.animation_finished.connect(shoot_anim_done_shotgun)
 	$UI/DeathScreen/Panel/Button.button_up.connect(restart)
 
 
@@ -36,16 +40,25 @@ func _input(event):
 	if dead:
 		return
 	if Input.is_action_just_pressed("Shoot"):
-		$AudioStreamPlayer3D.play()
-		shoot()
+		if current_weapon == "shotgun":
+			$UI/Shotgun/Timer.start()
+			shoot()
+		else :
+			revolver_audio.play()
+			shoot()
 	if Input.is_action_just_pressed("show_health"):
 		show_health()
-	if Input.is_action_just_pressed("switch_primary"):
-		print("switched to primary")
-		damage_power = 25
+	if Input.is_action_just_pressed("show_current_weapon"):
+		show_weapon()
+	#if Input.is_action_just_pressed("switch_primary"):
+		#print("switched to primary")
+		#damage_power = 25
 
 
 func _process(delta):
+	print(current_weapon)
+	print(damage_power)
+	print(can_shoot)
 	if Input.is_action_just_pressed("restart"):
 		restart()
 	if Input.is_action_just_pressed("quit"):
@@ -77,9 +90,11 @@ func shoot():
 	if !can_shoot:
 		return
 	can_shoot = false
-	revolver_sprite.play("shoot")
-	#if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("kill"):
-		#ray_cast_3d.get_collider().kill()
+	if current_weapon == "revolver":
+		revolver_sprite.play("shoot")
+	elif current_weapon == "shotgun":
+		shotgun_sprite.play("shoot")
+		
 	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("_on_player_damage"):
 		emit_signal("damage", damage_power)
 		ray_cast_3d.get_collider().kill()
@@ -96,12 +111,14 @@ func gun_switch():
 
 
 #Allows shooting after animation is done
-func shoot_anim_done():
+func shoot_anim_done_revolver():
+	can_shoot = true
+
+func shoot_anim_done_shotgun():
 	can_shoot = true
 
 #Dies when health reaches zero
 func kill():
-	#health -= 1
 	if health <= 0:
 		dead = true
 		death_screen.show()
@@ -113,7 +130,15 @@ func show_health():
 	print(health)
 
 
-#Signal Functions
+func show_weapon():
+	print(current_weapon)
+
+
+
+####################
+# Signal Functions #
+####################
+
 #Takes damage when colliding with enemy
 func _on_enemy_damage(damage_power):
 	health -= damage_power
@@ -124,8 +149,10 @@ func _on_med_kit_heal(heal_amount):
 	health += heal_amount
 
 #Changes gun damage when interacting with shotgun pic
-func _on_gun_box_damage(damage_num):
+func _on_shotgun_object_damage(damage_num):
 	damage_power = damage_num
+#func _on_gun_box_damage(damage_num):
+	#damage_power = damage_num
 
 
 func _on_shotgun_object_weapons_name(weapon_name):
@@ -138,3 +165,7 @@ func _on_sniper_object_damage(damage_num):
 
 func _on_sniper_object_weapons_name(weapon_name):
 	current_weapon = weapon_name
+
+
+func _on_timer_timeout():
+	can_shoot = true
