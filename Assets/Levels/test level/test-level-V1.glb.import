@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dn3bydstaos83"
-path="res://.godot/imported/test_level.fbx-2138ce0fdff918f8f74f6b3b946d852a.scn"
+uid="uid://c4rcsc272ln6c"
+path="res://.godot/imported/test-level-V1.glb-c5264b7e1047052c5ec9aa722ac0134b.scn"
 
 [deps]
 
-source_file="res://Assets/Levels/test level/test_level.fbx"
-dest_files=["res://.godot/imported/test_level.fbx-2138ce0fdff918f8f74f6b3b946d852a.scn"]
+source_file="res://Assets/Levels/test level/test-level-V1.glb"
+dest_files=["res://.godot/imported/test-level-V1.glb-c5264b7e1047052c5ec9aa722ac0134b.scn"]
 
 [params]
 
@@ -29,6 +29,17 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"MATfloor_dark": {
+"use_external/enabled": true,
+"use_external/path": ""
+},
+"MATwall_brick": {
+"use_external/enabled": true,
+"use_external/path": ""
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

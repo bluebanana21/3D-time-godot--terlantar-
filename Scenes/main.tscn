@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bl3b3guldify5"]
+[gd_scene load_steps=6 format=3 uid="uid://bl3b3guldify5"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
-[ext_resource type="PackedScene" uid="uid://dn3bydstaos83" path="res://Assets/Levels/test level/test_level.fbx" id="2_fltma"]
 [ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
 
 [sub_resource type="Sky" id="Sky_08eqe"]
@@ -24,10 +23,8 @@ environment = SubResource("Environment_lb72m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Level" parent="." instance=ExtResource("2_fltma")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
-
 [node name="Player" parent="." instance=ExtResource("1_jmicj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6354, 0, -12.4859)
 
 [node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1, -20.0716)

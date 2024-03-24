@@ -1,5 +1,9 @@
 extends Node3D
 
+var test_level = load("res://Assets/Levels/test level/test_level.glb")
+
+#func _ready():
+	#test_level = get_node("test_level")
 #@onready var pause_menu = $CanvasLayer/PauseMenu
 #var paused = false
 
