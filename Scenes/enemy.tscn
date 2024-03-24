@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_87n2l"]
 [ext_resource type="Texture2D" uid="uid://dmqjd83qxrnlq" path="res://Assets/temp assets/cat attack.jpeg" id="2_dtnwk"]
 [ext_resource type="Texture2D" uid="uid://dil5uxwqr7spt" path="res://Assets/temp assets/jeff-kingma--lLWCvEoFJM-unsplash.jpg" id="3_xu5yu"]
+[ext_resource type="Texture2D" uid="uid://cr4q5ns15cemo" path="res://Assets/enemies/gunmen v2.png" id="4_e8nrd"]
 [ext_resource type="AudioStream" uid="uid://4a6dwxijejgr" path="res://Assets/Audio assets/Nuclear Bomb Explosion Sound Effect..mp3" id="5_crvvs"]
-[ext_resource type="Texture2D" uid="uid://d13l7yr1lgu1p" path="res://Assets/enemies/gunmen.png" id="5_wregn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70m27"]
 
@@ -28,7 +28,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_wregn")
+"texture": ExtResource("4_e8nrd")
 }],
 "loop": true,
 "name": &"idle",
@@ -48,6 +48,7 @@ shape = SubResource("CapsuleShape3D_70m27")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 0, 0, 0)
+pixel_size = 0.0045
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_n8pba")
 animation = &"idle"
