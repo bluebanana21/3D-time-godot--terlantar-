@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c4rcsc272ln6c"
-path="res://.godot/imported/test-level-V1.glb-c5264b7e1047052c5ec9aa722ac0134b.scn"
+uid="uid://hlt23yw45lxy"
+path="res://.godot/imported/test_level-idk.glb-c6666f9cc25c5a1f36a07636b1839cf5.scn"
 
 [deps]
 
-source_file="res://Assets/Levels/test level/test-level-V1.glb"
-dest_files=["res://.godot/imported/test-level-V1.glb-c5264b7e1047052c5ec9aa722ac0134b.scn"]
+source_file="res://Assets/Levels/test_level-idk.glb"
+dest_files=["res://.godot/imported/test_level-idk.glb-c6666f9cc25c5a1f36a07636b1839cf5.scn"]
 
 [params]
 
@@ -33,11 +33,11 @@ _subresources={
 "materials": {
 "MATfloor_dark": {
 "use_external/enabled": true,
-"use_external/path": ""
+"use_external/path": "res://Assets/Levels/MATfloor_dark.tres"
 },
 "MATwall_brick": {
 "use_external/enabled": true,
-"use_external/path": ""
+"use_external/path": "res://Assets/Levels/MATwall_brick.tres"
 }
 }
 }

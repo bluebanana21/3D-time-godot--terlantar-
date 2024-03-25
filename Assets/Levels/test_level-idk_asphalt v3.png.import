@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://defx7ysdj86l6"
-path.s3tc="res://.godot/imported/test-level-V1_asphalt v3.png-61b0922f71a9aa7c34a9d6df9443d3af.s3tc.ctex"
+uid="uid://lke6qfoqco36"
+path.s3tc="res://.godot/imported/test_level-idk_asphalt v3.png-25216c0bee29c4750db19e9efcd1f1c6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://Assets/Levels/test level/test-level-V1_asphalt v3.png"
-dest_files=["res://.godot/imported/test-level-V1_asphalt v3.png-61b0922f71a9aa7c34a9d6df9443d3af.s3tc.ctex"]
+source_file="res://Assets/Levels/test_level-idk_asphalt v3.png"
+dest_files=["res://.godot/imported/test_level-idk_asphalt v3.png-25216c0bee29c4750db19e9efcd1f1c6.s3tc.ctex"]
 
 [params]
 
