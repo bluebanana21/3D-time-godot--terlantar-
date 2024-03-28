@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cmw6wbluswb8p"]
+
+[ext_resource type="Texture2D" uid="uid://lke6qfoqco36" path="res://Assets/Levels/test_level-idk_asphalt v3.png" id="1_p8xcj"]
+
+[resource]
+resource_name = "MATfloor_dark"
+cull_mode = 2
+albedo_texture = ExtResource("1_p8xcj")
+texture_filter = 0

@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkwdxqv1ncgkj"]
+[gd_scene load_steps=10 format=3 uid="uid://bkwdxqv1ncgkj"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_87n2l"]
 [ext_resource type="Texture2D" uid="uid://dmqjd83qxrnlq" path="res://Assets/temp assets/cat attack.jpeg" id="2_dtnwk"]
 [ext_resource type="Texture2D" uid="uid://dil5uxwqr7spt" path="res://Assets/temp assets/jeff-kingma--lLWCvEoFJM-unsplash.jpg" id="3_xu5yu"]
+[ext_resource type="Texture2D" uid="uid://cr4q5ns15cemo" path="res://Assets/enemies/gunmen v2.png" id="4_e8nrd"]
 [ext_resource type="AudioStream" uid="uid://4a6dwxijejgr" path="res://Assets/Audio assets/Nuclear Bomb Explosion Sound Effect..mp3" id="5_crvvs"]
-[ext_resource type="Texture2D" uid="uid://d13l7yr1lgu1p" path="res://Assets/enemies/gunmen.png" id="5_wregn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70m27"]
 
@@ -28,7 +28,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_wregn")
+"texture": ExtResource("4_e8nrd")
 }],
 "loop": true,
 "name": &"idle",
@@ -36,6 +36,9 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wnwje"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5had"]
+texture_filter = 0
 
 [node name="Enemy" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -48,13 +51,16 @@ shape = SubResource("CapsuleShape3D_70m27")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 0, 0, 0)
+pixel_size = 0.0045
 billboard = 2
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_n8pba")
-animation = &"idle"
+animation = &"death"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("CapsuleMesh_wnwje")
+surface_material_override/0 = SubResource("StandardMaterial3D_l5had")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_crvvs")
