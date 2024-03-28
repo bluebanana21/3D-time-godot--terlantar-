@@ -1,14 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://bl3b3guldify5"]
+[gd_scene load_steps=8 format=3 uid="uid://b1sbt77ojrtng"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
-[ext_resource type="Texture2D" uid="uid://yufqx1eo2g53" path="res://Assets/textures/asphalt v3.png" id="3_ipb6k"]
-[ext_resource type="PackedScene" uid="uid://dly71vtg7cik0" path="res://Scenes/brick_wall.tscn" id="4_21y5c"]
+[ext_resource type="PackedScene" uid="uid://hlt23yw45lxy" path="res://Assets/Levels/test_level-idk.glb" id="4_yp8kg"]
+[ext_resource type="PackedScene" uid="uid://drqgbv1nno15w" path="res://Scenes/gun.tscn" id="5_ir2iu"]
 [ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
-[ext_resource type="PackedScene" uid="uid://drqgbv1nno15w" path="res://Scenes/gun.tscn" id="7_twdv4"]
-[ext_resource type="PackedScene" uid="uid://cep4eoxup3mcl" path="res://Scenes/sniper_object.tscn" id="8_wmhbs"]
-[ext_resource type="PackedScene" uid="uid://cw3egvxu1j0j1" path="res://Scenes/med_kit.tscn" id="9_km23u"]
-[ext_resource type="PackedScene" uid="uid://fvwkxkmcdafx" path="res://Assets/Levels/test_level.fbx" id="9_v7wkc"]
 
 [sub_resource type="Sky" id="Sky_08eqe"]
 
@@ -16,15 +12,6 @@
 background_energy_multiplier = 14.33
 sky = SubResource("Sky_08eqe")
 glow_enabled = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_gm8ox"]
-size = Vector3(33, 1, 33)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owoal"]
-albedo_texture = ExtResource("3_ipb6k")
-uv1_scale = Vector3(4.505, 4.505, 4.505)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_r2rsm"]
 
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109615, 0, -0.0332985)
@@ -36,46 +23,22 @@ transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 23.72
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lb72m")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(2.11109, 0, 0, 0, 2.11109, 0, 0, 0, 2.11109, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_gm8ox")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(16.5, 0, 0, 0, 16.5, 0, 0, 0, 16.5, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_owoal")
-mesh = SubResource("PlaneMesh_r2rsm")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_jmicj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.45058e-09)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6354, 0, -0.4859)
 
 [node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8.44627)
-move_speed = 0.0
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 2, -20.0716)
+damage_power = 100
 
-[node name="ShotgunObject" parent="." instance=ExtResource("7_twdv4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9)
+[node name="test_level-idk" parent="." instance=ExtResource("4_yp8kg")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
-[node name="MedKit" parent="." instance=ExtResource("9_km23u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.06106, 0.862463, 0)
-
-[node name="SniperObject" parent="." instance=ExtResource("8_wmhbs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 1.35222, 0)
-
-[node name="BrickWall" parent="." instance=ExtResource("4_21y5c")]
-transform = Transform3D(9.81143, 0, 0, 0, -3.73037e-07, 8.53408, 0, -8.53408, -3.73037e-07, -6.45755, 4.05038, 15.0253)
-
-[node name="Root Scene" parent="." instance=ExtResource("9_v7wkc")]
-transform = Transform3D(2.70091, 0, 0, 0, 2.70091, 0, 0, 0, 2.70091, -97.0796, -0.00932312, -14.4859)
+[node name="ShotgunObject" parent="." instance=ExtResource("5_ir2iu")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 20, 1, -0.0716)
 
 [connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
 [connection signal="damage" from="Enemy" to="Player" method="_on_enemy_damage"]
 [connection signal="damage" from="ShotgunObject" to="Player" method="_on_shotgun_object_damage"]
 [connection signal="weapons_name" from="ShotgunObject" to="Player" method="_on_shotgun_object_weapons_name"]
-[connection signal="heal" from="MedKit" to="Player" method="_on_med_kit_heal"]
-[connection signal="damage" from="SniperObject" to="Player" method="_on_sniper_object_damage"]
-[connection signal="weapons_name" from="SniperObject" to="Player" method="_on_sniper_object_weapons_name"]

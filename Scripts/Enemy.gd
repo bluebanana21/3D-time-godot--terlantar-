@@ -15,8 +15,8 @@ var enemy_health = 100
 var can_attack = true
 var dead = false
 
-func _ready():
-	animated_sprite_3d.animation_finished.connect(attack_anim_done)
+#func _ready():
+	#animated_sprite_3d.animation_finished.connect(attack_anim_done)
 
 
 func _physics_process(delta):
@@ -51,7 +51,7 @@ func attempt_to_kill_player():
 	can_attack = false
 	if result.is_empty():
 		emit_signal("damage",damage_power)
-		animated_sprite_3d.play("attack")
+		#animated_sprite_3d.play("attack")
 		player.kill()
 
 
