@@ -48,19 +48,12 @@ func _input(event):
 			shoot()
 	if Input.is_action_just_pressed("show_health"):
 		show_health()
-	if Input.is_action_just_pressed("show_current_weapon"):
-		show_weapon()
-	#if Input.is_action_just_pressed("switch_primary"):
-		#print("switched to primary")
-		#damage_power = 25
 
 
 func _process(delta):
-	print(current_weapon)
-	print(damage_power)
-	print(can_shoot)
 	if Input.is_action_just_pressed("restart"):
 		restart()
+		#health -= 100
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 	
@@ -120,6 +113,7 @@ func shoot_anim_done_shotgun():
 #Dies when health reaches zero
 func kill():
 	if health <= 0:
+		#print("dead")
 		dead = true
 		death_screen.show()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -128,11 +122,9 @@ func kill():
 #Shows health in console
 func show_health():
 	print(health)
-
-
-func show_weapon():
 	print(current_weapon)
-
+	print(damage_power)
+	print(can_shoot)
 
 
 ####################
@@ -151,8 +143,6 @@ func _on_med_kit_heal(heal_amount):
 #Changes gun damage when interacting with shotgun pic
 func _on_shotgun_object_damage(damage_num):
 	damage_power = damage_num
-#func _on_gun_box_damage(damage_num):
-	#damage_power = damage_num
 
 
 func _on_shotgun_object_weapons_name(weapon_name):

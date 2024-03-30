@@ -1,17 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=14 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/temp assets/Gun Sprite 3D time 2.png" id="2_f3des"]
 [ext_resource type="Texture2D" uid="uid://cpd884r6ljbo0" path="res://Assets/temp assets/Gun Sprite blast.png" id="3_guu41"]
-[ext_resource type="Script" path="res://Scripts/Button.gd" id="4_4rxwo"]
+[ext_resource type="Script" path="res://Scripts/Panel.gd" id="5_18qjc"]
 [ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/temp assets/Shotgun.png" id="5_21cfq"]
 [ext_resource type="AudioStream" uid="uid://dwfwa7j4at0nc" path="res://Assets/Audio assets/Fart sound effect(1).mp3" id="5_vohir"]
 [ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/temp assets/Shotgun blast.png" id="6_50dtj"]
 [ext_resource type="Script" path="res://Scripts/_InteractRay.gd" id="6_54qee"]
+[ext_resource type="FontVariation" uid="uid://djt4o5u0sxijc" path="res://Assets/fonts/pixel-fonttres.tres" id="6_nf37h"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vc7f6"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6mt14"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sup3v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_grycg"]
 animations = [{
@@ -86,7 +87,7 @@ mesh = SubResource("CapsuleMesh_vc7f6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_6mt14")
+shape = SubResource("CapsuleShape3D_sup3v")
 
 [node name="GunRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -95,6 +96,7 @@ collision_mask = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+fov = 90.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -116,7 +118,7 @@ transform = Transform3D(0.991604, 0.129315, 0, -0.129315, 0.991604, 0, 0, 0, 1, 
 stream = ExtResource("5_vohir")
 
 [node name="bottom" type="ColorRect" parent="UI"]
-offset_top = 576.0
+offset_top = 544.0
 offset_right = 1152.0
 offset_bottom = 648.0
 
@@ -158,6 +160,7 @@ offset_right = 80.0
 offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_18qjc")
 
 [node name="Label" type="Label" parent="UI/DeathScreen/Panel"]
 layout_mode = 1
@@ -172,6 +175,7 @@ offset_right = 36.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_nf37h")
 text = "You died"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -190,7 +194,11 @@ offset_bottom = 28.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "restart"
-script = ExtResource("4_4rxwo")
+
+[node name="CheckButton" type="CheckButton" parent="UI/DeathScreen/Panel"]
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 24.0
 
 [node name="Shotgun" type="Control" parent="UI"]
 layout_mode = 3
@@ -231,4 +239,5 @@ text = "message
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="UI/Shotgun/Timer" to="." method="_on_timer_timeout"]
