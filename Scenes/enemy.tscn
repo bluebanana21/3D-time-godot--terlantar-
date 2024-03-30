@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bkwdxqv1ncgkj"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_87n2l"]
-[ext_resource type="Texture2D" uid="uid://dil5uxwqr7spt" path="res://Assets/temp assets/jeff-kingma--lLWCvEoFJM-unsplash.jpg" id="3_xu5yu"]
-[ext_resource type="Texture2D" uid="uid://b68wn2d5pqir1" path="res://Assets/enemies/gunmen v3.png" id="4_d6q2d"]
-[ext_resource type="AudioStream" uid="uid://4a6dwxijejgr" path="res://Assets/Audio assets/Nuclear Bomb Explosion Sound Effect..mp3" id="5_crvvs"]
+[ext_resource type="Texture2D" uid="uid://dil5uxwqr7spt" path="res://Assets/Temporary/jeff-kingma--lLWCvEoFJM-unsplash.jpg" id="3_xu5yu"]
+[ext_resource type="Texture2D" uid="uid://b68wn2d5pqir1" path="res://Assets/Enemies/gunmen v3.png" id="4_d6q2d"]
+[ext_resource type="AudioStream" uid="uid://4a6dwxijejgr" path="res://Assets/Audio/Nuclear Bomb Explosion Sound Effect..mp3" id="5_crvvs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70m27"]
 radius = 0.4

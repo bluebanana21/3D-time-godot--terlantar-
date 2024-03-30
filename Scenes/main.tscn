@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1sbt77ojrtng"]
+[gd_scene load_steps=13 format=3 uid="uid://b1sbt77ojrtng"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
+[ext_resource type="Script" path="res://Scripts/MeleeRay.gd" id="4_vsmv3"]
 [ext_resource type="PackedScene" uid="uid://hlt23yw45lxy" path="res://Assets/Levels/test_level-idk.glb" id="4_yp8kg"]
+[ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="5_fyavn"]
 [ext_resource type="PackedScene" uid="uid://cep4eoxup3mcl" path="res://Scenes/sniper_object.tscn" id="5_ihhcy"]
 [ext_resource type="PackedScene" uid="uid://cw3egvxu1j0j1" path="res://Scenes/med_kit.tscn" id="6_lj8e1"]
 [ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
@@ -14,6 +16,22 @@
 background_energy_multiplier = 16.0
 sky = SubResource("Sky_08eqe")
 glow_intensity = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6m5hw"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_fyavn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="World" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109615, 0, -0.0332985)
@@ -27,15 +45,28 @@ environment = SubResource("Environment_lb72m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="test_level-idk" parent="." instance=ExtResource("4_yp8kg")]
+[node name="TestLevel" parent="." instance=ExtResource("4_yp8kg")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_jmicj")]
+melee_damage = 100
+
+[node name="MeleeRay" type="RayCast3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0)
+target_position = Vector3(0, -5.05, 0)
+collision_mask = 3
+debug_shape_custom_color = Color(0.894118, 0.137255, 0, 1)
+script = ExtResource("4_vsmv3")
+
+[node name="MeleeAnim" type="AnimatedSprite2D" parent="Player/MeleeRay"]
+position = Vector2(385, 261)
+sprite_frames = SubResource("SpriteFrames_6m5hw")
+animation = &"idle"
 
 [node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
+move_speed = 0.0
 attack_range = 1.4
-damage_power = 100
 
 [node name="SniperObject" parent="." instance=ExtResource("5_ihhcy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 5)
@@ -47,6 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, -5)
 
 [connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
+[connection signal="melee" from="Player" to="Enemy" method="_on_player_melee"]
 [connection signal="damage" from="Enemy" to="Player" method="_on_enemy_damage"]
 [connection signal="damage" from="SniperObject" to="Player" method="_on_sniper_object_damage"]
 [connection signal="weapons_name" from="SniperObject" to="Player" method="_on_sniper_object_weapons_name"]

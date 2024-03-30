@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c43u8nxgpdfox"
-path="res://.godot/imported/Gun Sprite 3D time 2.png-ee511d4c8d35b7e82c89786e97b5cd04.ctex"
+uid="uid://bhf7123deba6t"
+path="res://.godot/imported/Shotgun blast.png-06735242a84c1fd2047448d088488244.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/temp assets/Gun Sprite 3D time 2.png"
-dest_files=["res://.godot/imported/Gun Sprite 3D time 2.png-ee511d4c8d35b7e82c89786e97b5cd04.ctex"]
+source_file="res://Assets/Temporary/Shotgun blast.png"
+dest_files=["res://.godot/imported/Shotgun blast.png-06735242a84c1fd2047448d088488244.ctex"]
 
 [params]
 

@@ -1,14 +1,14 @@
 [gd_scene load_steps=14 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
-[ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/temp assets/Gun Sprite 3D time 2.png" id="2_f3des"]
-[ext_resource type="Texture2D" uid="uid://cpd884r6ljbo0" path="res://Assets/temp assets/Gun Sprite blast.png" id="3_guu41"]
+[ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
+[ext_resource type="Texture2D" uid="uid://cpd884r6ljbo0" path="res://Assets/Temporary/Gun Sprite blast.png" id="3_guu41"]
 [ext_resource type="Script" path="res://Scripts/Panel.gd" id="5_18qjc"]
-[ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/temp assets/Shotgun.png" id="5_21cfq"]
-[ext_resource type="AudioStream" uid="uid://dwfwa7j4at0nc" path="res://Assets/Audio assets/Fart sound effect(1).mp3" id="5_vohir"]
-[ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/temp assets/Shotgun blast.png" id="6_50dtj"]
+[ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/Temporary/Shotgun.png" id="5_21cfq"]
+[ext_resource type="AudioStream" uid="uid://dwfwa7j4at0nc" path="res://Assets/Audio/Fart sound effect(1).mp3" id="5_vohir"]
+[ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/Temporary/Shotgun blast.png" id="6_50dtj"]
 [ext_resource type="Script" path="res://Scripts/_InteractRay.gd" id="6_54qee"]
-[ext_resource type="FontVariation" uid="uid://djt4o5u0sxijc" path="res://Assets/fonts/pixel-fonttres.tres" id="6_nf37h"]
+[ext_resource type="FontVariation" uid="uid://djt4o5u0sxijc" path="res://Assets/Fonts/pixel-fonttres.tres" id="6_nf37h"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vc7f6"]
 
@@ -111,13 +111,13 @@ size_flags_vertical = 8
 position = Vector2(616, 320)
 scale = Vector2(0.888889, 0.888889)
 sprite_frames = SubResource("SpriteFrames_grycg")
-animation = &"idle"
+animation = &"shoot"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="UI/Revolver"]
 transform = Transform3D(0.991604, 0.129315, 0, -0.129315, 0.991604, 0, 0, 0, 1, 0, 0, 0)
 stream = ExtResource("5_vohir")
 
-[node name="bottom" type="ColorRect" parent="UI"]
+[node name="Bottom" type="ColorRect" parent="UI"]
 offset_top = 544.0
 offset_right = 1152.0
 offset_bottom = 648.0

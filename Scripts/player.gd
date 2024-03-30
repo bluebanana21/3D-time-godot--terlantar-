@@ -6,8 +6,11 @@ extends CharacterBody3D
 @onready var death_screen = $UI/DeathScreen
 @onready var ray_cast_3d = $GunRayCast
 @onready var interact_ray = $InteractRay
+@onready var melee_ray = $MeleeRay
+
 
 @export var damage_power = 25
+@export var melee_damage = 20
 
 const SPEED = 5.0
 const MOUSE_SENS = 0.2
@@ -16,9 +19,11 @@ var can_shoot = true
 var dead = false
 var health = 100
 var current_weapon = "revolver"
+#@onready var melee_script = $RayCast3D
 #var current_weapon = "shotgun"
 
 signal damage(damage_power)
+signal melee(melee_damage)
 
 
 func _ready():
@@ -36,7 +41,6 @@ func _input(event):
 		return
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= event.relative.x * MOUSE_SENS
-	
 	if dead:
 		return
 	if Input.is_action_just_pressed("Shoot"):
@@ -48,6 +52,9 @@ func _input(event):
 			shoot()
 	if Input.is_action_just_pressed("show_health"):
 		show_health()
+	if Input.is_action_just_pressed("Melee attack"):
+		meleeAttack()
+		#melee_script.meleeAttack()
 
 
 func _process(delta):
@@ -77,6 +84,13 @@ func _physics_process(delta):
 #restarts scene
 func restart():
 	get_tree().reload_current_scene()
+
+
+func meleeAttack():
+	#melee_anim.play("attack")
+	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
+		emit_signal("melee", melee_damage)
+		melee_ray.get_collider().kill()
 
 
 func shoot():

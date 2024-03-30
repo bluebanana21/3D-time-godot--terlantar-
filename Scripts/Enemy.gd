@@ -1,3 +1,4 @@
+class_name enemy
 extends CharacterBody3D
 
 
@@ -71,3 +72,14 @@ func attack_anim_done():
 func _on_player_damage(damage_power):
 	enemy_health -= damage_power
 
+
+#func _on_melee_damage(melee_damage):
+	#enemy_health -= melee_damage
+
+
+#func _on_ray_cast_3d_melee(melee_damage):
+	#enemy_health -= melee_damage
+
+
+func _on_player_melee(melee_damage):
+	enemy_health -= melee_damage
