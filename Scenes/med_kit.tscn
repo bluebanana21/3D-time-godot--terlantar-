@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cw3egvxu1j0j1"]
+[gd_scene load_steps=9 format=3 uid="uid://cw3egvxu1j0j1"]
 
 [ext_resource type="Script" path="res://Scripts/med_kit.gd" id="1_3kqan"]
-[ext_resource type="Texture2D" uid="uid://bnt4waer42ktg" path="res://Assets/weapons/weapon interactables/medkit.png" id="2_asm5a"]
+[ext_resource type="Texture2D" uid="uid://bnt4waer42ktg" path="res://Assets/Weapons/weapon interactables/medkit.png" id="2_asm5a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_55dpl"]
 
@@ -10,6 +10,43 @@ albedo_color = Color(0, 1, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1cnxk"]
 material = SubResource("StandardMaterial3D_gapep")
+
+[sub_resource type="Animation" id="Animation_jhhid"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u646n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gqm6m"]
+_data = {
+"RESET": SubResource("Animation_u646n"),
+"idle": SubResource("Animation_jhhid")
+}
 
 [node name="MedKit" type="StaticBody3D"]
 script = ExtResource("1_3kqan")
@@ -28,3 +65,10 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 billboard = 1
 texture_filter = 0
 texture = ExtResource("2_asm5a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gqm6m")
+}
+autoplay = "idle"
+speed_scale = 0.4
