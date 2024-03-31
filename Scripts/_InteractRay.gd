@@ -25,6 +25,7 @@ func _input(event):
 		interact_with_obj()
 
 
+#Code that allows object interaction
 func interact_with_obj():
 	if is_colliding() and get_collider().has_method("interacted_by_player"):
 		get_collider().interacted_by_player()

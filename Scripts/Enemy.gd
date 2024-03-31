@@ -1,7 +1,6 @@
 class_name enemy
 extends CharacterBody3D
 
-
 @onready var animated_sprite_3d = $AnimatedSprite3D
 
 @export var move_speed = 2.0
@@ -9,12 +8,13 @@ extends CharacterBody3D
 @export var damage_power = 10
 
 @onready var player = $"../Player"
-#@onready var player : CharacterBody3D = get_tree().get_first_node_in_group("Player")
+
 signal damage(damage_power)
 
 var enemy_health = 100
 var can_attack = true
 var dead = false
+
 
 func _ready():
 	animated_sprite_3d.animation_finished.connect(attack_anim_done)
@@ -57,6 +57,7 @@ func attempt_to_kill_player():
 		player.kill()
 
 
+#Calls when enemy health reaches zero
 func kill():
 	if enemy_health <= 0:
 		dead = true
@@ -65,20 +66,15 @@ func kill():
 		$CollisionShape3D.disabled = true
 
 
+####################
+# SIGNAL FUNCTIONS #
+####################
 func attack_anim_done():
 	can_attack = true
 
 
 func _on_player_damage(damage_power):
 	enemy_health -= damage_power
-
-
-#func _on_melee_damage(melee_damage):
-	#enemy_health -= melee_damage
-
-
-#func _on_ray_cast_3d_melee(melee_damage):
-	#enemy_health -= melee_damage
 
 
 func _on_player_melee(melee_damage):

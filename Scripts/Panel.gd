@@ -11,6 +11,7 @@ func _process(delta):
 	pass
 
 
+#Changes between fullscreen and windowed
 func _on_check_button_toggled(toggled_on):
 	if toggled_on == true:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)

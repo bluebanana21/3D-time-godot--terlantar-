@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://b1sbt77ojrtng"]
+[gd_scene load_steps=13 format=3 uid="uid://b1sbt77ojrtng"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
-[ext_resource type="Script" path="res://Scripts/MeleeRay.gd" id="4_vsmv3"]
 [ext_resource type="PackedScene" uid="uid://hlt23yw45lxy" path="res://Assets/Levels/test_level-idk.glb" id="4_yp8kg"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="5_fyavn"]
 [ext_resource type="PackedScene" uid="uid://cep4eoxup3mcl" path="res://Scenes/sniper_object.tscn" id="5_ihhcy"]
@@ -63,7 +62,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5
 target_position = Vector3(0, -0.8, 0)
 collision_mask = 3
 debug_shape_custom_color = Color(0.894118, 0.137255, 0, 1)
-script = ExtResource("4_vsmv3")
 
 [node name="MeleeAnim" type="AnimatedSprite2D" parent="Player/MeleeRay"]
 position = Vector2(385, 261)

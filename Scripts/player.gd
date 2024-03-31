@@ -20,8 +20,6 @@ var can_shoot = true
 var dead = false
 var health = 100
 var current_weapon = "revolver"
-#@onready var melee_script = $RayCast3D
-#var current_weapon = "shotgun"
 
 signal damage(damage_power)
 signal melee(melee_damage)
@@ -29,8 +27,6 @@ signal melee(melee_damage)
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	#revolver_sprite.animation_finished.connect(shoot_anim_done)
-	#melee_anim.animation_finished.
 	if current_weapon == "revolver":
 		revolver_sprite.animation_finished.connect(shoot_anim_done_revolver)
 	if current_weapon == "shotgun":
@@ -57,7 +53,6 @@ func _input(event):
 	if Input.is_action_just_pressed("Melee attack"):
 		melee_anim.play("attack")
 		meleeAttack()
-		#melee_script.meleeAttack()
 
 
 func _process(delta):
@@ -70,6 +65,7 @@ func _process(delta):
 	gun_switch()
 
 
+#Movement code
 func _physics_process(delta):
 	if dead:
 		return
@@ -90,7 +86,6 @@ func restart():
 
 
 func meleeAttack():
-	#melee_anim.play("attack")
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
 		emit_signal("melee", melee_damage)
 		melee_ray.get_collider().kill()
@@ -110,6 +105,7 @@ func shoot():
 		ray_cast_3d.get_collider().kill()
 
 
+
 func gun_switch():
 	if current_weapon == "revolver":
 		revolver_sprite.show()
@@ -126,6 +122,7 @@ func shoot_anim_done_revolver():
 
 func shoot_anim_done_shotgun():
 	can_shoot = true
+
 
 #Dies when health reaches zero
 func kill():
@@ -157,22 +154,27 @@ func _on_enemy_damage(damage_power):
 func _on_med_kit_heal(heal_amount):
 	health += heal_amount
 
-#Changes gun damage when interacting with shotgun pic
+
+#Changes gun damage when interacting with shotgun Object
 func _on_shotgun_object_damage(damage_num):
 	damage_power = damage_num
 
 
+#Cahnges the current weapon to shotgun
 func _on_shotgun_object_weapons_name(weapon_name):
 	current_weapon = weapon_name
 
 
+#Changes gun damage when interacting with Sniper Object
 func _on_sniper_object_damage(damage_num):
 	damage_power = damage_num
 
 
+#Cahnges the current weapon to sniper
 func _on_sniper_object_weapons_name(weapon_name):
 	current_weapon = weapon_name
 
 
+#Changes the "can shoot var to true when using shotgun
 func _on_timer_timeout():
 	can_shoot = true
