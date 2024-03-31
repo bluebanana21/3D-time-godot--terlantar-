@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var revolver_sprite = $UI/Revolver/AnimatedSprite2D
 @onready var revolver_audio = $UI/Revolver/AudioStreamPlayer3D
 @onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
+@onready var melee_anim = $MeleeRay/MeleeAnim
 @onready var death_screen = $UI/DeathScreen
 @onready var ray_cast_3d = $GunRayCast
 @onready var interact_ray = $InteractRay
@@ -29,6 +30,7 @@ signal melee(melee_damage)
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#revolver_sprite.animation_finished.connect(shoot_anim_done)
+	#melee_anim.animation_finished.
 	if current_weapon == "revolver":
 		revolver_sprite.animation_finished.connect(shoot_anim_done_revolver)
 	if current_weapon == "shotgun":
@@ -53,6 +55,7 @@ func _input(event):
 	if Input.is_action_just_pressed("show_health"):
 		show_health()
 	if Input.is_action_just_pressed("Melee attack"):
+		melee_anim.play("attack")
 		meleeAttack()
 		#melee_script.meleeAttack()
 

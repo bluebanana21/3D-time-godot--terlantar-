@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1sbt77ojrtng"]
+[gd_scene load_steps=14 format=3 uid="uid://b1sbt77ojrtng"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="5_fyavn"]
 [ext_resource type="PackedScene" uid="uid://cep4eoxup3mcl" path="res://Scenes/sniper_object.tscn" id="5_ihhcy"]
 [ext_resource type="PackedScene" uid="uid://cw3egvxu1j0j1" path="res://Scenes/med_kit.tscn" id="6_lj8e1"]
+[ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="6_lq34y"]
 [ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
 [ext_resource type="PackedScene" uid="uid://drqgbv1nno15w" path="res://Scenes/shotgun.tscn" id="7_sd7gs"]
 
@@ -19,10 +20,16 @@ glow_intensity = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6m5hw"]
 animations = [{
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_lq34y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fyavn")
+}],
+"loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -53,7 +60,7 @@ melee_damage = 100
 
 [node name="MeleeRay" type="RayCast3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0)
-target_position = Vector3(0, -5.05, 0)
+target_position = Vector3(0, -0.8, 0)
 collision_mask = 3
 debug_shape_custom_color = Color(0.894118, 0.137255, 0, 1)
 script = ExtResource("4_vsmv3")
