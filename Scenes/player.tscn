@@ -1,14 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=20 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
 [ext_resource type="Texture2D" uid="uid://cpd884r6ljbo0" path="res://Assets/Temporary/Gun Sprite blast.png" id="3_guu41"]
 [ext_resource type="Script" path="res://Scripts/Panel.gd" id="5_18qjc"]
 [ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/Temporary/Shotgun.png" id="5_21cfq"]
+[ext_resource type="Texture2D" uid="uid://ds84oedp36ux4" path="res://Assets/Player Rel/HUD V2.png" id="5_63wyo"]
 [ext_resource type="AudioStream" uid="uid://dwfwa7j4at0nc" path="res://Assets/Audio/Fart sound effect(1).mp3" id="5_vohir"]
 [ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/Temporary/Shotgun blast.png" id="6_50dtj"]
 [ext_resource type="Script" path="res://Scripts/_InteractRay.gd" id="6_54qee"]
+[ext_resource type="Texture2D" uid="uid://bdy65a268403o" path="res://Assets/Weapons/weapon interactables/revolver-interact.png" id="6_jkiwv"]
 [ext_resource type="FontVariation" uid="uid://djt4o5u0sxijc" path="res://Assets/Fonts/pixel-fonttres.tres" id="6_nf37h"]
+[ext_resource type="Texture2D" uid="uid://c0udkxckktrnl" path="res://Assets/Weapons/weapon interactables/shotgun-Interact 3.png" id="7_fb0x0"]
+[ext_resource type="Texture2D" uid="uid://b18w1dyx4hask" path="res://Assets/Weapons/weapon interactables/sniper-interact.png" id="8_kolvp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vc7f6"]
 
@@ -43,6 +47,44 @@ animations = [{
 "loop": false,
 "name": &"shoot",
 "speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6fmkd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_63wyo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v70pe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_jkiwv")
+}],
+"loop": true,
+"name": &"Revolver",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_fb0x0")
+}],
+"loop": true,
+"name": &"Shotgun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_kolvp")
+}],
+"loop": true,
+"name": &"Sniper",
+"speed": 5.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7l6jv"]
@@ -118,9 +160,81 @@ transform = Transform3D(0.991604, 0.129315, 0, -0.129315, 0.991604, 0, 0, 0, 1, 
 stream = ExtResource("5_vohir")
 
 [node name="Bottom" type="ColorRect" parent="UI"]
+z_index = 1
+texture_filter = 1
 offset_top = 544.0
 offset_right = 1152.0
 offset_bottom = 648.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Bottom"]
+position = Vector2(576.222, -221)
+scale = Vector2(0.664609, 0.664609)
+sprite_frames = SubResource("SpriteFrames_6fmkd")
+
+[node name="Ammo" type="Label" parent="UI/Bottom"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 72.0
+offset_right = 144.0
+offset_bottom = 88.0
+text = "AMMO
+"
+
+[node name="Health" type="Label" parent="UI/Bottom"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 348.0
+offset_top = 64.0
+offset_right = 420.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 22
+text = "HEALTH
+"
+
+[node name="AmmoCounter" type="Label" parent="UI/Bottom"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09
+anchor_top = 0.231
+anchor_right = 0.125
+anchor_bottom = 0.385
+offset_left = 0.319992
+offset_top = -0.0240002
+offset_bottom = -0.0400009
+
+[node name="HealthCounter" type="Label" parent="UI/Bottom"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.255208
+anchor_top = -0.0674615
+anchor_right = 0.411208
+anchor_bottom = 0.624538
+offset_top = 0.0159988
+offset_right = 0.287964
+offset_bottom = 0.0479965
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI/Bottom"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 884.0
+offset_top = 73.0
+offset_right = 968.0
+offset_bottom = 97.0
+theme_override_font_sizes/font_size = 24
+text = "WEAPON"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Bottom/Label"]
+texture_filter = 1
+position = Vector2(20, -41)
+scale = Vector2(0.543311, 0.543311)
+sprite_frames = SubResource("SpriteFrames_v70pe")
+animation = &"Shotgun"
 
 [node name="CrossHair" type="ColorRect" parent="UI"]
 anchors_preset = 8

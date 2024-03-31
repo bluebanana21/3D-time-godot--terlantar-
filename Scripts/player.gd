@@ -8,7 +8,7 @@ extends CharacterBody3D
 @onready var ray_cast_3d = $GunRayCast
 @onready var interact_ray = $InteractRay
 @onready var melee_ray = $MeleeRay
-
+@onready var hud_weapon_sprite = $UI/Bottom/Label/AnimatedSprite2D
 
 @export var damage_power = 25
 @export var melee_damage = 20
@@ -77,6 +77,9 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+	update_ammo_label()
+	update_health_label()
 	move_and_slide()
 
 
@@ -105,15 +108,25 @@ func shoot():
 		ray_cast_3d.get_collider().kill()
 
 
+func update_ammo_label():
+	pass
+	
+
+
+func update_health_label():
+	$UI/Bottom/HealthCounter.text = str(health)
+
 
 func gun_switch():
 	if current_weapon == "revolver":
 		revolver_sprite.show()
 		shotgun_sprite.hide()
+		hud_weapon_sprite.play("Revolver")
 	
 	if current_weapon == "shotgun":
 		revolver_sprite.hide()
 		shotgun_sprite.show()
+		hud_weapon_sprite.play("Shotgun")
 
 
 #Allows shooting after animation is done
