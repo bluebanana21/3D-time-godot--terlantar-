@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1sbt77ojrtng"]
+[gd_scene load_steps=14 format=3 uid="uid://b1sbt77ojrtng"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="6_lq34y"]
 [ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
 [ext_resource type="PackedScene" uid="uid://drqgbv1nno15w" path="res://Scenes/shotgun.tscn" id="7_sd7gs"]
+[ext_resource type="PackedScene" uid="uid://crlfebpsxh76v" path="res://Scenes/revolver_object.tscn" id="10_ibv80"]
 
 [sub_resource type="Sky" id="Sky_08eqe"]
 
@@ -82,6 +83,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 0)
 [node name="ShotgunObject" parent="." instance=ExtResource("7_sd7gs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, -5)
 
+[node name="RevolverObject" parent="." instance=ExtResource("10_ibv80")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 1, 0)
+prompt_message = "Revolver"
+prompt_action = "E"
+damage_num = 25
+
 [connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
 [connection signal="melee" from="Player" to="Enemy" method="_on_player_melee"]
 [connection signal="damage" from="Enemy" to="Player" method="_on_enemy_damage"]
@@ -90,3 +97,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, -5)
 [connection signal="heal" from="MedKit" to="Player" method="_on_med_kit_heal"]
 [connection signal="damage" from="ShotgunObject" to="Player" method="_on_shotgun_object_damage"]
 [connection signal="weapons_name" from="ShotgunObject" to="Player" method="_on_shotgun_object_weapons_name"]
+[connection signal="damage" from="RevolverObject" to="Player" method="_on_revolver_object_damage"]
+[connection signal="weapons_name" from="RevolverObject" to="Player" method="_on_revolver_object_weapons_name"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=21 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -118,6 +118,8 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_jh7xu"]
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 3
@@ -166,7 +168,7 @@ offset_top = 544.0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Bottom"]
+[node name="BottomHUD" type="AnimatedSprite2D" parent="UI/Bottom"]
 position = Vector2(576.222, -221)
 scale = Vector2(0.664609, 0.664609)
 sprite_frames = SubResource("SpriteFrames_6fmkd")
@@ -229,7 +231,7 @@ offset_bottom = 97.0
 theme_override_font_sizes/font_size = 24
 text = "WEAPON"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Bottom/Label"]
+[node name="WeaponHUD" type="AnimatedSprite2D" parent="UI/Bottom/Label"]
 texture_filter = 1
 position = Vector2(20, -41)
 scale = Vector2(0.543311, 0.543311)
@@ -328,6 +330,15 @@ animation = &"shoot"
 
 [node name="Timer" type="Timer" parent="UI/Shotgun"]
 wait_time = 0.3
+
+[node name="Sniper" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Sniper"]
+sprite_frames = SubResource("SpriteFrames_jh7xu")
 
 [node name="InteractRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

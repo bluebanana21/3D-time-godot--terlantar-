@@ -3,12 +3,13 @@ extends CharacterBody3D
 @onready var revolver_sprite = $UI/Revolver/AnimatedSprite2D
 @onready var revolver_audio = $UI/Revolver/AudioStreamPlayer3D
 @onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
+@onready var sniper_sprite = $UI/Sniper/AnimatedSprite2D
 @onready var melee_anim = $MeleeRay/MeleeAnim
 @onready var death_screen = $UI/DeathScreen
 @onready var ray_cast_3d = $GunRayCast
 @onready var interact_ray = $InteractRay
 @onready var melee_ray = $MeleeRay
-@onready var hud_weapon_sprite = $UI/Bottom/Label/AnimatedSprite2D
+@onready var hud_weapon_sprite = $UI/Bottom/Label/WeaponHUD
 
 @export var damage_power = 25
 @export var melee_damage = 20
@@ -121,12 +122,20 @@ func gun_switch():
 	if current_weapon == "revolver":
 		revolver_sprite.show()
 		shotgun_sprite.hide()
+		sniper_sprite.hide()
 		hud_weapon_sprite.play("Revolver")
 	
 	if current_weapon == "shotgun":
-		revolver_sprite.hide()
 		shotgun_sprite.show()
+		revolver_sprite.hide()
+		sniper_sprite.hide()
 		hud_weapon_sprite.play("Shotgun")
+	
+	if current_weapon == "sniper":
+		sniper_sprite.show()
+		revolver_sprite.hide()
+		shotgun_sprite.hide()
+		hud_weapon_sprite.play("Sniper")
 
 
 #Allows shooting after animation is done
@@ -191,3 +200,11 @@ func _on_sniper_object_weapons_name(weapon_name):
 #Changes the "can shoot var to true when using shotgun
 func _on_timer_timeout():
 	can_shoot = true
+
+
+func _on_revolver_object_damage(damage_num):
+	damage_power = damage_num
+
+
+func _on_revolver_object_weapons_name(weapon_name):
+	current_weapon = weapon_name
