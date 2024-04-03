@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca1yk8vobavx0"]
+
+[sub_resource type="Curve" id="Curve_sstaf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.263736), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_apskx"]
+curve = SubResource("Curve_sstaf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_soary"]
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 9.0
+initial_velocity_max = 9.0
+scale_curve = SubResource("CurveTexture_apskx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_l7kan"]
+
+[node name="BloodParticles" type="GPUParticles3D"]
+amount = 10
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_soary")
+draw_pass_1 = SubResource("QuadMesh_l7kan")

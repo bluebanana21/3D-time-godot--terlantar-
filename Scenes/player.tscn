@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=28 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -144,6 +144,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_qqoco"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.263736), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s0hys"]
+curve = SubResource("Curve_qqoco")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_asw8g"]
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 9.0
+initial_velocity_max = 9.0
+scale_curve = SubResource("CurveTexture_s0hys")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kbmen"]
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 3
@@ -151,6 +167,7 @@ script = ExtResource("1_tt8ac")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_vc7f6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -396,9 +413,19 @@ collision_mask = 3
 debug_shape_custom_color = Color(0.894118, 0.137255, 0, 1)
 
 [node name="MeleeAnim" type="AnimatedSprite2D" parent="MeleeRay"]
+visible = false
 position = Vector2(385, 261)
 sprite_frames = SubResource("SpriteFrames_gc6d0")
 animation = &"idle"
+
+[node name="BloodParticles" type="GPUParticles3D" parent="MeleeRay"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+amount = 10
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_asw8g")
+draw_pass_1 = SubResource("QuadMesh_kbmen")
 
 [connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="UI/Shotgun/Timer" to="." method="_on_timer_timeout"]

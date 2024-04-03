@@ -53,6 +53,8 @@ func _input(event):
 		show_health()
 	if Input.is_action_just_pressed("Melee attack"):
 		meleeAttack()
+	else:
+		melee_anim.hide()
 
 
 func _process(delta):
@@ -89,6 +91,7 @@ func restart():
 
 
 func meleeAttack():
+	melee_anim.show()
 	melee_anim.play("attack")
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
 		emit_signal("melee", melee_damage)
