@@ -44,7 +44,7 @@ _data = {
 "idle": SubResource("Animation_jhhid")
 }
 
-[node name="RevolverObject" type="StaticBody3D"]
+[node name="RevolverObject" type="StaticBody3D" groups=["collectibles"]]
 script = ExtResource("1_tevch")
 prompt_message = "Revolver"
 prompt_action = "E"

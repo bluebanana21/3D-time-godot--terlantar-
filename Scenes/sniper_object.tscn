@@ -44,7 +44,7 @@ _data = {
 "idle": SubResource("Animation_jhhid")
 }
 
-[node name="SniperObject" type="StaticBody3D"]
+[node name="SniperObject" type="StaticBody3D" groups=["collectibles"]]
 collision_layer = 3
 script = ExtResource("1_4tu7d")
 prompt_message = "Sniper"

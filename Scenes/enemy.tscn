@@ -7,7 +7,6 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70m27"]
 radius = 0.4
-height = 2.17645
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n8pba"]
 animations = [{
@@ -30,7 +29,7 @@ animations = [{
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wnwje"]
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 collision_mask = 3
@@ -55,3 +54,9 @@ mesh = SubResource("CapsuleMesh_wnwje")
 stream = ExtResource("5_crvvs")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

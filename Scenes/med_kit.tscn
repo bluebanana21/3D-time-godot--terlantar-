@@ -48,7 +48,7 @@ _data = {
 "idle": SubResource("Animation_jhhid")
 }
 
-[node name="MedKit" type="StaticBody3D"]
+[node name="MedKit" type="StaticBody3D" groups=["collectibles"]]
 script = ExtResource("1_3kqan")
 prompt_message = "Medkit"
 prompt_action = "E"
