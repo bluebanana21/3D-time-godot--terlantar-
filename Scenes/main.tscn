@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
-[ext_resource type="PackedScene" uid="uid://hlt23yw45lxy" path="res://Assets/Levels/test_level-idk.glb" id="4_yp8kg"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="5_fyavn"]
 [ext_resource type="PackedScene" uid="uid://cep4eoxup3mcl" path="res://Scenes/sniper_object.tscn" id="5_ihhcy"]
 [ext_resource type="PackedScene" uid="uid://cw3egvxu1j0j1" path="res://Scenes/med_kit.tscn" id="6_lj8e1"]
@@ -40,8 +39,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ccjmt"]
+albedo_color = Color(0.223529, 0.223529, 0.223529, 1)
+
 [node name="World" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109615, 0, -0.0332985)
 script = ExtResource("1_1d7pl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -51,9 +52,6 @@ transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 23.72
 environment = SubResource("Environment_lb72m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="TestLevel" parent="." instance=ExtResource("4_yp8kg")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_jmicj")]
 melee_damage = 100
@@ -76,18 +74,35 @@ attack_range = 1.4
 
 [node name="SniperObject" parent="." instance=ExtResource("5_ihhcy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 5)
+collision_layer = 4
+collision_mask = 4
 
 [node name="MedKit" parent="." instance=ExtResource("6_lj8e1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 0)
+collision_layer = 4
+collision_mask = 4
 
 [node name="ShotgunObject" parent="." instance=ExtResource("7_sd7gs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, -5)
+collision_layer = 4
+collision_mask = 4
 
 [node name="RevolverObject" parent="." instance=ExtResource("10_ibv80")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 1, 0)
-prompt_message = "Revolver"
-prompt_action = "E"
+collision_layer = 4
+collision_mask = 4
 damage_num = 25
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_ccjmt")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8557, 1.5, -6)
+use_collision = true
+size = Vector3(1, 4, 5)
 
 [connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
 [connection signal="melee" from="Player" to="Enemy" method="_on_player_melee"]

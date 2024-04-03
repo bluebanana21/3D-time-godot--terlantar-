@@ -45,6 +45,7 @@ _data = {
 }
 
 [node name="SniperObject" type="StaticBody3D"]
+collision_layer = 3
 script = ExtResource("1_4tu7d")
 prompt_message = "Sniper"
 prompt_action = "E"
