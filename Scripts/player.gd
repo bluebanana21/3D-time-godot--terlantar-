@@ -52,7 +52,6 @@ func _input(event):
 	if Input.is_action_just_pressed("show_health"):
 		show_health()
 	if Input.is_action_just_pressed("Melee attack"):
-		melee_anim.play("attack")
 		meleeAttack()
 
 
@@ -90,6 +89,7 @@ func restart():
 
 
 func meleeAttack():
+	melee_anim.play("attack")
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
 		emit_signal("melee", melee_damage)
 		melee_ray.get_collider().kill()
@@ -101,7 +101,7 @@ func shoot():
 	can_shoot = false
 	if current_weapon == "revolver":
 		revolver_sprite.play("shoot")
-	elif current_weapon == "shotgun":
+	if current_weapon == "shotgun":
 		shotgun_sprite.play("shoot")
 		
 	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("_on_player_damage"):

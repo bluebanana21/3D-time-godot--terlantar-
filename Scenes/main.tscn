@@ -1,11 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1sbt77ojrtng"]
+[gd_scene load_steps=12 format=3 uid="uid://b1sbt77ojrtng"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
-[ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="5_fyavn"]
 [ext_resource type="PackedScene" uid="uid://cep4eoxup3mcl" path="res://Scenes/sniper_object.tscn" id="5_ihhcy"]
 [ext_resource type="PackedScene" uid="uid://cw3egvxu1j0j1" path="res://Scenes/med_kit.tscn" id="6_lj8e1"]
-[ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="6_lq34y"]
 [ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
 [ext_resource type="PackedScene" uid="uid://drqgbv1nno15w" path="res://Scenes/shotgun.tscn" id="7_sd7gs"]
 [ext_resource type="PackedScene" uid="uid://crlfebpsxh76v" path="res://Scenes/revolver_object.tscn" id="10_ibv80"]
@@ -16,28 +14,6 @@
 background_energy_multiplier = 16.0
 sky = SubResource("Sky_08eqe")
 glow_intensity = 0.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6m5hw"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_lq34y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_fyavn")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_fyavn")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_pmy2n"]
 vertices = PackedVector3Array(-9, 0.35, -8.75, -7.75, 0.35, -9, -7.75, 0.35, -19.5, -19.5, 0.35, -5, -9, 0.35, -5, -9, 0.35, -8.75, -9, 0.35, -8.75, -7.75, 0.35, -19.5, -19.5, 0.35, -19.5, -19.5, 0.35, -5, -7.75, 0.35, -19.5, -7.75, 0.35, -9, -6.75, 0.35, -8.75, 19.5, 0.35, -4.25, 19.5, 0.35, -19.5, -6.75, 0.35, -8.75, -6.75, 0.35, -4.5, 19.5, 0.35, -4.25, -8.75, 0.35, -2.75, -9, 0.35, -5, -19.5, 0.35, -5, -19.5, 0.35, 19.5, 19.5, 0.35, 19.5, 19.5, 0.35, -4.25, -7, 0.35, -2.75, -19.5, 0.35, 19.5, -7, 0.35, -2.75, -8.75, 0.35, -2.75, -19.5, 0.35, 19.5, 19.5, 0.35, -4.25, -6.75, 0.35, -4.5, -7, 0.35, -2.75)
@@ -58,20 +34,6 @@ transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 23.72
 environment = SubResource("Environment_lb72m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("1_jmicj")]
-melee_damage = 100
-
-[node name="MeleeRay" type="RayCast3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0)
-target_position = Vector3(0, -0.8, 0)
-collision_mask = 3
-debug_shape_custom_color = Color(0.894118, 0.137255, 0, 1)
-
-[node name="MeleeAnim" type="AnimatedSprite2D" parent="Player/MeleeRay"]
-position = Vector2(385, 261)
-sprite_frames = SubResource("SpriteFrames_6m5hw")
-animation = &"idle"
 
 [node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -14)
@@ -112,8 +74,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8557, 1.5, -6)
 use_collision = true
 size = Vector3(1, 4, 5)
 
-[connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
-[connection signal="melee" from="Player" to="Enemy" method="_on_player_melee"]
+[node name="Player" parent="." instance=ExtResource("1_jmicj")]
+
 [connection signal="damage" from="Enemy" to="Player" method="_on_enemy_damage"]
 [connection signal="damage" from="SniperObject" to="Player" method="_on_sniper_object_damage"]
 [connection signal="weapons_name" from="SniperObject" to="Player" method="_on_sniper_object_weapons_name"]
@@ -122,3 +84,5 @@ size = Vector3(1, 4, 5)
 [connection signal="weapons_name" from="ShotgunObject" to="Player" method="_on_shotgun_object_weapons_name"]
 [connection signal="damage" from="RevolverObject" to="Player" method="_on_revolver_object_damage"]
 [connection signal="weapons_name" from="RevolverObject" to="Player" method="_on_revolver_object_weapons_name"]
+[connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
+[connection signal="melee" from="Player" to="Enemy" method="_on_player_melee"]

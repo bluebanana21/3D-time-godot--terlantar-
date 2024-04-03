@@ -25,6 +25,17 @@ window/stretch/scale_mode="integer"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[file_customization]
+
+folder_colors={
+"res://Assets/Audio/": "green",
+"res://Assets/Enemies/": "red",
+"res://Assets/Fonts/": "gray",
+"res://Assets/Levels/": "yellow",
+"res://Assets/Player Rel/": "purple",
+"res://Assets/Temporary/": "gray"
+}
+
 [gui]
 
 theme/custom_font="res://Assets/fonts/pixel-fonttres.tres"
