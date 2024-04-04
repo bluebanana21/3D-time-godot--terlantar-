@@ -10,6 +10,7 @@ extends CharacterBody3D
 @onready var interact_ray = $InteractRay
 @onready var melee_ray = $MeleeRay
 @onready var hud_weapon_sprite = $UI/Bottom/Label/WeaponHUD
+@onready var blood_particles = $MeleeRay/BloodParticles
 
 @export var damage_power = 25
 @export var melee_damage = 20
@@ -95,6 +96,7 @@ func meleeAttack():
 	melee_anim.play("attack")
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
 		emit_signal("melee", melee_damage)
+		blood_particles.emitting = true
 		melee_ray.get_collider().kill()
 
 

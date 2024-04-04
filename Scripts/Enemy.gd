@@ -8,12 +8,12 @@ extends CharacterBody3D
 @export var move_speed = 2.0
 @export var attack_range = 2.0
 @export var damage_power = 10
+@export var enemy_health = 100
 
 @onready var player = $"../Player"
 
 signal damage(damage_power)
 
-var enemy_health = 100
 var can_attack = true
 var dead = false
 

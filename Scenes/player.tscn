@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=30 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b18w1dyx4hask" path="res://Assets/Weapons/weapon interactables/sniper-interact.png" id="8_kolvp"]
 [ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="14_5rx3v"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="15_4efu6"]
+[ext_resource type="Texture2D" uid="uid://tio5iexlc8rx" path="res://Assets/Particles/blood splatter.png" id="16_xroa6"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vc7f6"]
 
@@ -145,7 +146,7 @@ animations = [{
 }]
 
 [sub_resource type="Curve" id="Curve_qqoco"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.263736), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.502825, 0), -0.0572072, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_s0hys"]
@@ -154,11 +155,22 @@ curve = SubResource("Curve_qqoco")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_asw8g"]
 direction = Vector3(0, 1, 0)
 spread = 60.0
-initial_velocity_min = 9.0
+initial_velocity_min = 7.0
 initial_velocity_max = 9.0
+scale_min = 0.5
 scale_curve = SubResource("CurveTexture_s0hys")
 
-[sub_resource type="QuadMesh" id="QuadMesh_kbmen"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwlqu"]
+albedo_texture = ExtResource("16_xroa6")
+texture_filter = 0
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_tabbb"]
+material = SubResource("StandardMaterial3D_fwlqu")
+size = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -419,13 +431,16 @@ sprite_frames = SubResource("SpriteFrames_gc6d0")
 animation = &"idle"
 
 [node name="BloodParticles" type="GPUParticles3D" parent="MeleeRay"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-amount = 10
+transform = Transform3D(1, 0, 0, 0, -0.766044, 0.642788, 0, -0.642788, -0.766044, 0, -0.858438, 0)
+emitting = false
+amount = 12
+lifetime = 0.5
+one_shot = true
 speed_scale = 2.0
-explosiveness = 1.0
+explosiveness = 0.85
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_asw8g")
-draw_pass_1 = SubResource("QuadMesh_kbmen")
+draw_pass_1 = SubResource("QuadMesh_tabbb")
 
 [connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="UI/Shotgun/Timer" to="." method="_on_timer_timeout"]

@@ -37,7 +37,9 @@ environment = SubResource("Environment_lb72m")
 
 [node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -14)
+move_speed = 0.0
 attack_range = 1.4
+enemy_health = 1000
 
 [node name="SniperObject" parent="." instance=ExtResource("5_ihhcy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 5)
