@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=32 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -13,6 +13,8 @@
 [ext_resource type="FontVariation" uid="uid://djt4o5u0sxijc" path="res://Assets/Fonts/pixel-fonttres.tres" id="6_nf37h"]
 [ext_resource type="Texture2D" uid="uid://c0udkxckktrnl" path="res://Assets/Weapons/weapon interactables/shotgun-Interact 3.png" id="7_fb0x0"]
 [ext_resource type="Texture2D" uid="uid://b18w1dyx4hask" path="res://Assets/Weapons/weapon interactables/sniper-interact.png" id="8_kolvp"]
+[ext_resource type="Script" path="res://Scripts/reticle.gd" id="9_k2cb5"]
+[ext_resource type="Texture2D" uid="uid://4e4qepgfkvtc" path="res://Assets/Player Rel/crosshir.png" id="10_nwd0f"]
 [ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="14_5rx3v"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="15_4efu6"]
 [ext_resource type="Texture2D" uid="uid://tio5iexlc8rx" path="res://Assets/Particles/blood splatter.png" id="16_xroa6"]
@@ -228,11 +230,13 @@ scale = Vector2(0.664609, 0.664609)
 sprite_frames = SubResource("SpriteFrames_6fmkd")
 
 [node name="Ammo" type="Label" parent="UI/Bottom"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 104.0
-offset_top = 72.0
-offset_right = 144.0
-offset_bottom = 88.0
+offset_top = 64.0
+offset_right = 152.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 22
 text = "AMMO
 "
 
@@ -248,6 +252,7 @@ text = "HEALTH
 "
 
 [node name="AmmoCounter" type="Label" parent="UI/Bottom"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.09
@@ -259,6 +264,7 @@ offset_top = -0.0240002
 offset_bottom = -0.0400009
 
 [node name="HealthCounter" type="Label" parent="UI/Bottom"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.255208
@@ -275,7 +281,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="UI/Bottom"]
+[node name="WeaponLabel" type="Label" parent="UI/Bottom"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 884.0
@@ -285,28 +291,39 @@ offset_bottom = 97.0
 theme_override_font_sizes/font_size = 24
 text = "WEAPON"
 
-[node name="WeaponHUD" type="AnimatedSprite2D" parent="UI/Bottom/Label"]
+[node name="WeaponHUD" type="AnimatedSprite2D" parent="UI/Bottom/WeaponLabel"]
 texture_filter = 1
 position = Vector2(20, -41)
 scale = Vector2(0.543311, 0.543311)
 sprite_frames = SubResource("SpriteFrames_v70pe")
 animation = &"Shotgun"
 
-[node name="CrossHair" type="ColorRect" parent="UI"]
+[node name="CrossHair" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/CrossHair"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-color = Color(1, 1, 1, 0.721569)
+script = ExtResource("9_k2cb5")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/CrossHair/CenterContainer"]
+texture_filter = 1
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("10_nwd0f")
 
 [node name="DeathScreen" type="Control" parent="UI"]
 visible = false

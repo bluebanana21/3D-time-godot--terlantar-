@@ -9,7 +9,7 @@ extends CharacterBody3D
 @onready var ray_cast_3d = $GunRayCast
 @onready var interact_ray = $InteractRay
 @onready var melee_ray = $MeleeRay
-@onready var hud_weapon_sprite = $UI/Bottom/Label/WeaponHUD
+@onready var hud_weapon_sprite = $UI/Bottom/WeaponLabel/WeaponHUD
 @onready var blood_particles = $MeleeRay/BloodParticles
 @onready var melee_timer = $MeleeRay/MeleeTimer
 
