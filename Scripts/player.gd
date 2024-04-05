@@ -11,6 +11,7 @@ extends CharacterBody3D
 @onready var melee_ray = $MeleeRay
 @onready var hud_weapon_sprite = $UI/Bottom/Label/WeaponHUD
 @onready var blood_particles = $MeleeRay/BloodParticles
+@onready var melee_timer = $MeleeRay/MeleeTimer
 
 @export var damage_power = 25
 @export var melee_damage = 20
@@ -19,6 +20,7 @@ const SPEED = 5.0
 const MOUSE_SENS = 0.2
 
 var can_shoot = true
+var can_punch = true
 var dead = false
 var health = 100
 var current_weapon = "revolver"
@@ -81,6 +83,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
+	#_on_melee_timer_timeout()
 	update_ammo_label()
 	update_health_label()
 	move_and_slide()
@@ -92,12 +95,17 @@ func restart():
 
 
 func meleeAttack():
+	if !can_punch:
+		return
+	can_punch = false
+	melee_timer.start()
 	melee_anim.show()
 	melee_anim.play("attack")
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
 		emit_signal("melee", melee_damage)
 		blood_particles.emitting = true
 		melee_ray.get_collider().kill()
+		
 
 
 func shoot():
@@ -207,9 +215,14 @@ func _on_timer_timeout():
 	can_shoot = true
 
 
+func _on_melee_timer_timeout():
+	can_punch = true
+
+
 func _on_revolver_object_damage(damage_num):
 	damage_power = damage_num
 
 
 func _on_revolver_object_weapons_name(weapon_name):
 	current_weapon = weapon_name
+

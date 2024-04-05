@@ -161,6 +161,7 @@ scale_min = 0.5
 scale_curve = SubResource("CurveTexture_s0hys")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwlqu"]
+transparency = 1
 albedo_texture = ExtResource("16_xroa6")
 texture_filter = 0
 billboard_mode = 3
@@ -442,5 +443,10 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_asw8g")
 draw_pass_1 = SubResource("QuadMesh_tabbb")
 
+[node name="MeleeTimer" type="Timer" parent="MeleeRay"]
+wait_time = 0.8
+one_shot = true
+
 [connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="UI/Shotgun/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="MeleeRay/MeleeTimer" to="." method="_on_melee_timer_timeout"]
