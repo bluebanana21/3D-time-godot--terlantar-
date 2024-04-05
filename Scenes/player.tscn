@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=35 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -175,6 +175,44 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_fwlqu")
 size = Vector2(0.5, 0.5)
 
+[sub_resource type="Animation" id="Animation_j21bx"]
+resource_name = "pain"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ScreenAlert/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vomj6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ScreenAlert/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6g4e8"]
+_data = {
+"RESET": SubResource("Animation_vomj6"),
+"pain": SubResource("Animation_j21bx")
+}
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 3
@@ -195,7 +233,7 @@ target_position = Vector3(0, 0, -1000)
 collision_mask = 2
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.192219)
 fov = 90.0
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -394,6 +432,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Shotgun"]
+texture_filter = 1
 position = Vector2(672, 400)
 scale = Vector2(0.611111, 0.611111)
 sprite_frames = SubResource("SpriteFrames_7l6jv")
@@ -409,7 +448,24 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Sniper"]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_jh7xu")
+
+[node name="ScreenAlert" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="UI/ScreenAlert"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 28.8
+anchor_bottom = 16.2
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.831373, 0.0862745, 0, 0.32549)
 
 [node name="InteractRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -419,6 +475,7 @@ script = ExtResource("6_54qee")
 
 [node name="Prompt" type="Label" parent="InteractRay"]
 modulate = Color(1, 0, 0, 1)
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -444,6 +501,7 @@ debug_shape_custom_color = Color(0.894118, 0.137255, 0, 1)
 
 [node name="MeleeAnim" type="AnimatedSprite2D" parent="MeleeRay"]
 visible = false
+texture_filter = 1
 position = Vector2(385, 261)
 sprite_frames = SubResource("SpriteFrames_gc6d0")
 animation = &"idle"
@@ -463,6 +521,11 @@ draw_pass_1 = SubResource("QuadMesh_tabbb")
 [node name="MeleeTimer" type="Timer" parent="MeleeRay"]
 wait_time = 0.8
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6g4e8")
+}
 
 [connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="UI/Shotgun/Timer" to="." method="_on_timer_timeout"]

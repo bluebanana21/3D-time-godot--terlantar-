@@ -54,9 +54,11 @@ mesh = SubResource("CapsuleMesh_wnwje")
 stream = ExtResource("5_crvvs")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.8
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
 debug_enabled = true
 
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

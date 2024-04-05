@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 @onready var animated_sprite_3d = $AnimatedSprite3D
 @onready var nav_agent = $NavigationAgent3D
+@onready var timer = $Timer
 
 
 @export var move_speed = 2.0
@@ -19,7 +20,8 @@ var dead = false
 
 
 func _ready():
-	animated_sprite_3d.animation_finished.connect(attack_anim_done)
+	#animated_sprite_3d.animation_finished.connect(attack_anim_done)
+	pass
 
 
 func _physics_process(delta):
@@ -63,6 +65,7 @@ func attempt_to_kill_player():
 	if !can_attack:
 		return
 	can_attack = false
+	timer.start()
 	if result.is_empty():
 		print("colliding")
 		emit_signal("damage",damage_power)
@@ -82,8 +85,8 @@ func kill():
 ####################
 # SIGNAL FUNCTIONS #
 ####################
-func attack_anim_done():
-	can_attack = true
+#func attack_anim_done():
+	#can_attack = true
 
 
 func _on_player_damage(damage_power):
@@ -97,3 +100,7 @@ func _on_player_melee(melee_damage):
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	velocity = velocity.move_toward(safe_velocity, .25)
 	move_and_slide()
+
+
+func _on_timer_timeout():
+	can_attack = true

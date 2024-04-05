@@ -12,6 +12,8 @@ extends CharacterBody3D
 @onready var hud_weapon_sprite = $UI/Bottom/WeaponLabel/WeaponHUD
 @onready var blood_particles = $MeleeRay/BloodParticles
 @onready var melee_timer = $MeleeRay/MeleeTimer
+@onready var animation_player = $AnimationPlayer
+
 
 @export var damage_power = 25
 @export var melee_damage = 20
@@ -61,6 +63,8 @@ func _input(event):
 
 
 func _process(delta):
+	if dead:
+		$UI/Bottom/HealthCounter.text = str(0)
 	if Input.is_action_just_pressed("restart"):
 		restart()
 		#health -= 100
@@ -126,8 +130,11 @@ func update_ammo_label():
 	pass
 	
 
-
+#Updates health counter
 func update_health_label():
+	if dead:
+		pass
+		#$UI/Bottom/HealthCounter.text = str(0)
 	$UI/Bottom/HealthCounter.text = str(health)
 
 
@@ -182,7 +189,10 @@ func show_health():
 
 #Takes damage when colliding with enemy
 func _on_enemy_damage(damage_power):
+	if dead:
+		return
 	health -= damage_power
+	animation_player.play("pain")
 
 
 #Heals when interacting with medkit
