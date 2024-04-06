@@ -3,24 +3,32 @@ extends CharacterBody3D
 
 @onready var animated_sprite_3d = $AnimatedSprite3D
 @onready var nav_agent = $NavigationAgent3D
-@onready var timer = $Timer
+@onready var attack_timer = $AttackTimer
+@onready var shoot_timer = $ShootTimer
+@onready var gun_ray_cast = $GunRayCast
 
+@onready var player = $"../Player"
 
 @export var move_speed = 2.0
 @export var attack_range = 2.0
 @export var damage_power = 10
 @export var enemy_health = 100
 
-@onready var player = $"../Player"
 
 signal damage(damage_power)
 
+var other_player = null
+var can_shoot = true
 var can_attack = true
 var dead = false
+var bullet = preload("res://Scenes/bullet.tscn")
+var instance
 
 
 func _ready():
 	#animated_sprite_3d.animation_finished.connect(attack_anim_done)
+	#var instance = bullet.instantiate()
+	#add_child(instance)
 	pass
 
 
@@ -45,12 +53,14 @@ func _physics_process(delta):
 	
 	velocity = new_velocity
 	#velocity = dir * move_speed
-	#move_and_slide()
+	shoot()
 	attempt_to_kill_player()
+	move_and_slide()
 
 
 func update_target_location(target_location):
 	nav_agent.target_position = target_location
+
 
 func attempt_to_kill_player():
 	var dist_to_player = global_position.distance_to(player.global_position)
@@ -65,13 +75,26 @@ func attempt_to_kill_player():
 	if !can_attack:
 		return
 	can_attack = false
-	timer.start()
+	attack_timer.start()
 	if result.is_empty():
 		print("colliding")
 		emit_signal("damage",damage_power)
-		#animated_sprite_3d.play("attack")
 		player.kill()
 
+
+func shoot():
+	look_at(Vector3(player.global_position.x,  global_position.y, player.global_position.z), Vector3.UP)
+	
+	#if !can_shoot:
+		#return
+	#can_shoot = false
+	#shoot_timer.start()
+	if can_shoot:
+		instance = bullet.instantiate()
+		#add_child(instance)
+		instance.position = gun_ray_cast.global_position
+		instance.transform.basis = gun_ray_cast.global_transform.basis
+		get_parent().add_child(instance)
 
 #Calls when enemy health reaches zero
 func kill():
@@ -104,3 +127,7 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 
 func _on_timer_timeout():
 	can_attack = true
+
+
+func _on_shoot_timer_timeout():
+	can_shoot = true
