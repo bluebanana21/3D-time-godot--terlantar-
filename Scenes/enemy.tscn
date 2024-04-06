@@ -57,6 +57,7 @@ stream = ExtResource("5_crvvs")
 wait_time = 1.4
 
 [node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
@@ -67,6 +68,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4.5, 0, 0.5, -0.408145)
 target_position = Vector3(0, 0, -1)
 debug_shape_custom_color = Color(0.290196, 0.317647, 1, 1)
 
-[connection signal="timeout" from="AttackTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

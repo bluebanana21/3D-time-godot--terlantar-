@@ -52,7 +52,9 @@ func _physics_process(delta):
 	animated_sprite_3d.play("idle")
 	
 	velocity = new_velocity
+	print(can_shoot)
 	#velocity = dir * move_speed
+	#shoot_timer.start()
 	shoot()
 	attempt_to_kill_player()
 	move_and_slide()
@@ -85,16 +87,16 @@ func attempt_to_kill_player():
 func shoot():
 	look_at(Vector3(player.global_position.x,  global_position.y, player.global_position.z), Vector3.UP)
 	
-	#if !can_shoot:
-		#return
-	#can_shoot = false
-	#shoot_timer.start()
+	if !can_shoot:
+		return
 	if can_shoot:
 		instance = bullet.instantiate()
 		#add_child(instance)
 		instance.position = gun_ray_cast.global_position
 		instance.transform.basis = gun_ray_cast.global_transform.basis
 		get_parent().add_child(instance)
+	can_shoot = false
+	shoot_timer.start()
 
 #Calls when enemy health reaches zero
 func kill():
@@ -125,9 +127,14 @@ func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	move_and_slide()
 
 
-func _on_timer_timeout():
-	can_attack = true
+#func _on_timer_timeout():
+	#can_attack = true
 
 
 func _on_shoot_timer_timeout():
 	can_shoot = true
+	#shoot()
+
+
+func _on_attack_timer_timeout():
+	can_attack = true
