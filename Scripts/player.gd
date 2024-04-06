@@ -13,7 +13,7 @@ extends CharacterBody3D
 @onready var blood_particles = $MeleeRay/BloodParticles
 @onready var melee_timer = $MeleeRay/MeleeTimer
 @onready var animation_player = $AnimationPlayer
-
+@onready var melee_audio = $MeleeRay/MeleeAudioPlayer
 
 @export var damage_power = 25
 @export var melee_damage = 20
@@ -105,6 +105,7 @@ func meleeAttack():
 	melee_timer.start()
 	melee_anim.show()
 	melee_anim.play("attack")
+	melee_audio.play()
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
 		emit_signal("melee", melee_damage)
 		blood_particles.emitting = true
@@ -117,7 +118,7 @@ func shoot():
 		return
 	can_shoot = false
 	if current_weapon == "revolver":
-		revolver_sprite.play("shoot")
+		revolver_sprite.play("revolver shoot")
 	if current_weapon == "shotgun":
 		shotgun_sprite.play("shoot")
 		

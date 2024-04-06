@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=43 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Panel.gd" id="5_18qjc"]
 [ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/Temporary/Shotgun.png" id="5_21cfq"]
 [ext_resource type="Texture2D" uid="uid://ds84oedp36ux4" path="res://Assets/Player Rel/HUD V2.png" id="5_63wyo"]
-[ext_resource type="AudioStream" uid="uid://dwfwa7j4at0nc" path="res://Assets/Audio/Fart sound effect(1).mp3" id="5_vohir"]
+[ext_resource type="AudioStream" uid="uid://dwfwa7j4at0nc" path="res://Assets/Audio/Temp/Fart sound effect(1).mp3" id="5_vohir"]
 [ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/Temporary/Shotgun blast.png" id="6_50dtj"]
 [ext_resource type="Script" path="res://Scripts/_InteractRay.gd" id="6_54qee"]
 [ext_resource type="Texture2D" uid="uid://bdy65a268403o" path="res://Assets/Weapons/weapon interactables/revolver-interact.png" id="6_jkiwv"]
@@ -18,6 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="14_5rx3v"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="15_4efu6"]
 [ext_resource type="Texture2D" uid="uid://tio5iexlc8rx" path="res://Assets/Particles/blood splatter.png" id="16_xroa6"]
+[ext_resource type="AudioStream" uid="uid://bpufvt1w336u5" path="res://Assets/Audio/player rel/grunt-punch 1.wav" id="19_xne2p"]
+[ext_resource type="AudioStream" uid="uid://c1telut4rf5a2" path="res://Assets/Audio/player rel/grunt-punch 2.wav" id="20_m4koo"]
+[ext_resource type="AudioStream" uid="uid://dtmxn5hay6pep" path="res://Assets/Audio/player rel/grunt-punch 3.wav" id="21_oepfo"]
+[ext_resource type="AudioStream" uid="uid://v44x3k7nad11" path="res://Assets/Audio/player rel/grunt-punch 4.wav" id="22_4cwly"]
+[ext_resource type="AudioStream" uid="uid://cwt4aeysobl08" path="res://Assets/Audio/player rel/grunt-punch 5.wav" id="23_27mh6"]
+[ext_resource type="AudioStream" uid="uid://bmof1d77cf73q" path="res://Assets/Audio/player rel/grunt-punch 6.wav" id="24_6okg5"]
+[ext_resource type="AudioStream" uid="uid://bwlyscnuee4f6" path="res://Assets/Audio/player rel/grunt-punch 7.wav" id="25_m8b0f"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vc7f6"]
 
@@ -30,7 +37,7 @@ animations = [{
 "texture": ExtResource("2_f3des")
 }],
 "loop": false,
-"name": &"idle",
+"name": &"revolver idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -50,7 +57,7 @@ animations = [{
 "texture": ExtResource("2_f3des")
 }],
 "loop": false,
-"name": &"shoot",
+"name": &"revolver shoot",
 "speed": 10.0
 }]
 
@@ -175,6 +182,23 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_fwlqu")
 size = Vector2(0.5, 0.5)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mr3xt"]
+streams_count = 7
+stream_0/stream = ExtResource("19_xne2p")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("20_m4koo")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("21_oepfo")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("22_4cwly")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("23_27mh6")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("24_6okg5")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("25_m8b0f")
+stream_6/weight = 1.0
+
 [sub_resource type="Animation" id="Animation_vomj6"]
 length = 0.001
 tracks/0/type = "value"
@@ -249,7 +273,7 @@ size_flags_vertical = 8
 position = Vector2(616, 320)
 scale = Vector2(0.888889, 0.888889)
 sprite_frames = SubResource("SpriteFrames_grycg")
-animation = &"shoot"
+animation = &"revolver shoot"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="UI/Revolver"]
 transform = Transform3D(0.991604, 0.129315, 0, -0.129315, 0.991604, 0, 0, 0, 1, 0, 0, 0)
@@ -511,7 +535,7 @@ animation = &"idle"
 [node name="BloodParticles" type="GPUParticles3D" parent="MeleeRay"]
 transform = Transform3D(1, 0, 0, 0, -0.766044, 0.642788, 0, -0.642788, -0.766044, 0, -0.858438, 0)
 emitting = false
-amount = 12
+amount = 10
 lifetime = 0.5
 one_shot = true
 speed_scale = 2.0
@@ -523,6 +547,9 @@ draw_pass_1 = SubResource("QuadMesh_tabbb")
 [node name="MeleeTimer" type="Timer" parent="MeleeRay"]
 wait_time = 0.8
 one_shot = true
+
+[node name="MeleeAudioPlayer" type="AudioStreamPlayer3D" parent="MeleeRay"]
+stream = SubResource("AudioStreamRandomizer_mr3xt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
