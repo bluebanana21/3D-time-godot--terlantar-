@@ -29,7 +29,7 @@ animations = [{
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wnwje"]
 
-[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+[node name="Enemy" type="CharacterBody3D" groups=["enemies", "target"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 collision_mask = 3
@@ -57,7 +57,7 @@ stream = ExtResource("5_crvvs")
 wait_time = 1.4
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 1.5
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true

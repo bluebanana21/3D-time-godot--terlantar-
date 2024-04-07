@@ -26,9 +26,6 @@ var instance
 
 
 func _ready():
-	#animated_sprite_3d.animation_finished.connect(attack_anim_done)
-	#var instance = bullet.instantiate()
-	#add_child(instance)
 	pass
 
 
@@ -36,7 +33,6 @@ func _physics_process(delta):
 	if dead:
 		return
 	if player == null:
-		#print("player is null")
 		return
 	
 	#var dir = player.global_position - global_position
@@ -52,7 +48,6 @@ func _physics_process(delta):
 	animated_sprite_3d.play("idle")
 	
 	velocity = new_velocity
-	print(can_shoot)
 	#velocity = dir * move_speed
 	#shoot_timer.start()
 	shoot()
@@ -91,9 +86,9 @@ func shoot():
 		return
 	if can_shoot:
 		instance = bullet.instantiate()
-		#add_child(instance)
 		instance.position = gun_ray_cast.global_position
 		instance.transform.basis = gun_ray_cast.global_transform.basis
+		#add_child(instance)
 		get_parent().add_child(instance)
 	can_shoot = false
 	shoot_timer.start()
@@ -114,8 +109,8 @@ func kill():
 	#can_attack = true
 
 
-func _on_player_damage(damage_power):
-	enemy_health -= damage_power
+func _on_player_damage(damage_power_P):
+	enemy_health -= damage_power_P
 
 
 func _on_player_melee(melee_damage):

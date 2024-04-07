@@ -108,6 +108,7 @@ show_current_weapon={
 3d_physics/layer_1="environment"
 3d_physics/layer_2="characters"
 3d_physics/layer_3="collectibles"
+3d_physics/layer_4="projectiles"
 
 [rendering]
 

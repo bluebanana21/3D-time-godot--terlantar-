@@ -1,12 +1,12 @@
-[gd_scene load_steps=43 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=45 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
 [ext_resource type="Texture2D" uid="uid://cpd884r6ljbo0" path="res://Assets/Temporary/Gun Sprite blast.png" id="3_guu41"]
+[ext_resource type="AudioStream" uid="uid://dlpmhnicsqsj3" path="res://Assets/Audio/guns/colt-pyrhon-shoot.wav" id="4_qfj4v"]
 [ext_resource type="Script" path="res://Scripts/Panel.gd" id="5_18qjc"]
 [ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/Temporary/Shotgun.png" id="5_21cfq"]
 [ext_resource type="Texture2D" uid="uid://ds84oedp36ux4" path="res://Assets/Player Rel/HUD V2.png" id="5_63wyo"]
-[ext_resource type="AudioStream" uid="uid://dwfwa7j4at0nc" path="res://Assets/Audio/Temp/Fart sound effect(1).mp3" id="5_vohir"]
 [ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/Temporary/Shotgun blast.png" id="6_50dtj"]
 [ext_resource type="Script" path="res://Scripts/_InteractRay.gd" id="6_54qee"]
 [ext_resource type="Texture2D" uid="uid://bdy65a268403o" path="res://Assets/Weapons/weapon interactables/revolver-interact.png" id="6_jkiwv"]
@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://4e4qepgfkvtc" path="res://Assets/Player Rel/crosshir.png" id="10_nwd0f"]
 [ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="14_5rx3v"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="15_4efu6"]
+[ext_resource type="AudioStream" uid="uid://c6qisuld155jo" path="res://Assets/Audio/guns/remington870-shoot.wav" id="15_grhgg"]
+[ext_resource type="AudioStream" uid="uid://cm27pwgmlquvi" path="res://Assets/Audio/guns/xm21-shoot.wav" id="16_thr22"]
 [ext_resource type="Texture2D" uid="uid://tio5iexlc8rx" path="res://Assets/Particles/blood splatter.png" id="16_xroa6"]
 [ext_resource type="AudioStream" uid="uid://bpufvt1w336u5" path="res://Assets/Audio/player rel/grunt-punch 1.wav" id="19_xne2p"]
 [ext_resource type="AudioStream" uid="uid://c1telut4rf5a2" path="res://Assets/Audio/player rel/grunt-punch 2.wav" id="20_m4koo"]
@@ -61,6 +63,39 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_7l6jv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_21cfq")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_21cfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_50dtj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_50dtj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_50dtj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_21cfq")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jh7xu"]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_6fmkd"]
 animations = [{
 "frames": [{
@@ -98,39 +133,6 @@ animations = [{
 "name": &"Sniper",
 "speed": 5.0
 }]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7l6jv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_21cfq")
-}],
-"loop": false,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_21cfq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_50dtj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_50dtj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_50dtj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_21cfq")
-}],
-"loop": false,
-"name": &"shoot",
-"speed": 10.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jh7xu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gc6d0"]
 animations = [{
@@ -237,9 +239,9 @@ _data = {
 "pain": SubResource("Animation_j21bx")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player", "target"]]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 11
 script = ExtResource("1_tt8ac")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -260,6 +262,18 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.192219)
 fov = 90.0
 
+[node name="RevolverAudio" type="AudioStreamPlayer3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.192219)
+stream = ExtResource("4_qfj4v")
+
+[node name="ShotgunAudio" type="AudioStreamPlayer3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.065379, -0.192219)
+stream = ExtResource("15_grhgg")
+
+[node name="SniperAudio" type="AudioStreamPlayer3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0111384, -0.192219)
+stream = ExtResource("16_thr22")
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Revolver" type="Control" parent="UI"]
@@ -275,9 +289,31 @@ scale = Vector2(0.888889, 0.888889)
 sprite_frames = SubResource("SpriteFrames_grycg")
 animation = &"revolver shoot"
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="UI/Revolver"]
-transform = Transform3D(0.991604, 0.129315, 0, -0.129315, 0.991604, 0, 0, 0, 1, 0, 0, 0)
-stream = ExtResource("5_vohir")
+[node name="Shotgun" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Shotgun"]
+texture_filter = 1
+position = Vector2(672, 400)
+scale = Vector2(0.611111, 0.611111)
+sprite_frames = SubResource("SpriteFrames_7l6jv")
+animation = &"shoot"
+
+[node name="Timer" type="Timer" parent="UI/Shotgun"]
+wait_time = 0.3
+
+[node name="Sniper" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Sniper"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_jh7xu")
 
 [node name="Bottom" type="ColorRect" parent="UI"]
 z_index = 1
@@ -449,32 +485,6 @@ layout_mode = 0
 offset_right = 44.0
 offset_bottom = 24.0
 
-[node name="Shotgun" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Shotgun"]
-texture_filter = 1
-position = Vector2(672, 400)
-scale = Vector2(0.611111, 0.611111)
-sprite_frames = SubResource("SpriteFrames_7l6jv")
-animation = &"shoot"
-
-[node name="Timer" type="Timer" parent="UI/Shotgun"]
-wait_time = 0.3
-
-[node name="Sniper" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Sniper"]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_jh7xu")
-
 [node name="ScreenAlert" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
@@ -556,6 +566,6 @@ libraries = {
 "": SubResource("AnimationLibrary_6g4e8")
 }
 
-[connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="UI/Shotgun/Timer" to="." method="_on_timer_timeout"]
+[connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="MeleeRay/MeleeTimer" to="." method="_on_melee_timer_timeout"]

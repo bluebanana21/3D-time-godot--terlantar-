@@ -1,9 +1,13 @@
 extends CharacterBody3D
 
 @onready var revolver_sprite = $UI/Revolver/AnimatedSprite2D
-@onready var revolver_audio = $UI/Revolver/AudioStreamPlayer3D
+@onready var revolver_audio = $Camera3D/RevolverAudio
 @onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
+@onready var shotgun_audio = $Camera3D/ShotgunAudio
+
 @onready var sniper_sprite = $UI/Sniper/AnimatedSprite2D
+@onready var sniper_audio = $Camera3D/SniperAudio
+
 @onready var melee_anim = $MeleeRay/MeleeAnim
 @onready var death_screen = $UI/DeathScreen
 @onready var ray_cast_3d = $GunRayCast
@@ -15,7 +19,7 @@ extends CharacterBody3D
 @onready var animation_player = $AnimationPlayer
 @onready var melee_audio = $MeleeRay/MeleeAudioPlayer
 
-@export var damage_power = 25
+@export var damage_power_P = 25
 @export var melee_damage = 20
 
 const SPEED = 5.0
@@ -27,7 +31,7 @@ var dead = false
 var health = 100
 var current_weapon = "revolver"
 
-signal damage(damage_power)
+signal damage(damage_power_P)
 signal melee(melee_damage)
 
 
@@ -50,6 +54,7 @@ func _input(event):
 	if Input.is_action_just_pressed("Shoot"):
 		if current_weapon == "shotgun":
 			$UI/Shotgun/Timer.start()
+			shotgun_audio.play()
 			shoot()
 		else :
 			revolver_audio.play()
@@ -123,7 +128,7 @@ func shoot():
 		shotgun_sprite.play("shoot")
 		
 	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("_on_player_damage"):
-		emit_signal("damage", damage_power)
+		emit_signal("damage", damage_power_P)
 		ray_cast_3d.get_collider().kill()
 
 
@@ -180,13 +185,17 @@ func kill():
 func show_health():
 	print(health)
 	print(current_weapon)
-	print(damage_power)
+	print(damage_power_P)
 	print(can_shoot)
 
 
 ####################
 # Signal Functions #
 ####################
+
+func _on_projectile_damage(projectile_damage):
+	print("Projectilel")
+	health -= projectile_damage
 
 #Takes damage when colliding with enemy
 func _on_enemy_damage(damage_power):
@@ -203,7 +212,7 @@ func _on_med_kit_heal(heal_amount):
 
 #Changes gun damage when interacting with shotgun Object
 func _on_shotgun_object_damage(damage_num):
-	damage_power = damage_num
+	damage_power_P = damage_num
 
 
 #Cahnges the current weapon to shotgun
@@ -213,7 +222,7 @@ func _on_shotgun_object_weapons_name(weapon_name):
 
 #Changes gun damage when interacting with Sniper Object
 func _on_sniper_object_damage(damage_num):
-	damage_power = damage_num
+	damage_power_P = damage_num
 
 
 #Cahnges the current weapon to sniper
@@ -231,7 +240,7 @@ func _on_melee_timer_timeout():
 
 
 func _on_revolver_object_damage(damage_num):
-	damage_power = damage_num
+	damage_power_P = damage_num
 
 
 func _on_revolver_object_weapons_name(weapon_name):

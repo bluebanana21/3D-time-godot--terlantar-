@@ -35,11 +35,12 @@ environment = SubResource("Environment_lb72m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Player" parent="." instance=ExtResource("1_jmicj")]
+
 [node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -14)
 move_speed = 0.0
 attack_range = 1.4
-enemy_health = 1000
 
 [node name="SniperObject" parent="." instance=ExtResource("5_ihhcy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 5)
@@ -76,8 +77,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8557, 1.5, -6)
 use_collision = true
 size = Vector3(1, 4, 5)
 
-[node name="Player" parent="." instance=ExtResource("1_jmicj")]
-
+[connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
+[connection signal="melee" from="Player" to="Enemy" method="_on_player_melee"]
 [connection signal="damage" from="Enemy" to="Player" method="_on_enemy_damage"]
 [connection signal="damage" from="SniperObject" to="Player" method="_on_sniper_object_damage"]
 [connection signal="weapons_name" from="SniperObject" to="Player" method="_on_sniper_object_weapons_name"]
@@ -86,5 +87,3 @@ size = Vector3(1, 4, 5)
 [connection signal="weapons_name" from="ShotgunObject" to="Player" method="_on_shotgun_object_weapons_name"]
 [connection signal="damage" from="RevolverObject" to="Player" method="_on_revolver_object_damage"]
 [connection signal="weapons_name" from="RevolverObject" to="Player" method="_on_revolver_object_weapons_name"]
-[connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
-[connection signal="melee" from="Player" to="Enemy" method="_on_player_melee"]
