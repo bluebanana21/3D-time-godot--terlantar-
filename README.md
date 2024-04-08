@@ -7,8 +7,9 @@ sebuah proyek mandiri untuk mempelajari game engine GODOT. 3D time terinspirasi 
 
 ## Screenshots
 
-![Screenshot 2024-03-31 195738](https://github.com/bluebanana21/3D-time-godot-/assets/147362583/c6dc2cb3-4066-47eb-8f3b-49877ffe09e4)
-![Screenshot 2024-03-31 195809](https://github.com/bluebanana21/3D-time-godot-/assets/147362583/541226bf-2e31-4da6-9c63-b59c94f28558)
+![Screenshot 2024-04-08 122334](https://github.com/bluebanana21/3D-time-godot-/assets/147362583/e614c9a8-adef-4aec-a1d2-80b7b5a608ab)
+![Screenshot 2024-04-08 122412](https://github.com/bluebanana21/3D-time-godot-/assets/147362583/e788b904-5998-409a-91a2-655acdc8e8f0)
+
 
 game ini masih dalam pengembangan sangat awal.
 
