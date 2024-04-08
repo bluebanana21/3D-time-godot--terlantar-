@@ -1,12 +1,14 @@
 extends CharacterBody3D
 
 @onready var revolver_sprite = $UI/Revolver/AnimatedSprite2D
-@onready var revolver_audio = $Camera3D/RevolverAudio
-@onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
-@onready var shotgun_audio = $Camera3D/ShotgunAudio
-
 @onready var sniper_sprite = $UI/Sniper/AnimatedSprite2D
-@onready var sniper_audio = $Camera3D/SniperAudio
+@onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
+
+@onready var revolver_audio = $Camera3D/Audio/RevolverAudio
+@onready var shotgun_audio = $Camera3D/Audio/ShotgunAudio
+@onready var sniper_audio = $Camera3D/Audio/SniperAudio
+@onready var hurt_audio = $Camera3D/Audio/HurtAudio
+@onready var death_audio = $Camera3D/Audio/DeathAudio
 
 @onready var melee_anim = $MeleeRay/MeleeAnim
 @onready var death_screen = $UI/DeathScreen
@@ -69,6 +71,7 @@ func _input(event):
 
 func _process(delta):
 	if dead:
+		death_audio.play()
 		$UI/Bottom/HealthCounter.text = str(0)
 	if Input.is_action_just_pressed("restart"):
 		restart()
@@ -82,6 +85,7 @@ func _process(delta):
 #Movement code
 func _physics_process(delta):
 	if dead:
+		#print("dead as hell")
 		return
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -93,6 +97,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
 	#_on_melee_timer_timeout()
+	kill()
 	update_ammo_label()
 	update_health_label()
 	move_and_slide()
@@ -139,8 +144,7 @@ func update_ammo_label():
 #Updates health counter
 func update_health_label():
 	if dead:
-		pass
-		#$UI/Bottom/HealthCounter.text = str(0)
+		return
 	$UI/Bottom/HealthCounter.text = str(health)
 
 
@@ -175,6 +179,7 @@ func shoot_anim_done_shotgun():
 #Dies when health reaches zero
 func kill():
 	if health <= 0:
+		#death_audio.play()
 		dead = true
 		death_screen.show()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -193,21 +198,25 @@ func show_health():
 ####################
 
 func Hit_Succesfull(projectile_damage):
-	#print("Projectilel")
 	if dead:
 		return
 	health -= projectile_damage
+	hurt_audio.play()
+	animation_player.play("pain")
 
 #Takes damage when colliding with enemy
 func _on_enemy_damage(damage_power):
 	if dead:
 		return
 	health -= damage_power
+	hurt_audio.play()
 	animation_player.play("pain")
 
 
 #Heals when interacting with medkit
 func _on_med_kit_heal(heal_amount):
+	if health >= 100:
+		return
 	health += heal_amount
 
 

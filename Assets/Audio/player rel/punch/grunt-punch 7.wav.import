@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bwlyscnuee4f6"
-path="res://.godot/imported/grunt-punch 7.wav-ba666b8892f10fdbf38abc2058f73b70.sample"
+path="res://.godot/imported/grunt-punch 7.wav-23520ae59c95371e96f642bebc3e5939.sample"
 
 [deps]
 
-source_file="res://Assets/Audio/player rel/grunt-punch 7.wav"
-dest_files=["res://.godot/imported/grunt-punch 7.wav-ba666b8892f10fdbf38abc2058f73b70.sample"]
+source_file="res://Assets/Audio/player rel/punch/grunt-punch 7.wav"
+dest_files=["res://.godot/imported/grunt-punch 7.wav-23520ae59c95371e96f642bebc3e5939.sample"]
 
 [params]
 
