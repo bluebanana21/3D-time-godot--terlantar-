@@ -10,6 +10,7 @@ collision_layer = 8
 collision_mask = 3
 mass = 0.01
 continuous_cd = true
+max_contacts_reported = 3
 contact_monitor = true
 script = ExtResource("1_ue6pu")
 speed = 5.0

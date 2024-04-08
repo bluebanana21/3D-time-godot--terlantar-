@@ -14,14 +14,12 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	if body.is_in_group("target") and body.has_method("_on_projectile_damage"):
-		print("has colldieded")
-
-#if body.is_in_group("target") and body.has_method("_on_projectile_damage"):
-		#print("has collided")
-		#body.Hit_Succesfull(projectile_damage)
-		#queue_free()
+	if body.is_in_group("target") and body.has_method("Hit_Succesfull"):
+		print("has collided")
+		body.Hit_Succesfull(projectile_damage)
+		queue_free()
 	#queue_free()
+
 
 func _on_timer_timeout():
 	queue_free()

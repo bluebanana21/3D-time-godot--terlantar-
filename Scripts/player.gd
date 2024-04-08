@@ -175,7 +175,6 @@ func shoot_anim_done_shotgun():
 #Dies when health reaches zero
 func kill():
 	if health <= 0:
-		#print("dead")
 		dead = true
 		death_screen.show()
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -193,8 +192,10 @@ func show_health():
 # Signal Functions #
 ####################
 
-func _on_projectile_damage(projectile_damage):
-	print("Projectilel")
+func Hit_Succesfull(projectile_damage):
+	#print("Projectilel")
+	if dead:
+		return
 	health -= projectile_damage
 
 #Takes damage when colliding with enemy

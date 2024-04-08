@@ -52,6 +52,7 @@ func _physics_process(delta):
 	#shoot_timer.start()
 	shoot()
 	attempt_to_kill_player()
+	player.kill()
 	move_and_slide()
 
 
@@ -76,7 +77,7 @@ func attempt_to_kill_player():
 	if result.is_empty():
 		print("colliding")
 		emit_signal("damage",damage_power)
-		player.kill()
+		#player.kill()
 
 
 func shoot():
@@ -120,10 +121,6 @@ func _on_player_melee(melee_damage):
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):
 	velocity = velocity.move_toward(safe_velocity, .25)
 	move_and_slide()
-
-
-#func _on_timer_timeout():
-	#can_attack = true
 
 
 func _on_shoot_timer_timeout():
