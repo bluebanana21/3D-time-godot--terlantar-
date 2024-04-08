@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var attack_timer = $AttackTimer
 @onready var shoot_timer = $ShootTimer
 @onready var gun_ray_cast = $GunRayCast
+@onready var death_audio = $DeathAudio
 
 @onready var player = $"../Player"
 
@@ -98,7 +99,7 @@ func shoot():
 func kill():
 	if enemy_health <= 0:
 		dead = true
-		$AudioStreamPlayer3D.play()
+		$DeathAudio.play()
 		animated_sprite_3d.play("death")
 		$CollisionShape3D.disabled = true
 

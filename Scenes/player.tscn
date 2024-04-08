@@ -296,7 +296,7 @@ stream = ExtResource("16_thr22")
 [node name="HurtAudio" type="AudioStreamPlayer3D" parent="Camera3D/Audio"]
 stream = ExtResource("5_n3lrb")
 
-[node name="DeathAudio" type="AudioStreamPlayer2D" parent="Camera3D/Audio"]
+[node name="DeathAudio" type="AudioStreamPlayer3D" parent="Camera3D/Audio"]
 stream = SubResource("AudioStreamRandomizer_uxo8m")
 
 [node name="UI" type="CanvasLayer" parent="."]
