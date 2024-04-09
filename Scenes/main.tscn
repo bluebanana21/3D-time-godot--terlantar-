@@ -39,13 +39,10 @@ environment = SubResource("Environment_lb72m")
 
 [node name="Enemy" parent="." instance=ExtResource("6_yvojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -14)
-move_speed = 0.0
 attack_range = 1.4
 
 [node name="SniperObject" parent="." instance=ExtResource("5_ihhcy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 5)
-collision_layer = 4
-collision_mask = 4
 
 [node name="MedKit" parent="." instance=ExtResource("6_lj8e1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 0)
@@ -54,13 +51,9 @@ collision_mask = 4
 
 [node name="ShotgunObject" parent="." instance=ExtResource("7_sd7gs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, -5)
-collision_layer = 4
-collision_mask = 4
 
 [node name="RevolverObject" parent="." instance=ExtResource("10_ibv80")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1, 0)
-collision_layer = 4
-collision_mask = 4
 damage_num = 25
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
@@ -76,6 +69,9 @@ material = SubResource("StandardMaterial3D_ccjmt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8557, 1.5, -6)
 use_collision = true
 size = Vector3(1, 4, 5)
+
+[node name="ShotgunObject2" parent="." instance=ExtResource("7_sd7gs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 9)
 
 [connection signal="damage" from="Player" to="Enemy" method="_on_player_damage"]
 [connection signal="melee" from="Player" to="Enemy" method="_on_player_melee"]

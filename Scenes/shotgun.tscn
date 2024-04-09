@@ -45,6 +45,8 @@ _data = {
 }
 
 [node name="ShotgunObject" type="StaticBody3D" groups=["collectibles"]]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_x4v3u")
 prompt_message = "Shotgun"
 prompt_action = "E"
@@ -68,3 +70,5 @@ libraries = {
 }
 autoplay = "idle"
 speed_scale = 0.4
+
+[connection signal="damage" from="." to="." method="_on_damage"]

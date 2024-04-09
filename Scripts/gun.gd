@@ -27,3 +27,7 @@ func interacted_by_player():
 	emit_signal("weapons_name", weapon_name)
 	#health += 1
 	print("Shotgun has changed player weapon")
+
+#
+#func _on_damage(damage_num):
+	#pass # Replace with function body.

@@ -23,6 +23,7 @@ var can_shoot = true
 var can_attack = true
 var dead = false
 var bullet = preload("res://Scenes/bullet.tscn")
+var weapon = preload("res://Scenes/shotgun.tscn")
 var instance
 
 
@@ -102,6 +103,10 @@ func kill():
 		$DeathAudio.play()
 		animated_sprite_3d.play("death")
 		$CollisionShape3D.disabled = true
+		instance = weapon.instantiate()
+		get_parent().add_child(instance)
+		instance.position = $".".global_position
+		#instance.transform.basis = $".".global_transform.basis
 
 
 ####################
