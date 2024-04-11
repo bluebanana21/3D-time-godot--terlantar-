@@ -27,6 +27,8 @@ albedo_color = Color(0.223529, 0.223529, 0.223529, 1)
 [node name="World" type="Node3D"]
 script = ExtResource("1_1d7pl")
 
+[node name="Player" parent="." instance=ExtResource("1_jmicj")]
+
 [node name="collectibles" type="Node3D" parent="."]
 
 [node name="SniperObject" parent="collectibles" instance=ExtResource("5_ihhcy")]
@@ -48,6 +50,7 @@ damage_num = 25
 
 [node name="Enemy" parent="enemy" instance=ExtResource("6_yvojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -14)
+move_speed = 1.5
 attack_range = 1.4
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -57,8 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 23.72
 environment = SubResource("Environment_lb72m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("1_jmicj")]
+visible = false
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_pmy2n")
@@ -77,6 +79,8 @@ size = Vector3(1, 4, 5)
 [node name="ShotgunObject2" parent="." instance=ExtResource("7_sd7gs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 9)
 
+[connection signal="damage" from="Player" to="enemy/Enemy" method="_on_player_damage"]
+[connection signal="melee" from="Player" to="enemy/Enemy" method="_on_player_melee"]
 [connection signal="damage" from="collectibles/SniperObject" to="Player" method="_on_sniper_object_damage"]
 [connection signal="weapons_name" from="collectibles/SniperObject" to="Player" method="_on_sniper_object_weapons_name"]
 [connection signal="heal" from="collectibles/MedKit" to="Player" method="_on_med_kit_heal"]
@@ -85,5 +89,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 9)
 [connection signal="damage" from="collectibles/RevolverObject" to="Player" method="_on_revolver_object_damage"]
 [connection signal="weapons_name" from="collectibles/RevolverObject" to="Player" method="_on_revolver_object_weapons_name"]
 [connection signal="damage" from="enemy/Enemy" to="Player" method="_on_enemy_damage"]
-[connection signal="damage" from="Player" to="enemy/Enemy" method="_on_player_damage"]
-[connection signal="melee" from="Player" to="enemy/Enemy" method="_on_player_melee"]

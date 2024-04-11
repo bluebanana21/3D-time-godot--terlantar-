@@ -314,6 +314,8 @@ scale = Vector2(0.888889, 0.888889)
 sprite_frames = SubResource("SpriteFrames_grycg")
 animation = &"revolver shoot"
 
+[node name="RevolverTimer" type="Timer" parent="UI/Revolver"]
+
 [node name="Shotgun" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
@@ -327,8 +329,7 @@ scale = Vector2(0.611111, 0.611111)
 sprite_frames = SubResource("SpriteFrames_7l6jv")
 animation = &"shoot"
 
-[node name="Timer" type="Timer" parent="UI/Shotgun"]
-wait_time = 0.3
+[node name="ShotgunTimer" type="Timer" parent="UI/Shotgun"]
 
 [node name="Sniper" type="Control" parent="UI"]
 layout_mode = 3
@@ -339,6 +340,8 @@ offset_bottom = 40.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Sniper"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_jh7xu")
+
+[node name="SniperTimer" type="Timer" parent="UI/Sniper"]
 
 [node name="Bottom" type="ColorRect" parent="UI"]
 z_index = 1
@@ -591,6 +594,7 @@ libraries = {
 "": SubResource("AnimationLibrary_6g4e8")
 }
 
-[connection signal="timeout" from="UI/Shotgun/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="UI/Revolver/RevolverTimer" to="." method="_on_revolver_timer_timeout"]
+[connection signal="timeout" from="UI/Shotgun/ShotgunTimer" to="." method="_on_shotgun_timer_timeout"]
 [connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="MeleeRay/MeleeTimer" to="." method="_on_melee_timer_timeout"]

@@ -56,11 +56,8 @@ func _input(event):
 		return
 	if Input.is_action_just_pressed("Shoot"):
 		if current_weapon == "shotgun":
-			$UI/Shotgun/Timer.start()
-			shotgun_audio.play()
 			shoot()
 		else :
-			revolver_audio.play()
 			shoot()
 	if Input.is_action_just_pressed("show_health"):
 		show_health()
@@ -129,8 +126,12 @@ func shoot():
 		return
 	can_shoot = false
 	if current_weapon == "revolver":
+		$UI/Revolver/RevolverTimer.start()
+		revolver_audio.play()
 		revolver_sprite.play("revolver shoot")
 	if current_weapon == "shotgun":
+		$UI/Shotgun/ShotgunTimer.start()
+		shotgun_audio.play()
 		shotgun_sprite.play("shoot")
 		
 	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("_on_player_damage"):
@@ -155,12 +156,14 @@ func gun_switch():
 		shotgun_sprite.hide()
 		sniper_sprite.hide()
 		hud_weapon_sprite.play("Revolver")
+		#can_shoot = true
 	
 	if current_weapon == "shotgun":
 		shotgun_sprite.show()
 		revolver_sprite.hide()
 		sniper_sprite.hide()
 		hud_weapon_sprite.play("Shotgun")
+		#can_shoot = true
 	
 	if current_weapon == "sniper":
 		sniper_sprite.show()
@@ -171,10 +174,12 @@ func gun_switch():
 
 #Allows shooting after animation is done
 func shoot_anim_done_revolver():
-	can_shoot = true
+	#can_shoot = true
+	pass
 
 func shoot_anim_done_shotgun():
-	can_shoot = true
+	#can_shoot = true
+	pass
 
 
 #Dies when health reaches zero
@@ -231,25 +236,24 @@ func _on_med_kit_heal(heal_amount):
 func _on_shotgun_object_damage(damage_num):
 	damage_power_P = damage_num
 
-
 #Cahnges the current weapon to shotgun
 func _on_shotgun_object_weapons_name(weapon_name):
 	current_weapon = weapon_name
+
+#Changes the "can shoot var to true when using shotgun
+func _on_shotgun_timer_timeout():
+	#pass
+	can_shoot = true
 
 
 #Changes gun damage when interacting with Sniper Object
 func _on_sniper_object_damage(damage_num):
 	damage_power_P = damage_num
 
-
 #Cahnges the current weapon to sniper
 func _on_sniper_object_weapons_name(weapon_name):
 	current_weapon = weapon_name
 
-
-#Changes the "can shoot var to true when using shotgun
-func _on_timer_timeout():
-	can_shoot = true
 
 
 func _on_melee_timer_timeout():
@@ -259,7 +263,9 @@ func _on_melee_timer_timeout():
 func _on_revolver_object_damage(damage_num):
 	damage_power_P = damage_num
 
-
 func _on_revolver_object_weapons_name(weapon_name):
 	current_weapon = weapon_name
 
+func _on_revolver_timer_timeout():
+	#pass
+	can_shoot = true
