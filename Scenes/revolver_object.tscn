@@ -44,7 +44,7 @@ _data = {
 "idle": SubResource("Animation_jhhid")
 }
 
-[node name="RevolverObject" type="StaticBody3D" groups=["collectibles"]]
+[node name="RevolverObject" type="StaticBody3D" groups=["collectibles", "weapons"]]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_tevch")

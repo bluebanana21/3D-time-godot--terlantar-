@@ -32,6 +32,7 @@ var can_punch = true
 var dead = false
 var health = 100
 var current_weapon = "revolver"
+#var weapons = get_tree().get_nodes_in_group("weapons")
 
 signal damage(damage_power_P)
 signal melee(melee_damage)
@@ -193,6 +194,12 @@ func show_health():
 	print(can_shoot)
 
 
+func _on_weapon_interacted(weapon_name):
+	#weapons.interacted_by_player()
+	#print("weapon interaction lesgo")
+	#get_tree().call_group("weapons", "interacted_by_player")
+	pass
+	
 ####################
 # Signal Functions #
 ####################

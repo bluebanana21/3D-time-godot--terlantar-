@@ -8,7 +8,7 @@ extends CharacterBody3D
 @onready var gun_ray_cast = $GunRayCast
 @onready var death_audio = $DeathAudio
 
-@onready var player = $"../Player"
+@onready var player = $"../../Player"
 
 @export var move_speed = 2.0
 @export var attack_range = 2.0
