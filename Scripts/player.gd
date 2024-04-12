@@ -133,6 +133,9 @@ func shoot():
 		$UI/Shotgun/ShotgunTimer.start()
 		shotgun_audio.play()
 		shotgun_sprite.play("shoot")
+	
+	#if current_weapon != "revolver":
+		#$UI/Revolver/RevolverTimer.
 		
 	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("_on_player_damage"):
 		emit_signal("damage", damage_power_P)

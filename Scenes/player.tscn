@@ -315,6 +315,8 @@ sprite_frames = SubResource("SpriteFrames_grycg")
 animation = &"revolver shoot"
 
 [node name="RevolverTimer" type="Timer" parent="UI/Revolver"]
+wait_time = 0.5
+one_shot = true
 
 [node name="Shotgun" type="Control" parent="UI"]
 layout_mode = 3
@@ -330,6 +332,8 @@ sprite_frames = SubResource("SpriteFrames_7l6jv")
 animation = &"shoot"
 
 [node name="ShotgunTimer" type="Timer" parent="UI/Shotgun"]
+wait_time = 1.598
+one_shot = true
 
 [node name="Sniper" type="Control" parent="UI"]
 layout_mode = 3
