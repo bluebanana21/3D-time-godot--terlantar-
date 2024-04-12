@@ -37,9 +37,6 @@ func _physics_process(delta):
 	if player == null:
 		return
 	
-	#var dir = player.global_position - global_position
-	#dir.y = 0.0
-	#dir = dir.normalized()
 	
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
@@ -50,8 +47,6 @@ func _physics_process(delta):
 	animated_sprite_3d.play("idle")
 	
 	velocity = new_velocity
-	#velocity = dir * move_speed
-	#shoot_timer.start()
 	shoot()
 	attempt_to_kill_player()
 	player.kill()
@@ -79,7 +74,6 @@ func attempt_to_kill_player():
 	if result.is_empty():
 		print("colliding")
 		emit_signal("damage",damage_power)
-		#player.kill()
 
 
 func shoot():
@@ -91,7 +85,6 @@ func shoot():
 		instance = bullet.instantiate()
 		instance.position = gun_ray_cast.global_position
 		instance.transform.basis = gun_ray_cast.global_transform.basis
-		#add_child(instance)
 		get_parent().add_child(instance)
 	can_shoot = false
 	shoot_timer.start()
@@ -106,16 +99,11 @@ func kill():
 		instance = weapon.instantiate()
 		get_parent().add_child(instance)
 		instance.position = $".".global_position
-		#instance.transform.basis = $".".global_transform.basis
 
 
 ####################
 # SIGNAL FUNCTIONS #
 ####################
-#func attack_anim_done():
-	#can_attack = true
-
-
 func _on_player_damage(damage_power_P):
 	enemy_health -= damage_power_P
 

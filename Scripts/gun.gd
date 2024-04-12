@@ -22,12 +22,6 @@ func get_prompt():
 
 #Calls when object is interacted by player
 func interacted_by_player():
-	#emit_signal("heal", heal_amount)
 	emit_signal("damage", damage_num)
 	emit_signal("weapons_name", weapon_name)
-	#health += 1
 	print("Shotgun has changed player weapon")
-
-#
-#func _on_damage(damage_num):
-	#pass # Replace with function body.

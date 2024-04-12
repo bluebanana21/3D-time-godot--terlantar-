@@ -13,8 +13,6 @@ func get_prompt():
 
 #Calls when object is interacted by player
 func interacted_by_player():
-	#emit_signal("heal", heal_amount)
 	emit_signal("damage", damage_num)
 	emit_signal("weapons_name", weapon_name)
-	#health += 1
 	print("sniper has changed player weapon")
