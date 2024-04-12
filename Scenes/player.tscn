@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=55 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://nb2kg2psxlke" path="res://Assets/Audio/player rel/hurt & death/dying 3.wav" id="8_n88qh"]
 [ext_resource type="AudioStream" uid="uid://cc4lvxt7i6m3r" path="res://Assets/Audio/player rel/hurt & death/dying 4.wav" id="9_aun07"]
 [ext_resource type="Script" path="res://Scripts/reticle.gd" id="9_k2cb5"]
+[ext_resource type="Script" path="res://Scenes/FPSCounter.gd" id="10_muqpj"]
 [ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="14_5rx3v"]
 [ext_resource type="Texture2D" uid="uid://d15fn3pth7hbq" path="res://Assets/Player Rel/HUD V3.png" id="14_umxjf"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="15_4efu6"]
@@ -241,6 +242,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Bottom/BottomHUD/FaceProfile:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0872665]
+}
 
 [sub_resource type="Animation" id="Animation_j21bx"]
 resource_name = "pain"
@@ -259,9 +272,26 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_infas"]
+resource_name = "face_movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Bottom/BottomHUD/FaceProfile:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.962518),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665, -0.0872665]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6g4e8"]
 _data = {
 "RESET": SubResource("Animation_vomj6"),
+"face_movement": SubResource("Animation_infas"),
 "pain": SubResource("Animation_j21bx")
 }
 
@@ -310,6 +340,16 @@ stream = ExtResource("5_n3lrb")
 stream = SubResource("AudioStreamRandomizer_uxo8m")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="FPSCounter" type="Label" parent="UI"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "FPS : "
+script = ExtResource("10_muqpj")
 
 [node name="Revolver" type="Control" parent="UI"]
 layout_mode = 3
@@ -373,6 +413,7 @@ texture = ExtResource("14_umxjf")
 [node name="FaceProfile" type="AnimatedSprite2D" parent="UI/Bottom/BottomHUD"]
 texture_filter = 1
 position = Vector2(-0.111004, 126.5)
+rotation = -0.0872665
 scale = Vector2(0.295833, 0.295833)
 sprite_frames = SubResource("SpriteFrames_kxo3m")
 animation = &"normal"
