@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=53 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://dlpmhnicsqsj3" path="res://Assets/Audio/guns/colt-pyrhon-shoot.wav" id="4_qfj4v"]
 [ext_resource type="Script" path="res://Scripts/Panel.gd" id="5_18qjc"]
 [ext_resource type="Texture2D" uid="uid://dcsqpxe0nsq4b" path="res://Assets/Temporary/Shotgun.png" id="5_21cfq"]
-[ext_resource type="Texture2D" uid="uid://ds84oedp36ux4" path="res://Assets/Player Rel/HUD V2.png" id="5_63wyo"]
 [ext_resource type="AudioStream" uid="uid://cs6vi33b5rkw4" path="res://Assets/Audio/player rel/hurt & death/player hurt.wav" id="5_n3lrb"]
 [ext_resource type="Texture2D" uid="uid://bhf7123deba6t" path="res://Assets/Temporary/Shotgun blast.png" id="6_50dtj"]
 [ext_resource type="Script" path="res://Scripts/_InteractRay.gd" id="6_54qee"]
@@ -19,12 +18,15 @@
 [ext_resource type="AudioStream" uid="uid://nb2kg2psxlke" path="res://Assets/Audio/player rel/hurt & death/dying 3.wav" id="8_n88qh"]
 [ext_resource type="AudioStream" uid="uid://cc4lvxt7i6m3r" path="res://Assets/Audio/player rel/hurt & death/dying 4.wav" id="9_aun07"]
 [ext_resource type="Script" path="res://Scripts/reticle.gd" id="9_k2cb5"]
-[ext_resource type="Texture2D" uid="uid://4e4qepgfkvtc" path="res://Assets/Player Rel/crosshir.png" id="10_nwd0f"]
 [ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="14_5rx3v"]
+[ext_resource type="Texture2D" uid="uid://d15fn3pth7hbq" path="res://Assets/Player Rel/HUD V3.png" id="14_umxjf"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="15_4efu6"]
 [ext_resource type="AudioStream" uid="uid://c6qisuld155jo" path="res://Assets/Audio/guns/remington870-shoot.wav" id="15_grhgg"]
+[ext_resource type="Texture2D" uid="uid://bet60pbnw4mrj" path="res://Assets/Player Rel/anger face.png" id="15_kcvhy"]
+[ext_resource type="Texture2D" uid="uid://8k1j7yucs8w6" path="res://Assets/Player Rel/normal face.png" id="16_3inwq"]
 [ext_resource type="AudioStream" uid="uid://cm27pwgmlquvi" path="res://Assets/Audio/guns/xm21-shoot.wav" id="16_thr22"]
 [ext_resource type="Texture2D" uid="uid://tio5iexlc8rx" path="res://Assets/Particles/blood splatter.png" id="16_xroa6"]
+[ext_resource type="Texture2D" uid="uid://cbo8ynuu68smv" path="res://Assets/Player Rel/crosshair V3.png" id="19_mmbxg"]
 [ext_resource type="AudioStream" uid="uid://bpufvt1w336u5" path="res://Assets/Audio/player rel/punch/grunt-punch 1.wav" id="19_xne2p"]
 [ext_resource type="AudioStream" uid="uid://c1telut4rf5a2" path="res://Assets/Audio/player rel/punch/grunt-punch 2.wav" id="20_m4koo"]
 [ext_resource type="AudioStream" uid="uid://dtmxn5hay6pep" path="res://Assets/Audio/player rel/punch/grunt-punch 3.wav" id="21_oepfo"]
@@ -112,14 +114,22 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jh7xu"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6fmkd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_kxo3m"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_63wyo")
+"texture": ExtResource("15_kcvhy")
 }],
 "loop": true,
-"name": &"default",
+"name": &"anger",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_3inwq")
+}],
+"loop": true,
+"name": &"normal",
 "speed": 5.0
 }]
 
@@ -354,10 +364,22 @@ offset_top = 544.0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="BottomHUD" type="AnimatedSprite2D" parent="UI/Bottom"]
+[node name="BottomHUD" type="Sprite2D" parent="UI/Bottom"]
+texture_filter = 1
 position = Vector2(576.222, -221)
-scale = Vector2(0.664609, 0.664609)
-sprite_frames = SubResource("SpriteFrames_6fmkd")
+scale = Vector2(2, 2)
+texture = ExtResource("14_umxjf")
+
+[node name="FaceProfile" type="AnimatedSprite2D" parent="UI/Bottom/BottomHUD"]
+texture_filter = 1
+position = Vector2(-0.111004, 126.5)
+scale = Vector2(0.295833, 0.295833)
+sprite_frames = SubResource("SpriteFrames_kxo3m")
+animation = &"normal"
+
+[node name="FaceTimer" type="Timer" parent="UI/Bottom/BottomHUD/FaceProfile"]
+wait_time = 0.2
+one_shot = true
 
 [node name="Ammo" type="Label" parent="UI/Bottom"]
 texture_filter = 1
@@ -452,8 +474,8 @@ script = ExtResource("9_k2cb5")
 
 [node name="Sprite2D" type="Sprite2D" parent="UI/CrossHair/CenterContainer"]
 texture_filter = 1
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("10_nwd0f")
+scale = Vector2(3, 3)
+texture = ExtResource("19_mmbxg")
 
 [node name="DeathScreen" type="Control" parent="UI"]
 visible = false
@@ -600,5 +622,6 @@ libraries = {
 
 [connection signal="timeout" from="UI/Revolver/RevolverTimer" to="." method="_on_revolver_timer_timeout"]
 [connection signal="timeout" from="UI/Shotgun/ShotgunTimer" to="." method="_on_shotgun_timer_timeout"]
+[connection signal="timeout" from="UI/Bottom/BottomHUD/FaceProfile/FaceTimer" to="." method="_on_face_timer_timeout"]
 [connection signal="toggled" from="UI/DeathScreen/Panel/CheckButton" to="UI/DeathScreen/Panel" method="_on_check_button_toggled"]
 [connection signal="timeout" from="MeleeRay/MeleeTimer" to="." method="_on_melee_timer_timeout"]

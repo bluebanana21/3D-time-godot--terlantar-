@@ -6,7 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_wye8k"]
 
 [node name="Bullet" type="RigidBody3D" groups=["projectile"]]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 collision_layer = 8
 collision_mask = 3
 mass = 0.01
@@ -17,12 +17,12 @@ script = ExtResource("1_ue6pu")
 speed = 5.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(2.215, 0, 0, 0, 2.215, 0, 0, 0, 2.215, 0, 0, 0)
 billboard = 1
 texture_filter = 0
 texture = ExtResource("1_p5bsc")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0, 0)
 shape = SubResource("SphereShape3D_wye8k")
 
 [node name="Timer" type="Timer" parent="."]

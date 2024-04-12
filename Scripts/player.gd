@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var revolver_sprite = $UI/Revolver/AnimatedSprite2D
 @onready var sniper_sprite = $UI/Sniper/AnimatedSprite2D
 @onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
+@onready var face_profile = $UI/Bottom/BottomHUD/FaceProfile
 
 @onready var revolver_audio = $Camera3D/Audio/RevolverAudio
 @onready var shotgun_audio = $Camera3D/Audio/ShotgunAudio
@@ -32,7 +33,6 @@ var can_punch = true
 var dead = false
 var health = 100
 var current_weapon = "revolver"
-#var weapons = get_tree().get_nodes_in_group("weapons")
 
 signal damage(damage_power_P)
 signal melee(melee_damage)
@@ -69,7 +69,6 @@ func _process(delta):
 		$UI/Bottom/HealthCounter.text = str(0)
 	if Input.is_action_just_pressed("restart"):
 		restart()
-		#health -= 100
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 	
@@ -79,7 +78,6 @@ func _process(delta):
 #Movement code
 func _physics_process(delta):
 	if dead:
-		#print("dead as hell")
 		return
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Down")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -90,7 +88,6 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-	#_on_melee_timer_timeout()
 	kill()
 	update_ammo_label()
 	update_health_label()
@@ -193,6 +190,8 @@ func Hit_Succesfull(projectile_damage):
 	health -= projectile_damage
 	hurt_audio.play()
 	animation_player.play("pain")
+	face_profile.play("anger")
+	$UI/Bottom/BottomHUD/FaceProfile/FaceTimer.start()
 
 #Takes damage when colliding with enemy
 func _on_enemy_damage(damage_power):
@@ -201,6 +200,8 @@ func _on_enemy_damage(damage_power):
 	health -= damage_power
 	hurt_audio.play()
 	animation_player.play("pain")
+	face_profile.play("anger")
+	$UI/Bottom/BottomHUD/FaceProfile/FaceTimer.start()
 
 
 #Heals when interacting with medkit
@@ -254,3 +255,7 @@ func _on_revolver_object_weapons_name(weapon_name):
 
 func _on_revolver_timer_timeout():
 	can_shoot = true
+
+
+func _on_face_timer_timeout():
+	face_profile.play("normal")
