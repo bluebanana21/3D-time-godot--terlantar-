@@ -18,6 +18,8 @@ func _on_body_entered(body):
 		print("has collided")
 		body.Hit_Succesfull(projectile_damage)
 		queue_free()
+	if body.is_in_group("env"): 
+		queue_free()
 
 
 func _on_timer_timeout():

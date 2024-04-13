@@ -92,6 +92,7 @@ func shoot():
 #Calls when enemy health reaches zero
 func kill():
 	if enemy_health <= 0:
+		queue_free()
 		dead = true
 		$DeathAudio.play()
 		animated_sprite_3d.play("death")
