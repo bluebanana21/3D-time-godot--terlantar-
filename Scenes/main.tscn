@@ -1,12 +1,57 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1sbt77ojrtng"]
+[gd_scene load_steps=22 format=3 uid="uid://b1sbt77ojrtng"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
 [ext_resource type="PackedScene" uid="uid://cep4eoxup3mcl" path="res://Scenes/sniper_object.tscn" id="5_ihhcy"]
 [ext_resource type="PackedScene" uid="uid://cw3egvxu1j0j1" path="res://Scenes/med_kit.tscn" id="6_lj8e1"]
-[ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="6_yvojt"]
 [ext_resource type="PackedScene" uid="uid://drqgbv1nno15w" path="res://Scenes/shotgun.tscn" id="7_sd7gs"]
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="8_aid54"]
+[ext_resource type="Texture2D" uid="uid://b68wn2d5pqir1" path="res://Assets/Enemies/gunmen v3.png" id="9_j5voc"]
 [ext_resource type="PackedScene" uid="uid://crlfebpsxh76v" path="res://Scenes/revolver_object.tscn" id="10_ibv80"]
+[ext_resource type="Texture2D" uid="uid://bss6rhb7thli3" path="res://Assets/Enemies/dead-enemy V3.png" id="10_pejtk"]
+[ext_resource type="AudioStream" uid="uid://dn2w121n4yeh3" path="res://Assets/Audio/player rel/hurt & death/dying 1.wav" id="11_ydqfe"]
+[ext_resource type="AudioStream" uid="uid://cko80bnp2e4l" path="res://Assets/Audio/player rel/hurt & death/dying 2.wav" id="12_nreel"]
+[ext_resource type="AudioStream" uid="uid://nb2kg2psxlke" path="res://Assets/Audio/player rel/hurt & death/dying 3.wav" id="13_4nvfr"]
+[ext_resource type="AudioStream" uid="uid://cc4lvxt7i6m3r" path="res://Assets/Audio/player rel/hurt & death/dying 4.wav" id="14_u1mxw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70m27"]
+radius = 0.4
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n8pba"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_j5voc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_pejtk")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_j5voc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wnwje"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vg5ry"]
+random_volume_offset_db = 3.0
+streams_count = 4
+stream_0/stream = ExtResource("11_ydqfe")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("12_nreel")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("13_4nvfr")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("14_u1mxw")
+stream_3/weight = 1.0
 
 [sub_resource type="Sky" id="Sky_08eqe"]
 
@@ -48,13 +93,85 @@ damage_num = 25
 
 [node name="enemy" type="Node3D" parent="."]
 
-[node name="Enemy" parent="enemy" instance=ExtResource("6_yvojt")]
+[node name="Enemy" type="CharacterBody3D" parent="enemy" groups=["enemies", "target"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -14)
-move_speed = 0.0
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_aid54")
 attack_range = 1.4
 
-[node name="Enemy2" parent="enemy" instance=ExtResource("6_yvojt")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemy/Enemy"]
+shape = SubResource("CapsuleShape3D_70m27")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="enemy/Enemy"]
+transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 0, 0, 0)
+pixel_size = 0.0045
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_n8pba")
+animation = &"death"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="enemy/Enemy"]
+visible = false
+mesh = SubResource("CapsuleMesh_wnwje")
+
+[node name="DeathAudio" type="AudioStreamPlayer3D" parent="enemy/Enemy"]
+stream = SubResource("AudioStreamRandomizer_vg5ry")
+
+[node name="AttackTimer" type="Timer" parent="enemy/Enemy"]
+wait_time = 1.4
+
+[node name="ShootTimer" type="Timer" parent="enemy/Enemy"]
+wait_time = 1.5
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="enemy/Enemy"]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="GunRayCast" type="RayCast3D" parent="enemy/Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4.5, 0, 0.5, -0.408145)
+target_position = Vector3(0, 0, -1)
+debug_shape_custom_color = Color(0.290196, 0.317647, 1, 1)
+
+[node name="Enemy2" type="CharacterBody3D" parent="enemy" groups=["enemies", "target"]]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -18)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("8_aid54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemy/Enemy2"]
+shape = SubResource("CapsuleShape3D_70m27")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="enemy/Enemy2"]
+transform = Transform3D(0.46, 0, 0, 0, 0.46, 0, 0, 0, 0.46, 0, 0, 0)
+pixel_size = 0.0045
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_n8pba")
+animation = &"death"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="enemy/Enemy2"]
+visible = false
+mesh = SubResource("CapsuleMesh_wnwje")
+
+[node name="DeathAudio" type="AudioStreamPlayer3D" parent="enemy/Enemy2"]
+stream = SubResource("AudioStreamRandomizer_vg5ry")
+
+[node name="AttackTimer" type="Timer" parent="enemy/Enemy2"]
+wait_time = 1.4
+
+[node name="ShootTimer" type="Timer" parent="enemy/Enemy2"]
+wait_time = 1.5
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="enemy/Enemy2"]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="GunRayCast" type="RayCast3D" parent="enemy/Enemy2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4.5, 0, 0.5, -0.408145)
+target_position = Vector3(0, 0, -1)
+debug_shape_custom_color = Color(0.290196, 0.317647, 1, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 23.722, 0)
@@ -93,5 +210,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 9)
 [connection signal="weapons_name" from="collectibles/ShotgunObject" to="Player" method="_on_shotgun_object_weapons_name"]
 [connection signal="damage" from="collectibles/RevolverObject" to="Player" method="_on_revolver_object_damage"]
 [connection signal="weapons_name" from="collectibles/RevolverObject" to="Player" method="_on_revolver_object_weapons_name"]
-[connection signal="damage" from="enemy/Enemy" to="Player" method="_on_enemy_damage"]
-[connection signal="damage" from="enemy/Enemy2" to="Player" method="_on_enemy_damage"]
+[connection signal="timeout" from="enemy/Enemy/AttackTimer" to="enemy/Enemy" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="enemy/Enemy/ShootTimer" to="enemy/Enemy" method="_on_shoot_timer_timeout"]
+[connection signal="velocity_computed" from="enemy/Enemy/NavigationAgent3D" to="enemy/Enemy" method="_on_navigation_agent_3d_velocity_computed"]
+[connection signal="timeout" from="enemy/Enemy2/AttackTimer" to="enemy/Enemy2" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="enemy/Enemy2/ShootTimer" to="enemy/Enemy2" method="_on_shoot_timer_timeout"]
+[connection signal="velocity_computed" from="enemy/Enemy2/NavigationAgent3D" to="enemy/Enemy2" method="_on_navigation_agent_3d_velocity_computed"]
