@@ -7,5 +7,5 @@ class_name Enemy
 @export var projectile_damage : int
 @export var damage_power : int
 @export var enemy_health : int
-@export var can_shoot : bool
-@export var can_attack : bool
+#@export var can_shoot : bool
+#@export var can_attack : bool
