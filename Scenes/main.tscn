@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1sbt77ojrtng"]
+[gd_scene load_steps=15 format=3 uid="uid://b1sbt77ojrtng"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_1d7pl"]
 [ext_resource type="PackedScene" uid="uid://bjr87ev5c6r4f" path="res://Scenes/player.tscn" id="1_jmicj"]
@@ -6,7 +6,26 @@
 [ext_resource type="PackedScene" uid="uid://cw3egvxu1j0j1" path="res://Scenes/med_kit.tscn" id="6_lj8e1"]
 [ext_resource type="PackedScene" uid="uid://bkwdxqv1ncgkj" path="res://Scenes/enemy.tscn" id="7_s35sn"]
 [ext_resource type="PackedScene" uid="uid://drqgbv1nno15w" path="res://Scenes/shotgun.tscn" id="7_sd7gs"]
+[ext_resource type="Script" path="res://resource/enemy_resorce.gd" id="8_uifyh"]
 [ext_resource type="PackedScene" uid="uid://crlfebpsxh76v" path="res://Scenes/revolver_object.tscn" id="10_ibv80"]
+
+[sub_resource type="Resource" id="Resource_ux73h"]
+resource_local_to_scene = true
+script = ExtResource("8_uifyh")
+name = "gunman"
+move_speed = 1.4
+attack_range = 1.4
+damage_power = 5
+enemy_health = 100
+
+[sub_resource type="Resource" id="Resource_850tn"]
+resource_local_to_scene = true
+script = ExtResource("8_uifyh")
+name = "gunman"
+move_speed = 0.0
+attack_range = 1.4
+damage_power = 5
+enemy_health = 100
 
 [sub_resource type="Sky" id="Sky_08eqe"]
 
@@ -50,6 +69,11 @@ damage_num = 25
 
 [node name="Enemy" parent="enemy" instance=ExtResource("7_s35sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -11.7454)
+enemy_resource = SubResource("Resource_ux73h")
+
+[node name="Enemy2" parent="enemy" instance=ExtResource("7_s35sn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.09888, 1, -6.70982)
+enemy_resource = SubResource("Resource_850tn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 23.722, 0)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkwdxqv1ncgkj"]
+[gd_scene load_steps=13 format=3 uid="uid://bkwdxqv1ncgkj"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_87n2l"]
+[ext_resource type="Resource" uid="uid://bwfk34lhapcvk" path="res://resource/gunman-1.tres" id="2_v8iqg"]
 [ext_resource type="Texture2D" uid="uid://bss6rhb7thli3" path="res://Assets/Enemies/dead-enemy V3.png" id="3_56kck"]
 [ext_resource type="AudioStream" uid="uid://dn2w121n4yeh3" path="res://Assets/Audio/player rel/hurt & death/dying 1.wav" id="4_7o17j"]
 [ext_resource type="Texture2D" uid="uid://b68wn2d5pqir1" path="res://Assets/Enemies/gunmen v3.png" id="4_d6q2d"]
@@ -52,6 +53,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_87n2l")
+enemy_resource = ExtResource("2_v8iqg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_70m27")

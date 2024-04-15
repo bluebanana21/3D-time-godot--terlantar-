@@ -7,6 +7,5 @@ script = ExtResource("1_artp5")
 name = "gunman"
 move_speed = 1.4
 attack_range = 1.4
-projectile_damage = 20
 damage_power = 5
 enemy_health = 100

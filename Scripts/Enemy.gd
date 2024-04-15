@@ -1,6 +1,8 @@
 #class_name enemy
 extends CharacterBody3D
 
+@export var enemy_resource : Enemy
+
 @onready var animated_sprite_3d = $AnimatedSprite3D
 @onready var nav_agent = $NavigationAgent3D
 @onready var attack_timer = $AttackTimer
@@ -10,15 +12,15 @@ extends CharacterBody3D
 
 @onready var player = $"../../Player"
 
-@export var move_speed = 2.0
-@export var attack_range = 2.0
-@export var damage_power = 10
-@export var enemy_health = 100
+#@export var move_speed = 2.0
+#@export var attack_range = 2.0
+#@export var damage_power = 10
+#@export var enemy_health = 100
 
 
 signal damage(damage_power)
 
-var other_player = null
+#var other_player = null
 var can_shoot = true
 var can_attack = true
 var dead = false
@@ -40,7 +42,7 @@ func _physics_process(delta):
 	
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
-	var new_velocity = (next_location - current_location).normalized() * move_speed
+	var new_velocity = (next_location - current_location).normalized() * enemy_resource.move_speed
 	
 	nav_agent.set_velocity_forced(new_velocity)
 	
@@ -59,7 +61,7 @@ func update_target_location(target_location):
 
 func attempt_to_kill_player():
 	var dist_to_player = global_position.distance_to(player.global_position)
-	if dist_to_player > attack_range:
+	if dist_to_player > enemy_resource.attack_range:
 		return
 	
 	var eye_line = Vector3.UP * 1.5
@@ -73,7 +75,7 @@ func attempt_to_kill_player():
 	attack_timer.start()
 	if result.is_empty():
 		print("colliding")
-		emit_signal("damage",damage_power)
+		emit_signal("damage",enemy_resource.damage_power)
 
 
 func shoot():
@@ -91,8 +93,8 @@ func shoot():
 
 #Calls when enemy health reaches zero
 func kill():
-	if enemy_health <= 0:
-		queue_free()
+	if enemy_resource.enemy_health <= 0:
+		#queue_free()
 		dead = true
 		$DeathAudio.play()
 		animated_sprite_3d.play("death")
@@ -101,16 +103,17 @@ func kill():
 		get_parent().add_child(instance)
 		instance.position = $".".global_position
 
-
+#func take_damage(damage_power_p):
+	#enemy_resource.enemy_health -= damage_power_P
 ####################
 # SIGNAL FUNCTIONS #
 ####################
 func _on_player_damage(damage_power_P):
-	enemy_health -= damage_power_P
+	enemy_resource.enemy_health -= damage_power_P
 
 
 func _on_player_melee(melee_damage):
-	enemy_health -= melee_damage
+	enemy_resource.enemy_health -= melee_damage
 
 
 func _on_navigation_agent_3d_velocity_computed(safe_velocity):

@@ -108,8 +108,9 @@ func meleeAttack():
 	melee_anim.show()
 	melee_anim.play("attack")
 	melee_audio.play()
-	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
-		emit_signal("melee", melee_damage)
+	if melee_ray.is_colliding().is_in_group("enemies") and melee_ray.get_collider().has_method("_on_player_melee"):
+		#emit_signal("melee", melee_damage)
+		
 		blood_particles.emitting = true
 		melee_ray.get_collider().kill()
 		
@@ -129,7 +130,8 @@ func shoot():
 		shotgun_sprite.play("shoot")
 	
 	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("_on_player_damage"):
-		emit_signal("damage", damage_power_P)
+		#emit_signal("damage", damage_power_P)
+		ray_cast_3d.get_collider()._on_player_damage(damage_power_P)
 		ray_cast_3d.get_collider().kill()
 
 
