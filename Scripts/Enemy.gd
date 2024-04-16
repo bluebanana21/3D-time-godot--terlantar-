@@ -75,7 +75,7 @@ func attempt_to_kill_player():
 	attack_timer.start()
 	if result.is_empty():
 		print("colliding")
-		emit_signal("damage",enemy_resource.damage_power)
+		player._on_enemy_damage(enemy_resource.damage_power)
 
 
 func shoot():
