@@ -1,4 +1,3 @@
-#class_name enemy
 extends CharacterBody3D
 
 @export var enemy_resource : Enemy

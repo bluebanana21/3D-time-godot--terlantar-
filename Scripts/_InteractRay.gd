@@ -12,12 +12,11 @@ func _process(delta):
 	prompt.text = ""
 	if is_colliding():
 		var detected = get_collider()
-		#if Input.is_action_just_pressed("interact"):
-			#print("youve interacted")
 		if detected is HealthInteractable:
 			prompt.text = detected.get_prompt()
-		if detected is GunInteractable:
+		if detected is StaticBody3D:
 			prompt.text = detected.get_prompt()
+			print("its a weapon")
 
 #Interacting with "interact" button
 func _input(event):

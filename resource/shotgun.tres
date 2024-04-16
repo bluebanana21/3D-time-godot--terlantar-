@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=2 format=3 uid="uid://b5bs3f3yl7rp7"]
+
+[ext_resource type="Script" path="res://resource/weapons_interact.gd" id="1_j5l1s"]
+
+[resource]
+script = ExtResource("1_j5l1s")
+Weapon_name = "shotgun"
+Prompt_action = "E"
+Prompt_message = "Shotgun"
+damage_num = 50

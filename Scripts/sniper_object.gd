@@ -1,18 +1,23 @@
-extends GunInteractable
+extends StaticBody3D
+
+@export var weapon_resource : Weapons
+
+@onready var player = $"../../Player"
 
 
-#Shows text prompt when in range of Object
+#Shows text qprompt when in range of Object
 func get_prompt():
 	var key_name = ""
-	for action in InputMap.action_get_events(prompt_action):
+	for action in InputMap.action_get_events(weapon_resource.Prompt_action):
 		if action is InputEventKey:
 			key_name = OS.get_keycode_string(action.keycode)
-	return prompt_message + "\n[" + prompt_action + "]"
-	#return 
+	return weapon_resource.Prompt_message + "\n[" + weapon_resource.Prompt_action + "]"
+	return 
 
 
 #Calls when object is interacted by player
 func interacted_by_player():
-	emit_signal("damage", damage_num)
-	emit_signal("weapons_name", weapon_name)
-	print("sniper has changed player weapon")
+	
+	player._on_revolver_object_damage(weapon_resource.damage_num)
+	player._on_revolver_object_weapons_name(weapon_resource.Weapon_name)
+	print("Shotgun has changed player weapon")

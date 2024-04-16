@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://drqgbv1nno15w"]
+[gd_scene load_steps=9 format=3 uid="uid://drqgbv1nno15w"]
 
-[ext_resource type="Script" path="res://Scripts/gun.gd" id="1_x4v3u"]
+[ext_resource type="Script" path="res://Scripts/shotgun_object.gd" id="1_0g5w3"]
 [ext_resource type="Texture2D" uid="uid://cqaia72p613j" path="res://Assets/Weapons/weapon interactables/shotgun-Interact-export.png" id="2_argko"]
+[ext_resource type="Resource" uid="uid://b5bs3f3yl7rp7" path="res://resource/shotgun.tres" id="2_x7qe5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7vv2e"]
 
@@ -47,9 +48,8 @@ _data = {
 [node name="ShotgunObject" type="StaticBody3D" groups=["collectibles", "weapons"]]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_x4v3u")
-prompt_message = "Shotgun"
-prompt_action = "E"
+script = ExtResource("1_0g5w3")
+weapon_resource = ExtResource("2_x7qe5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_7vv2e")
@@ -70,5 +70,3 @@ libraries = {
 }
 autoplay = "idle"
 speed_scale = 0.4
-
-[connection signal="damage" from="." to="." method="_on_damage"]
