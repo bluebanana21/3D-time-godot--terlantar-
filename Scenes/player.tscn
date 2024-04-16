@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=58 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -50,6 +50,73 @@ stream_2/stream = ExtResource("8_n88qh")
 stream_2/weight = 1.0
 stream_3/stream = ExtResource("9_aun07")
 stream_3/weight = 1.0
+
+[sub_resource type="Animation" id="Animation_vomj6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ScreenAlert/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Bottom/BottomHUD/FaceProfile:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0872665]
+}
+
+[sub_resource type="Animation" id="Animation_infas"]
+resource_name = "face_movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Bottom/BottomHUD/FaceProfile:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.962518),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665, -0.0872665]
+}
+
+[sub_resource type="Animation" id="Animation_j21bx"]
+resource_name = "pain"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/ScreenAlert/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6g4e8"]
+_data = {
+"RESET": SubResource("Animation_vomj6"),
+"face_movement": SubResource("Animation_infas"),
+"pain": SubResource("Animation_j21bx")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_grycg"]
 animations = [{
@@ -228,71 +295,42 @@ stream_5/weight = 1.0
 stream_6/stream = ExtResource("25_m8b0f")
 stream_6/weight = 1.0
 
-[sub_resource type="Animation" id="Animation_vomj6"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/ScreenAlert/ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("UI/Bottom/BottomHUD/FaceProfile:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.0872665]
-}
-
-[sub_resource type="Animation" id="Animation_infas"]
+[sub_resource type="Animation" id="Animation_21m66"]
 resource_name = "face_movement"
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("UI/Bottom/BottomHUD/FaceProfile:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.962518),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [-0.0872665, 0.0872665, -0.0872665]
-}
-
-[sub_resource type="Animation" id="Animation_j21bx"]
-resource_name = "pain"
-length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UI/ScreenAlert/ColorRect:modulate")
+tracks/0/path = NodePath("UI/Bottom/BottomHUD/FaceProfile:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"times": PackedFloat32Array(0, 0.25, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 2,
+"values": [0.0, 0.174533, -0.174533, 0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6g4e8"]
+[sub_resource type="Animation" id="Animation_jhvnn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/Bottom/BottomHUD/FaceProfile:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nhs3o"]
 _data = {
-"RESET": SubResource("Animation_vomj6"),
-"face_movement": SubResource("Animation_infas"),
-"pain": SubResource("Animation_j21bx")
+"RESET": SubResource("Animation_jhvnn"),
+"face_movement": SubResource("Animation_21m66")
 }
 
 [node name="Player" type="CharacterBody3D" groups=["player", "target"]]
@@ -338,6 +376,12 @@ stream = ExtResource("5_n3lrb")
 
 [node name="DeathAudio" type="AudioStreamPlayer3D" parent="Camera3D/Audio"]
 stream = SubResource("AudioStreamRandomizer_uxo8m")
+
+[node name="CameraAnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_6g4e8")
+}
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -413,7 +457,6 @@ texture = ExtResource("14_umxjf")
 [node name="FaceProfile" type="AnimatedSprite2D" parent="UI/Bottom/BottomHUD"]
 texture_filter = 1
 position = Vector2(-0.111004, 126.5)
-rotation = -0.0872665
 scale = Vector2(0.295833, 0.295833)
 sprite_frames = SubResource("SpriteFrames_kxo3m")
 animation = &"normal"
@@ -610,10 +653,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = 13.5
-offset_right = 34.0
-offset_bottom = 62.5
+offset_left = -33.0
+offset_top = 29.0
+offset_right = 35.0
+offset_bottom = 78.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -658,7 +701,7 @@ stream = SubResource("AudioStreamRandomizer_mr3xt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6g4e8")
+"": SubResource("AnimationLibrary_nhs3o")
 }
 
 [connection signal="timeout" from="UI/Revolver/RevolverTimer" to="." method="_on_revolver_timer_timeout"]

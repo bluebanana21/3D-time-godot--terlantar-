@@ -16,7 +16,7 @@ func _process(delta):
 			prompt.text = detected.get_prompt()
 		if detected is StaticBody3D:
 			prompt.text = detected.get_prompt()
-			print("its a weapon")
+			#print("its a weapon")
 
 #Interacting with "interact" button
 func _input(event):

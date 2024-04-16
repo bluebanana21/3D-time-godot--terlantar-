@@ -19,7 +19,9 @@ extends CharacterBody3D
 @onready var hud_weapon_sprite = $UI/Bottom/WeaponLabel/WeaponHUD
 @onready var blood_particles = $MeleeRay/BloodParticles
 @onready var melee_timer = $MeleeRay/MeleeTimer
+@onready var camera_animation_player = $Camera3D/CameraAnimationPlayer
 @onready var animation_player = $AnimationPlayer
+
 @onready var melee_audio = $MeleeRay/MeleeAudioPlayer
 
 @export var damage_power_P = 25
@@ -34,11 +36,9 @@ var dead = false
 var health = 100
 var current_weapon = "revolver"
 
-#signal damage(damage_power_P)
-#signal melee(melee_damage)
-
 
 func _ready():
+	#camera_animation_player.play("face_movement")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	$UI/DeathScreen/Panel/Button.button_up.connect(restart)
 
@@ -72,6 +72,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 	
+	#animation_player.play("face_movement")
 	gun_switch()
 
 
@@ -116,6 +117,7 @@ func meleeAttack():
 
 
 func shoot():
+	#animation_player.play("pain")
 	if !can_shoot:
 		return
 	can_shoot = false
@@ -190,8 +192,9 @@ func Hit_Succesfull(projectile_damage):
 		return
 	health -= projectile_damage
 	hurt_audio.play()
-	animation_player.play("pain")
+	camera_animation_player.play("pain")
 	face_profile.play("anger")
+	#print("hurt")
 	$UI/Bottom/BottomHUD/FaceProfile/FaceTimer.start()
 
 #Takes damage when colliding with enemy
@@ -200,7 +203,7 @@ func _on_enemy_damage(damage_power):
 		return
 	health -= damage_power
 	hurt_audio.play()
-	animation_player.play("pain")
+	camera_animation_player.play("pain")
 	face_profile.play("anger")
 	$UI/Bottom/BottomHUD/FaceProfile/FaceTimer.start()
 
@@ -212,16 +215,15 @@ func _on_med_kit_heal(heal_amount):
 	health += heal_amount
 
 
+func Weapon_damage(damage_num):
+	damage_power_P = damage_num
+
+
+func Weapon_name(weapon_name):
+	current_weapon = weapon_name
 #########################
 #   Shotgun signals    #
 #########################
-#Changes gun damage when interacting with shotgun Object
-func _on_shotgun_object_damage(damage_num):
-	damage_power_P = damage_num
-
-#Cahnges the current weapon to shotgun
-func _on_shotgun_object_weapons_name(weapon_name):
-	current_weapon = weapon_name
 
 #Changes the "can shoot var to true when using shotgun
 func _on_shotgun_timer_timeout():
@@ -232,14 +234,6 @@ func _on_shotgun_timer_timeout():
 #########################
 #   Sniper signals      #
 #########################
-#Changes gun damage when interacting with Sniper Object
-func _on_sniper_object_damage(damage_num):
-	damage_power_P = damage_num
-
-#Cahnges the current weapon to sniper
-func _on_sniper_object_weapons_name(weapon_name):
-	current_weapon = weapon_name
-
 
 func _on_melee_timer_timeout():
 	can_punch = true
@@ -248,11 +242,6 @@ func _on_melee_timer_timeout():
 #########################
 #   Revolver signals    #
 #########################
-func _on_revolver_object_damage(damage_num):
-	damage_power_P = damage_num
-
-func _on_revolver_object_weapons_name(weapon_name):
-	current_weapon = weapon_name
 
 func _on_revolver_timer_timeout():
 	can_shoot = true
