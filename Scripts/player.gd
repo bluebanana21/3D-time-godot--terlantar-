@@ -35,6 +35,7 @@ var can_punch = true
 var dead = false
 var health = 100
 var current_weapon = "revolver"
+var current_ammo = 12
 
 
 func _ready():
@@ -113,12 +114,14 @@ func meleeAttack():
 		melee_ray.get_collider()._on_player_melee(melee_damage)
 		blood_particles.emitting = true
 		melee_ray.get_collider().kill()
-		
 
 
 func shoot():
-	#animation_player.play("pain")
+	if can_shoot and current_ammo > 0:
+		current_ammo -= 1
 	if !can_shoot:
+		return
+	if current_ammo <= 0:
 		return
 	can_shoot = false
 	if current_weapon == "revolver":
@@ -136,7 +139,8 @@ func shoot():
 
 
 func update_ammo_label():
-	pass
+	$UI/Bottom/AmmoCounter.text = str(current_ammo)
+	#pass
 
 
 #Updates health counter

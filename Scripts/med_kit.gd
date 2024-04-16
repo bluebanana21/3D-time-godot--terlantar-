@@ -5,7 +5,9 @@ extends StaticBody3D
 @export var prompt_action = "interact"
 @export var heal_amount = 10
 
-signal heal(heal_amount)
+@onready var player = $"../../Player"
+
+#signal heal(heal_amount)
 
 
 #Shows text prompt when in range of Object
@@ -20,6 +22,6 @@ func get_prompt():
 
 #Calls when object is interacted by player
 func interacted_by_player():
-	emit_signal("heal", heal_amount)
+	player._on_med_kit_heal(heal_amount)
 	#health += 1
 	print("Medkit has healed player")

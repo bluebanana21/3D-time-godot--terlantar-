@@ -7,4 +7,6 @@ script = ExtResource("1_4bdye")
 Weapon_name = "revolver"
 Prompt_action = "E"
 Prompt_message = "Revolver"
+ammo_amount = 6
 damage_num = 25
+projectile = false

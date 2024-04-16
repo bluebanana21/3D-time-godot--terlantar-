@@ -17,9 +17,6 @@ extends CharacterBody3D
 #@export var enemy_health = 100
 
 
-signal damage(damage_power)
-
-#var other_player = null
 var can_shoot = true
 var can_attack = true
 var dead = false

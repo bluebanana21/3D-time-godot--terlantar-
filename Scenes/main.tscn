@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://resource/enemy_resorce.gd" id="8_uifyh"]
 [ext_resource type="PackedScene" uid="uid://crlfebpsxh76v" path="res://Scenes/revolver_object.tscn" id="10_ibv80"]
 
-[sub_resource type="Resource" id="Resource_rcnsd"]
+[sub_resource type="Resource" id="Resource_l8x0e"]
 resource_local_to_scene = true
 script = ExtResource("8_uifyh")
 name = "gunman"
@@ -18,7 +18,7 @@ attack_range = 1.4
 damage_power = 5
 enemy_health = 100
 
-[sub_resource type="Resource" id="Resource_43chd"]
+[sub_resource type="Resource" id="Resource_dab7s"]
 resource_local_to_scene = true
 script = ExtResource("8_uifyh")
 name = "gunman"
@@ -68,11 +68,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1, 0)
 
 [node name="Enemy" parent="enemy" instance=ExtResource("7_s35sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -11.7454)
-enemy_resource = SubResource("Resource_rcnsd")
+enemy_resource = SubResource("Resource_l8x0e")
 
 [node name="Enemy2" parent="enemy" instance=ExtResource("7_s35sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.09888, 1, -6.70982)
-enemy_resource = SubResource("Resource_43chd")
+enemy_resource = SubResource("Resource_dab7s")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 23.722, 0)
@@ -99,5 +99,3 @@ size = Vector3(1, 4, 5)
 
 [node name="ShotgunObject2" parent="." instance=ExtResource("7_sd7gs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 9)
-
-[connection signal="heal" from="collectibles/MedKit" to="Player" method="_on_med_kit_heal"]
