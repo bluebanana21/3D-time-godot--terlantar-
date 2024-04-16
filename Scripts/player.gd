@@ -225,6 +225,9 @@ func Weapon_damage(damage_num):
 
 func Weapon_name(weapon_name):
 	current_weapon = weapon_name
+
+func ammo_refill(ammo_amount):
+	current_ammo = ammo_amount
 #########################
 #   Shotgun signals    #
 #########################
