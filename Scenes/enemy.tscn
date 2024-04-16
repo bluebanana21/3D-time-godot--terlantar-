@@ -1,26 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkwdxqv1ncgkj"]
+[gd_scene load_steps=13 format=3 uid="uid://bkwdxqv1ncgkj"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_87n2l"]
-[ext_resource type="Texture2D" uid="uid://dmqjd83qxrnlq" path="res://Assets/temp assets/cat attack.jpeg" id="2_dtnwk"]
-[ext_resource type="Texture2D" uid="uid://dil5uxwqr7spt" path="res://Assets/temp assets/jeff-kingma--lLWCvEoFJM-unsplash.jpg" id="3_xu5yu"]
-[ext_resource type="Texture2D" uid="uid://cr4q5ns15cemo" path="res://Assets/enemies/gunmen v2.png" id="4_e8nrd"]
-[ext_resource type="AudioStream" uid="uid://4a6dwxijejgr" path="res://Assets/Audio assets/Nuclear Bomb Explosion Sound Effect..mp3" id="5_crvvs"]
+[ext_resource type="Resource" uid="uid://bwfk34lhapcvk" path="res://resource/gunman-1.tres" id="2_v8iqg"]
+[ext_resource type="Texture2D" uid="uid://bss6rhb7thli3" path="res://Assets/Enemies/dead-enemy V3.png" id="3_56kck"]
+[ext_resource type="AudioStream" uid="uid://dn2w121n4yeh3" path="res://Assets/Audio/player rel/hurt & death/dying 1.wav" id="4_7o17j"]
+[ext_resource type="Texture2D" uid="uid://b68wn2d5pqir1" path="res://Assets/Enemies/gunmen v3.png" id="4_d6q2d"]
+[ext_resource type="AudioStream" uid="uid://cko80bnp2e4l" path="res://Assets/Audio/player rel/hurt & death/dying 2.wav" id="5_aeeg6"]
+[ext_resource type="AudioStream" uid="uid://nb2kg2psxlke" path="res://Assets/Audio/player rel/hurt & death/dying 3.wav" id="6_04q33"]
+[ext_resource type="AudioStream" uid="uid://cc4lvxt7i6m3r" path="res://Assets/Audio/player rel/hurt & death/dying 4.wav" id="7_lhnwg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70m27"]
+radius = 0.4
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n8pba"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_dtnwk")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 5.0
+"texture": ExtResource("4_d6q2d")
 }, {
-"frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_xu5yu")
+"texture": ExtResource("3_56kck")
 }],
 "loop": false,
 "name": &"death",
@@ -28,7 +27,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_e8nrd")
+"texture": ExtResource("4_d6q2d")
 }],
 "loop": true,
 "name": &"idle",
@@ -37,14 +36,24 @@ animations = [{
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wnwje"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5had"]
-texture_filter = 0
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vg5ry"]
+random_volume_offset_db = 3.0
+streams_count = 4
+stream_0/stream = ExtResource("4_7o17j")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_aeeg6")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_04q33")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("7_lhnwg")
+stream_3/weight = 1.0
 
-[node name="Enemy" type="CharacterBody3D"]
+[node name="Enemy" type="CharacterBody3D" groups=["enemies", "target"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_87n2l")
+enemy_resource = ExtResource("2_v8iqg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_70m27")
@@ -60,9 +69,25 @@ animation = &"death"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("CapsuleMesh_wnwje")
-surface_material_override/0 = SubResource("StandardMaterial3D_l5had")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_crvvs")
+[node name="DeathAudio" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_vg5ry")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.4
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="GunRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4.5, 0, 0.5, -0.408145)
+target_position = Vector3(0, 0, -1)
+debug_shape_custom_color = Color(0.290196, 0.317647, 1, 1)
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

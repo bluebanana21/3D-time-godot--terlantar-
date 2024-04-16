@@ -7,6 +7,8 @@ extends StaticBody3D
 
 signal heal(heal_amount)
 
+
+#Shows text prompt when in range of Object
 func get_prompt():
 	var key_name = ""
 	for action in InputMap.action_get_events(prompt_action):
@@ -16,6 +18,7 @@ func get_prompt():
 	#return 
 
 
+#Calls when object is interacted by player
 func interacted_by_player():
 	emit_signal("heal", heal_amount)
 	#health += 1

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8b6yw54uhbmv"]
+
+[ext_resource type="Texture2D" uid="uid://begsx6r053kw4" path="res://Assets/Particles/bullet.png" id="1_p5bsc"]
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_ue6pu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wye8k"]
+
+[node name="Bullet" type="RigidBody3D" groups=["projectile"]]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+collision_layer = 8
+collision_mask = 3
+mass = 0.01
+continuous_cd = true
+max_contacts_reported = 3
+contact_monitor = true
+script = ExtResource("1_ue6pu")
+speed = 5.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture_filter = 0
+texture = ExtResource("1_p5bsc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.625, 0, 0, 0, 0.625, 0, 0, 0, 0.625, 0, 0, 0)
+shape = SubResource("SphereShape3D_wye8k")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

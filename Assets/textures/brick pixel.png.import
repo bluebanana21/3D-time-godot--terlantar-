@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xedqx0qcfhtc"
-path.s3tc="res://.godot/imported/brick pixel.png-0f77a001c912e3319afb5bbf83c4ab45.s3tc.ctex"
+path.s3tc="res://.godot/imported/brick pixel.png-a5e67e300b49c3fad365db8f13ac3fdb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/textures/brick pixel.png"
-dest_files=["res://.godot/imported/brick pixel.png-0f77a001c912e3319afb5bbf83c4ab45.s3tc.ctex"]
+source_file="res://Assets/Textures/brick pixel.png"
+dest_files=["res://.godot/imported/brick pixel.png-a5e67e300b49c3fad365db8f13ac3fdb.s3tc.ctex"]
 
 [params]
 

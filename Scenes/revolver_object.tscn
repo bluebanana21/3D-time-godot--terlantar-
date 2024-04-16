@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://crlfebpsxh76v"]
+
+[ext_resource type="Script" path="res://Scripts/revolver_object.gd" id="1_tevch"]
+[ext_resource type="Texture2D" uid="uid://bdy65a268403o" path="res://Assets/Weapons/weapon interactables/revolver-interact.png" id="2_538oa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_njvxr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_awb5c"]
+
+[sub_resource type="Animation" id="Animation_u646n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jhhid"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gqm6m"]
+_data = {
+"RESET": SubResource("Animation_u646n"),
+"idle": SubResource("Animation_jhhid")
+}
+
+[node name="RevolverObject" type="StaticBody3D" groups=["collectibles", "weapons"]]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_tevch")
+prompt_message = "Revolver"
+prompt_action = "E"
+weapon_name = "revolver"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_njvxr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("BoxMesh_awb5c")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_538oa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gqm6m")
+}
+autoplay = "idle"
+speed_scale = 0.4

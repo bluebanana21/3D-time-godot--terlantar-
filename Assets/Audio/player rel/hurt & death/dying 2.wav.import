@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cko80bnp2e4l"
+path="res://.godot/imported/dying 2.wav-29ad4c9f061a22adc2cb19a6a6f69417.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/player rel/hurt & death/dying 2.wav"
+dest_files=["res://.godot/imported/dying 2.wav-29ad4c9f061a22adc2cb19a6a6f69417.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

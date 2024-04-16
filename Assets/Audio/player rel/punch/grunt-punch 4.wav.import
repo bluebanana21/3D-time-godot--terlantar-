@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://v44x3k7nad11"
+path="res://.godot/imported/grunt-punch 4.wav-6357a24ba3d888915030fccaa3e7afcf.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/player rel/punch/grunt-punch 4.wav"
+dest_files=["res://.godot/imported/grunt-punch 4.wav-6357a24ba3d888915030fccaa3e7afcf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
