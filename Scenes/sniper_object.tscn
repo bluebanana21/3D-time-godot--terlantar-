@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cep4eoxup3mcl"]
+[gd_scene load_steps=9 format=3 uid="uid://cep4eoxup3mcl"]
 
 [ext_resource type="Script" path="res://Scripts/sniper_object.gd" id="1_4tu7d"]
 [ext_resource type="Texture2D" uid="uid://b18w1dyx4hask" path="res://Assets/Weapons/weapon interactables/sniper-interact.png" id="2_ervsy"]
+[ext_resource type="Resource" uid="uid://bfnefommvu4vf" path="res://resource/sniper.tres" id="2_pdvl0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fqivt"]
 
@@ -48,6 +49,7 @@ _data = {
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_4tu7d")
+weapon_resource = ExtResource("2_pdvl0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_fqivt")

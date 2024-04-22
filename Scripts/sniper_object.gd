@@ -17,7 +17,8 @@ func get_prompt():
 
 #Calls when object is interacted by player
 func interacted_by_player():
-	
-	player._on_revolver_object_damage(weapon_resource.damage_num)
-	player._on_revolver_object_weapons_name(weapon_resource.Weapon_name)
+	player.ammo_refill(weapon_resource.ammo_amount)
+	player.Weapon_damage(weapon_resource.damage_num)
+	player.Weapon_name(weapon_resource.Weapon_name)
 	print("Shotgun has changed player weapon")
+	queue_free()

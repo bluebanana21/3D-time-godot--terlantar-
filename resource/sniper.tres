@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Weapons" load_steps=2 format=3 uid="uid://bfnefommvu4vf"]
+
+[ext_resource type="Script" path="res://resource/weapons_interact.gd" id="1_4a46d"]
+
+[resource]
+script = ExtResource("1_4a46d")
+Weapon_name = "sniper"
+Prompt_action = "E"
+Prompt_message = "Sniper"
+ammo_amount = 20
+damage_num = 40
+projectile = false

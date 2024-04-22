@@ -51,7 +51,7 @@ func _input(event):
 		rotation_degrees.y -= event.relative.x * MOUSE_SENS
 	if dead:
 		return
-	if Input.is_action_just_pressed("Shoot"):
+	if Input.is_action_just_pressed("Shoot") and current_ammo > 0:
 		if current_weapon == "shotgun":
 			shoot()
 		else :
@@ -117,12 +117,12 @@ func meleeAttack():
 
 
 func shoot():
-	if can_shoot and current_ammo > 0:
+	if can_shoot and current_ammo >= 0:
 		current_ammo -= 1
 	if !can_shoot:
 		return
-	if current_ammo <= 0:
-		return
+	#if current_ammo <= -1:
+		#return
 	can_shoot = false
 	if current_weapon == "revolver":
 		$UI/Revolver/RevolverTimer.start()
@@ -133,13 +133,15 @@ func shoot():
 		shotgun_audio.play()
 		shotgun_sprite.play("shoot")
 	
-	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("_on_player_damage"):
+	if ray_cast_3d.is_colliding() and ray_cast_3d.get_collider().has_method("_on_player_damage") and current_ammo > 0:
 		ray_cast_3d.get_collider()._on_player_damage(damage_power_P)
 		ray_cast_3d.get_collider().kill()
 
 
 func update_ammo_label():
 	$UI/Bottom/AmmoCounter.text = str(current_ammo)
+	if current_ammo <= 0:
+		return
 	#pass
 
 
@@ -168,6 +170,11 @@ func gun_switch():
 		revolver_sprite.hide()
 		shotgun_sprite.hide()
 		hud_weapon_sprite.play("Sniper")
+	
+	if current_weapon == "nothing":
+		sniper_sprite.hide()
+		revolver_sprite.hide()
+		shotgun_sprite.hide()
 
 
 #Dies when health reaches zero
@@ -221,7 +228,6 @@ func _on_med_kit_heal(heal_amount):
 
 func Weapon_damage(damage_num):
 	damage_power_P = damage_num
-
 
 func Weapon_name(weapon_name):
 	current_weapon = weapon_name
