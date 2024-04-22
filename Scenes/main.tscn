@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://resource/enemy_resorce.gd" id="8_uifyh"]
 [ext_resource type="PackedScene" uid="uid://crlfebpsxh76v" path="res://Scenes/revolver_object.tscn" id="10_ibv80"]
 
-[sub_resource type="Resource" id="Resource_whdx4"]
+[sub_resource type="Resource" id="Resource_5pv30"]
 resource_local_to_scene = true
 script = ExtResource("8_uifyh")
 name = "gunman"
@@ -18,7 +18,7 @@ attack_range = 1.4
 damage_power = 5
 enemy_health = 100
 
-[sub_resource type="Resource" id="Resource_1q7b2"]
+[sub_resource type="Resource" id="Resource_4qjnl"]
 resource_local_to_scene = true
 script = ExtResource("8_uifyh")
 name = "gunman"
@@ -64,15 +64,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, -5)
 [node name="RevolverObject" parent="collectibles" instance=ExtResource("10_ibv80")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1, 0)
 
+[node name="ShotgunObject2" parent="collectibles" instance=ExtResource("7_sd7gs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 9)
+
 [node name="enemy" type="Node3D" parent="."]
 
 [node name="Enemy" parent="enemy" instance=ExtResource("7_s35sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -11.7454)
-enemy_resource = SubResource("Resource_whdx4")
+enemy_resource = SubResource("Resource_5pv30")
 
 [node name="Enemy2" parent="enemy" instance=ExtResource("7_s35sn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.09888, 1, -6.70982)
-enemy_resource = SubResource("Resource_1q7b2")
+enemy_resource = SubResource("Resource_4qjnl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 23.722, 0)
@@ -96,6 +99,3 @@ material = SubResource("StandardMaterial3D_ccjmt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8557, 1.5, -6)
 use_collision = true
 size = Vector3(1, 4, 5)
-
-[node name="ShotgunObject2" parent="." instance=ExtResource("7_sd7gs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 9)

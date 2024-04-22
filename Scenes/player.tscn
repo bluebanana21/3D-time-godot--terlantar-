@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bjr87ev5c6r4f"]
+[gd_scene load_steps=60 format=3 uid="uid://bjr87ev5c6r4f"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_tt8ac"]
 [ext_resource type="Texture2D" uid="uid://c43u8nxgpdfox" path="res://Assets/Temporary/Gun Sprite 3D time 2.png" id="2_f3des"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://cje3k3ulmefrq" path="res://Assets/Weapons/weapon UI/fist attack blood.png" id="14_5rx3v"]
 [ext_resource type="Texture2D" uid="uid://d15fn3pth7hbq" path="res://Assets/Player Rel/HUD V3.png" id="14_umxjf"]
 [ext_resource type="Texture2D" uid="uid://ci86leubgljwd" path="res://Assets/Weapons/weapon UI/fist attack.png" id="15_4efu6"]
+[ext_resource type="Texture2D" uid="uid://kaam88cvpgvo" path="res://Assets/Player Rel/melee ui.png" id="15_7u3v6"]
 [ext_resource type="AudioStream" uid="uid://c6qisuld155jo" path="res://Assets/Audio/guns/remington870-shoot.wav" id="15_grhgg"]
 [ext_resource type="Texture2D" uid="uid://bet60pbnw4mrj" path="res://Assets/Player Rel/anger face.png" id="15_kcvhy"]
 [ext_resource type="Texture2D" uid="uid://8k1j7yucs8w6" path="res://Assets/Player Rel/normal face.png" id="16_3inwq"]
@@ -181,6 +182,17 @@ animations = [{
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jh7xu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kcd75"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_7u3v6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kxo3m"]
 animations = [{
@@ -441,6 +453,22 @@ sprite_frames = SubResource("SpriteFrames_jh7xu")
 
 [node name="SniperTimer" type="Timer" parent="UI/Sniper"]
 
+[node name="Nothing" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/Nothing"]
+visible = false
+texture_filter = 1
+position = Vector2(584, 416)
+scale = Vector2(0.885965, 0.875)
+sprite_frames = SubResource("SpriteFrames_kcd75")
+
+[node name="Timer" type="Timer" parent="UI/Nothing"]
+wait_time = 0.2
+
 [node name="Bottom" type="ColorRect" parent="UI"]
 z_index = 1
 texture_filter = 1
@@ -550,6 +578,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/CrossHair"]
 layout_mode = 1
@@ -644,6 +673,7 @@ anchor_bottom = 16.2
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.831373, 0.0862745, 0, 0.32549)
+metadata/_edit_lock_ = true
 
 [node name="InteractRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

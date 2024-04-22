@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var revolver_sprite = $UI/Revolver/AnimatedSprite2D
 @onready var sniper_sprite = $UI/Sniper/AnimatedSprite2D
 @onready var shotgun_sprite = $UI/Shotgun/AnimatedSprite2D
+@onready var boxing_sprite = $UI/Nothing/AnimatedSprite2D
 @onready var face_profile = $UI/Bottom/BottomHUD/FaceProfile
 
 @onready var revolver_audio = $Camera3D/Audio/RevolverAudio
@@ -10,6 +11,8 @@ extends CharacterBody3D
 @onready var sniper_audio = $Camera3D/Audio/SniperAudio
 @onready var hurt_audio = $Camera3D/Audio/HurtAudio
 @onready var death_audio = $Camera3D/Audio/DeathAudio
+
+@onready var boxing_timer = $UI/Nothing/Timer
 
 @onready var melee_anim = $MeleeRay/MeleeAnim
 @onready var death_screen = $UI/DeathScreen
@@ -79,6 +82,8 @@ func _process(delta):
 
 #Movement code
 func _physics_process(delta):
+	if health > 100:
+		health = 100
 	if dead:
 		return
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Down")
@@ -90,6 +95,8 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
+	if current_ammo == 0:
+		current_weapon = "nothing"
 	animation_player.play("face_movement")
 	kill()
 	update_ammo_label()
@@ -106,14 +113,18 @@ func meleeAttack():
 	if !can_punch:
 		return
 	can_punch = false
-	melee_timer.start()
-	melee_anim.show()
-	melee_anim.play("attack")
-	melee_audio.play()
-	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
-		melee_ray.get_collider()._on_player_melee(melee_damage)
-		blood_particles.emitting = true
-		melee_ray.get_collider().kill()
+	if current_weapon != "nothing":
+		melee_timer.start()
+		melee_anim.show()
+		melee_anim.play("attack")
+		melee_audio.play()
+		if melee_ray.is_colliding() and melee_ray.get_collider().has_method("_on_player_melee"):
+			melee_ray.get_collider()._on_player_melee(melee_damage)
+			blood_particles.emitting = true
+			melee_ray.get_collider().kill()
+	
+	if current_weapon == "nothing":
+		boxing_timer.start()
 
 
 func shoot():
@@ -175,6 +186,7 @@ func gun_switch():
 		sniper_sprite.hide()
 		revolver_sprite.hide()
 		shotgun_sprite.hide()
+		boxing_sprite.show()
 
 
 #Dies when health reaches zero
